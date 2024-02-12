@@ -17,7 +17,6 @@ public:
 	void update(bullet&);
 	enemy(int);
 	enemy();
-	//bullet bang;
 };
 
 #endif
