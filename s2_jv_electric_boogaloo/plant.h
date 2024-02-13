@@ -2,7 +2,7 @@
 #include "displayObject.h"
 #include "bullet.h"
 #include "enemy.h"
-class plant
+class plant: public displayObject
 {
 protected:
 	int health = 1;
@@ -12,8 +12,6 @@ public:
 	bool decreaseHealth(int);
 	virtual char display();
 	virtual void update();
-	virtual int getX();
-	virtual int getY();
 	virtual bullet shoot();
 };
 

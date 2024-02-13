@@ -15,14 +15,6 @@ char plant::display()
     return 'X';
 }
 
-int plant::getX() {
-
-}
-
-int plant::getY() {
-
-}
-
 void plant::update()
 {
     cout << "update plante non overwriter\n";

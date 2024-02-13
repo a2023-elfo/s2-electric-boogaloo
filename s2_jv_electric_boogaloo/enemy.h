@@ -1,6 +1,6 @@
 #pragma once
 #include "displayObject.h"
-class enemy:displayObject
+class enemy:public displayObject
 {
 protected:
 	int health = 1;

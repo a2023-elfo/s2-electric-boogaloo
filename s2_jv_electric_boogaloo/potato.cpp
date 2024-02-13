@@ -9,14 +9,6 @@ void potato::update()
 {
 }
 
-plant potato::getX() {
-
-}
-
-plant potato::getY() {
-
-}
-
 bullet potato::shoot()
 {
     return bullet();
