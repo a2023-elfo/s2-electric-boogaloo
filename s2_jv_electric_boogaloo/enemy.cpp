@@ -1,4 +1,3 @@
-
 #include "enemy.h"
 
 
@@ -7,9 +6,13 @@ bool enemy::checkHitBox(bullet& bang)
 	return (bang.getY() == getY() && bang.getX() == getX());
 }
 
+//return false if actor has died, else return true
 bool enemy::decreaseHealth(int damage)
 {
 	health -= damage;
+	if (health <= 0) {
+		return false;
+	}
 	return true;
 	
 }
@@ -35,11 +38,9 @@ enemy::enemy(int input)
 
 enemy::enemy()
 {
-	//int health = 3;
 	setHeight(5);
 	setWidth(3);
 	srand(time(0));
 	setX(rand() % 6 + 1);
 	setY(0);
-	
 }
