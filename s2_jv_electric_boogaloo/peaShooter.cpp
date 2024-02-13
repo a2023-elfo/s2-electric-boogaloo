@@ -9,6 +9,14 @@ void peaShooter::update()
 {
 }
 
+plant peaShooter::getX() {
+
+}
+
+plant peaShooter::getY() {
+
+}
+
 bullet peaShooter::shoot()
 {
     return bullet();

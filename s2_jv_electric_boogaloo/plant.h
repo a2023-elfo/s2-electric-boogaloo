@@ -12,6 +12,8 @@ public:
 	bool decreaseHealth(int);
 	virtual char display();
 	virtual void update();
+	virtual int getX();
+	virtual int getY();
 	virtual bullet shoot();
 };
 
