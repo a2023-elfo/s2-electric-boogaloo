@@ -4,10 +4,13 @@
 #include <iostream>
 #include "gameloop.h"
 
+
 using namespace std;
 
 int main()
 {
+    grid grid;
+    grid.display();
     cout << "Hello World!\n";
 }
 
