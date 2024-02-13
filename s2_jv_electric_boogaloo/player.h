@@ -1,6 +1,6 @@
 #pragma once
 #include "displayObject.h"
-class player:displayObject
+class player:public displayObject
 {
 public:
 	char display();

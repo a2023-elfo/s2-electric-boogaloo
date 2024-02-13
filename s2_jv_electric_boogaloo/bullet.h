@@ -2,7 +2,7 @@
 #include "displayObject.h"
 
 
-class bullet:displayObject
+class bullet:public displayObject
 {
 public:
 	char display();

@@ -2,7 +2,7 @@
 #include "displayObject.h"
 #include "bullet.h"
 #include "enemy.h"
-class plant
+class plant :public displayObject
 {
 protected:
 	int health = 1;

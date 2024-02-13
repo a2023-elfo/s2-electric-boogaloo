@@ -39,6 +39,7 @@ void grid::display()
     for (auto& enemy : enemies) {
         x = enemy.getX();
         y = enemy.getY();
+        
         if (x >= 0 && x < 10 && y >= 0 && y < 5) {
             grille[y][x] = 'X';
         }
