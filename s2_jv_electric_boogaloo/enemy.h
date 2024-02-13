@@ -1,16 +1,22 @@
+#ifndef ENEMY_H
+#define ENEMY_H
+
 #pragma once
+#include "bullet.h"
 #include "displayObject.h"
-class enemy:displayObject
+#include <random>
+class enemy : public displayObject
 {
 protected:
-	int health = 1;
+	int health = 5;
 
 public:
-	bool checkHitBox();
+	bool checkHitBox(bullet&);
 	bool decreaseHealth(int);
 	char display();
-	void update();
+	void update(bullet&);
 	enemy(int);
 	enemy();
 };
 
+#endif
