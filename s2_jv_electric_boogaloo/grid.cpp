@@ -32,7 +32,7 @@ void grid::display()
     //Effacer la grille au début
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 10; j++) {
-            grille[i][j] = ' ';
+            grille[i][j] = '0';
         }
     }
     //Afficher ennemis
