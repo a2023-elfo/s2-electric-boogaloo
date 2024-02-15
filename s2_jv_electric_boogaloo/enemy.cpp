@@ -23,7 +23,7 @@ char enemy::display()
 
 void enemy::update(bullet& boom)
 {
-	setY(getY() - 1);
+	setY(getY() + 1);
 
 	if (checkHitBox(boom)) {
 		decreaseHealth(1);
