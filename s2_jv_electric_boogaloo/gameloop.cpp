@@ -37,3 +37,7 @@ void gameloop :: readUserInput() {
         }
     }
 }
+
+void gameloop :: translateUserInput() {
+   
+}

@@ -11,6 +11,7 @@ class gameloop
 {
 public:
 	void readUserInput();
+	void translateUserInput();
 };
 
 #endif
