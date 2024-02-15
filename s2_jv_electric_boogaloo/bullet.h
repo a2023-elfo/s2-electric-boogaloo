@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BULLET_H
+#define BULLET_H
 #include "displayObject.h"
 #include "player.h"
 #include <stdlib.h>
@@ -12,3 +13,5 @@ public:
 	char display();
 	void update();
 };
+
+#endifb
