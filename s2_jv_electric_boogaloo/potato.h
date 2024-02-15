@@ -6,5 +6,7 @@ public:
 	char display();
 	void update();
 	potato(int, int, int);
+protected:
+	int health = 10;
 };
 
