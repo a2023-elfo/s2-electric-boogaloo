@@ -1,7 +1,7 @@
 #pragma once
 #include "plant.h"
 
-class peaShooter:plant
+class peaShooter:public plant
 {
 public:
 	char display();

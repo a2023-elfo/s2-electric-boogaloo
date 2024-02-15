@@ -1,11 +1,10 @@
 #pragma once
 #include "plant.h"
-class potato
+class potato: public plant
 {
 public:
 	char display();
 	void update();
-	bullet shoot();
 	potato(int, int, int);
 };
 
