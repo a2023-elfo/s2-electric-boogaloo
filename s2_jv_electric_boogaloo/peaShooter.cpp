@@ -9,11 +9,6 @@ void peaShooter::update()
 {
 }
 
-bullet peaShooter::shoot()
-{
-    return bullet();
-}
-
 peaShooter::peaShooter(int, int, int)
 {
 }

@@ -20,7 +20,8 @@ void plant::update()
     cout << "update plante non overwriter\n";
 }
 
-bullet plant::shoot()
+bullet* plant::shoot()
 {
-    return bullet();
+    bullet* b = new bullet(x, y);
+    return b;
 }
