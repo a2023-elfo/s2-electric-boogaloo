@@ -24,7 +24,7 @@ void player::my_down()
 
 bullet* player::shoot()
 {
-    bullet* b = new bullet(x,y);
+    bullet* b = new bullet(this->getX(), this->getY());
     return b;
 }
 

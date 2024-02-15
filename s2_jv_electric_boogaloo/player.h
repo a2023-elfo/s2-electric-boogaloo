@@ -2,8 +2,7 @@
 #define PLAYER_H
 #include "displayObject.h"
 #include "bullet.h"
-
-class player:displayObject
+class player:public displayObject
 {
 public:
 	player();

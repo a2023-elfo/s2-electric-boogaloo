@@ -11,7 +11,7 @@ void potato::update()
 
 bullet potato::shoot()
 {
-    return bullet();
+    return bullet(x,y);
 }
 
 potato::potato(int, int, int)
