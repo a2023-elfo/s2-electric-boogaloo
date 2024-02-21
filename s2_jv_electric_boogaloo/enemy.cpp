@@ -14,7 +14,6 @@ bool enemy::decreaseHealth(int damage)
 		return false;
 	}
 	return true;
-	
 }
 
 char enemy::display()
