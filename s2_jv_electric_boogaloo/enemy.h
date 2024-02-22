@@ -4,6 +4,7 @@
 #pragma once
 #include "bullet.h"
 #include "displayObject.h"
+
 #include <random>
 class enemy : public displayObject
 {
