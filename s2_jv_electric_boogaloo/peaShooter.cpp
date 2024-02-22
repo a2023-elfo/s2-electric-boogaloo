@@ -7,12 +7,12 @@ char peaShooter::display()
 
 void peaShooter::update()
 {
-    // Vérifier si le pea shooter est touche par un ennemi 
+    // VÃ©rifier si le pea shooter est touche par un ennemi 
     if (checkHitBox(x, y)) {
         // Si le peashooter est touche
         if (decreaseHealth(1)) {
             // Si la sante atteint 0 ou moins
-            std::cout << "Le pea shooter est détruit !" << std::endl;
+            std::cout << "Le pea shooter est dÃ©truit !" << std::endl;
         }
     }
 }

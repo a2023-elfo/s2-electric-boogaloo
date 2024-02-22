@@ -1,13 +1,15 @@
 #ifndef BULLET_H
 #define BULLET_H
-
-#pragma once
 #include "displayObject.h"
+#include "player.h"
+#include <stdlib.h>
 
-
-class bullet: public displayObject
+class bullet:public displayObject
 {
 public:
+	bullet(int _posX, int _posY);
+	~bullet();
+
 	char display();
 	void update();
 };

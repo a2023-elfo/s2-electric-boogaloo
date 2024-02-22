@@ -8,9 +8,9 @@ bool plant::checkHitBox(int, int)
 
 bool plant::decreaseHealth(int amount)
 {
-    // Réduire la sante de la plante de la quantite specifiee (amount)
+    // RÃ©duire la sante de la plante de la quantite specifiee (amount)
     health -= amount;
-    // Vérifier si la sante est tombee à zero ou moins
+    // VÃ©rifier si la sante est tombee Ã  zero ou moins
     if (health <= 0) {
         // La plante est morte
         return true;
@@ -26,7 +26,7 @@ char plant::display()
 
 void plant::update()
 {
-    // Mise à jour de l'etat de la plante
+    // Mise Ã  jour de l'etat de la plante
     if (checkHitBox(x, y)) {
         // La plante est touchee par un ennemi, reduire sa sante
         if (decreaseHealth(1)) {
@@ -36,8 +36,8 @@ void plant::update()
     }
 }
 
-bullet plant::shoot()
+bullet* plant::shoot()
 {
-    // Créer un objet bullet à la position de la plante et le retourner
-    return bullet();
+    bullet* b = new bullet(x, y);
+    return b;
 }
