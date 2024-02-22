@@ -1,7 +1,10 @@
+#ifndef PEASHOOTER_H
+#define PEASHOOTER_H
+
 #pragma once
 #include "plant.h"
 
-class peaShooter:public plant
+class peaShooter: public plant
 {
 public:
 	char display();
@@ -12,3 +15,4 @@ protected:
 	int health = 5;
 };
 
+#endif

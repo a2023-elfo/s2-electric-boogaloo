@@ -1,3 +1,5 @@
+#ifndef PLANT_H
+#define PLANT_H
 #pragma once
 #include "displayObject.h"
 #include "bullet.h"
@@ -15,3 +17,4 @@ public:
 	virtual bullet shoot();
 };
 
+#endif

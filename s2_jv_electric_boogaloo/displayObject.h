@@ -1,3 +1,5 @@
+#ifndef DISPLAYOBJECT_H
+#define DISPLAYOBJECT_H
 #pragma once
 #include <iostream>
 using namespace std;
@@ -22,3 +24,4 @@ public:
 	void setHeight(int);
 };
 
+#endif;
