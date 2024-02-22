@@ -5,7 +5,7 @@
 #include "bullet.h"
 #include "enemy.h"
 
-class plant:public displayObject
+class plant :public displayObject
 {
 protected:
 	int health = 1;
