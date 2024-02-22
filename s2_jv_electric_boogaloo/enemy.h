@@ -14,7 +14,7 @@ public:
 	bool checkHitBox(bullet&);
 	bool decreaseHealth(int);
 	char display();
-	void update(bullet&);
+	void update(bullet&, int);
 	enemy(int);
 	enemy();
 };
