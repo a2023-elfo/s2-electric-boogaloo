@@ -9,12 +9,7 @@ bool enemy::checkHitBox(bullet& bang)
 //return false if actor has died, else return true
 bool enemy::decreaseHealth(int damage)
 {
-	health -= damage;
-	if (health <= 0) {
-		return false;
-	}
-	return true;
-	
+	return (health -= damage) > 0;
 }
 
 char enemy::display()
@@ -22,9 +17,9 @@ char enemy::display()
 	return 'X';
 }
 
-void enemy::update(bullet& boom)
+void enemy::update(bullet& boom, int deplacement)
 {
-	setY(getY() - 1);
+	setY(getY() + deplacement);
 
 	if (checkHitBox(boom)) {
 		decreaseHealth(1);
@@ -41,6 +36,6 @@ enemy::enemy()
 	setHeight(5);
 	setWidth(3);
 	srand(time(0));
-	setX(rand() % 6 + 1);
+	setX(rand());
 	setY(0);
 }

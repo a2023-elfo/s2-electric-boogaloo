@@ -10,6 +10,8 @@ public:
 	char display();
 	void update();
 	peaShooter(int, int, int);
+protected:
+	int health = 5;
 };
 
 #endif
