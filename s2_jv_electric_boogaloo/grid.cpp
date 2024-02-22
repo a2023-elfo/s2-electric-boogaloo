@@ -5,22 +5,22 @@ char grille[5][10];
 
 void grid::update()
 {
-    // Mettre à jour les ennemis
+    // Mettre ï¿½ jour les ennemis
     for (auto& enemy : enemies) {
         enemy.update();
     }
 
-    // Mettre à jour les plantes
+    // Mettre ï¿½ jour les plantes
     for (auto& plant : plants) {
         plant.update();
     }
 
-    // Mettre à jour les balles
+    // Mettre ï¿½ jour les balles
     for (auto& bullet : bullets) {
         bullet.update();
     }
 
-    // Mettre à jour le joueur
+    // Mettre ï¿½ jour le joueur
     playerShooter.update();
 }
 
@@ -29,7 +29,7 @@ void grid::display()
     int x; //position dans la grille
     int y; //position dans la grille
 
-    //Effacer la grille au début
+    //Effacer la grille au dï¿½but
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 10; j++) {
             grille[i][j] = '0';
@@ -66,7 +66,7 @@ void grid::display()
     if (playerX >= 0 && playerX < 10 && playerY >= 0 && playerY < 5) {
         grille[playerY][playerX] = 'E'; //E pour ELFO ofc
     }
-    //Premiere ligne sont des étoiles
+    //Premiere ligne sont des ï¿½toiles
     for (int j = 0; j < 10; ++j) {
         std::cout << "* ";
     }
@@ -78,16 +78,17 @@ void grid::display()
     std::cout << std::endl;
 
     for (int i = 0; i < 5; ++i) {
-        std::cout << "* "; // Afficher un * au début de chaque ligne
+        std::cout << "* "; // Afficher un * au dï¿½but de chaque ligne
         for (int j = 0; j < 10; ++j) {
             std::cout << grille[i][j] << " ";
         }
         std::cout << std::endl;
     }
+
 }
 
 void grid::placePlant(plant p)
 {
-	// Ajouter la plante 'p' à la liste des plantes dans la grille
+	// Ajouter la plante 'p' ï¿½ la liste des plantes dans la grille
 	plants.push_back(p);
 }

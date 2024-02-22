@@ -1,7 +1,10 @@
+#ifndef PLANT_H
+#define PLANT_H
 #pragma once
 #include "displayObject.h"
 #include "bullet.h"
 #include "enemy.h"
+
 class plant :public displayObject
 {
 protected:
@@ -12,6 +15,7 @@ public:
 	bool decreaseHealth(int);
 	virtual char display();
 	virtual void update();
-	virtual bullet shoot();
+	bullet* shoot();
 };
 
+#endif

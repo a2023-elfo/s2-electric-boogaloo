@@ -1,3 +1,6 @@
+#ifndef GRID_H
+#define GRID_H
+
 #pragma once
 #include <vector>
 #include "enemy.h"
@@ -21,3 +24,4 @@ public:
 	void placePlant(plant);
 };
 
+#endif

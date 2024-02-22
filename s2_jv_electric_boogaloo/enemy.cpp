@@ -1,22 +1,29 @@
 #include "enemy.h"
 
-bool enemy::checkHitBox()
-{
-	return false;
+
+bool enemy::checkHitBox(bullet& bang)
+{	
+	return (bang.getY() == getY() && bang.getX() == getX());
 }
 
-bool enemy::decreaseHealth(int)
+//return false if actor has died, else return true
+bool enemy::decreaseHealth(int damage)
 {
-	return false;
+	return (health -= damage) > 0;
 }
 
 char enemy::display()
 {
-	return 0;
+	return 'X';
 }
 
-void enemy::update()
+void enemy::update(bullet& boom, int deplacement)
 {
+	setY(getY() + deplacement);
+
+	if (checkHitBox(boom)) {
+		decreaseHealth(1);
+	}
 }
 
 enemy::enemy(int input)
@@ -26,4 +33,9 @@ enemy::enemy(int input)
 
 enemy::enemy()
 {
+	setHeight(5);
+	setWidth(3);
+	srand(time(0));
+	setX(rand());
+	setY(0);
 }
