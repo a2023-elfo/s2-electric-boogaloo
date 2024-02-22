@@ -2,37 +2,38 @@
 
 void gameloop :: readUserInput() {
     char userInput;
-    /*if (met tes input ici) {
-        Keyboard.write('w');
-    }*/
     while (true) {
         if (_kbhit()) {
             userInput = _getch();//fonctionne seulement sur Windows
-            switch (userInput) {
-            case'w':
+            if (userInput == 'w'/*|| arduino*/) {
                 cout << "Avancer" << endl;
-                break;
-            case 'a':
+                joueur.setY(joueur.getY() - 1);
+            }
+            if (userInput == 'a') {
                 cout << "Gauche" << endl;
-                break;
-            case 's':
+                joueur.setX(joueur.getY() - 1);
+            }
+            if (userInput == 's') {
                 cout << "Reculer" << endl;
-                break;
-            case 'd':
+                joueur.setY(joueur.getY() + 1);
+            }
+            if (userInput == 'd') {
                 cout << "Droite" << endl;
-                break;
-            case 'q':
+                joueur.setX(joueur.getY() + 1);
+            }
+            if (userInput == 'q') {
                 cout << "Pause" << endl;
-                break;
-            case 'e':
+            }
+            if (userInput == 'e') {
                 cout << "Tremblement de terre" << endl;
-                break;
-            case 'r':
-                cout << "Placer plante" << endl;
-                break;
-            case ' ':
-                cout << "Menu - placer plante" << endl;
-                break;
+                //super();
+            }
+            if (userInput == 'r') {
+                cout << "PLacer plante" << endl;
+                //changer menu? ou bouger Elfo position?
+            }
+            if (userInput == ' ') {
+                cout << "Tirer" << endl;
             }
         }
     }
@@ -41,3 +42,9 @@ void gameloop :: readUserInput() {
 void gameloop :: translateUserInput() {
    
 }
+
+void gameloop :: spawnPlayer() {}
+void gameloop :: spawnEnemy() {}
+void gameloop :: spawnPeashooter() {}
+void gameloop :: spawnPotato() {}
+void gameloop :: tremblementDeTerre() {}
