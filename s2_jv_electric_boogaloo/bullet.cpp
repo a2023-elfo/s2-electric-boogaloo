@@ -8,3 +8,9 @@ char bullet::display()
 void bullet::update()
 {
 }
+
+bullet::bullet(int x, int y)
+{
+	this->setX(x);
+	this->setY(y);
+}

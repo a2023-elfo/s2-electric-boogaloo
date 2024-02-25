@@ -10,9 +10,7 @@ public:
 	char display();
 	void update();
 	bullet shoot();
-	peaShooter(int, int, int);
-protected:
-	int health = 5;
+	peaShooter(int x, int y, int health = 5);
 };
 
 #endif

@@ -10,6 +10,8 @@ class bullet: public displayObject
 public:
 	char display();
 	void update();
+	bullet(int x, int y);
+
 };
 
 #endif

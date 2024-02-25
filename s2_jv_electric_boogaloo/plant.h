@@ -10,11 +10,11 @@ protected:
 	int health = 1;
 
 public:
+	int getHealth();
 	bool checkHitBox(int, int);
 	bool decreaseHealth(int);
 	virtual char display();
 	virtual void update();
-	virtual bullet shoot();
 };
 
 #endif
