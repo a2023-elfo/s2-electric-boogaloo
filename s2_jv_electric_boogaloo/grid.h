@@ -25,6 +25,9 @@ public:
 	void placePlant(plant);
 	enemy* getEnemy(int index);
 	vector<enemy>& getEnemies();
+	plant* getPlant(int index);
+	vector<plant>& getPlants();
+
 };
 
 #endif

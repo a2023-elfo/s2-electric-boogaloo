@@ -14,8 +14,8 @@ public:
 	void translateUserInput();
 	//void spawnPlayer();
 	void spawnEnemy(int enemyPos, bool theRock);
-	void spawnPeashooter();
-	void spawnPotato();
+	void spawnPeashooter(int health);
+	void spawnPotato(int health);
 	void tremblementDeTerre();
 	void gameOver();
 private:

@@ -46,7 +46,7 @@ void gameloop :: readUserInput() {
     char userInput;
     spawnEnemy(0,0);
     spawnEnemy(1,0);
-    //spawnEnemy(2);
+    spawnEnemy(2,1);
     spawnEnemy(3,0);
     spawnEnemy(4,0);
     arene.display();
@@ -78,9 +78,11 @@ void gameloop :: readUserInput() {
             }
             if (userInput == 't') {
                 cout << "Placer potato" << endl;
+                spawnPotato(10);
             }
             if (userInput == 'r') {
                 cout << "Placer peashooter" << endl;
+                spawnPeashooter(10);
                 //changer menu? ou bouger Elfo position?
             }
             if (userInput == ' ') {
@@ -109,7 +111,14 @@ void gameloop :: translateUserInput() {
 
 
 
-void gameloop :: spawnPeashooter() {}
-void gameloop :: spawnPotato() {}
+void gameloop :: spawnPeashooter(int health) {
+    peaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() + 1);
+    arene.getPlants().push_back(piouPiou);
+}
+void gameloop :: spawnPotato(int health) {
+    peaShooter bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() + 1);
+    arene.getPlants().push_back(bigMama);
+
+}
 void gameloop :: tremblementDeTerre() {}
 

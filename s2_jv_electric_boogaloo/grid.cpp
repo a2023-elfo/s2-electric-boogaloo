@@ -105,3 +105,17 @@ enemy* grid::getEnemy(int index) {
         return nullptr;
     }
 }
+
+vector<plant>& grid::getPlants() {
+    return plants;
+}
+
+plant* grid::getPlant(int index) {
+    if (index >= 0 && index < plants.size()) {
+        return &plants[index];
+    }
+    else {
+        return nullptr;
+    }
+
+}
