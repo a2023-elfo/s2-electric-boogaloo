@@ -123,5 +123,17 @@ Plant* Grid::getPlant(int index) {
     else {
         return nullptr;
     }
+}
 
+Bullet* Grid::getBullet(int index) {
+    if (index >= 0 && index < (int)this->bullets.size()) {
+        return &bullets[index];
+    }
+    else {
+        return nullptr;
+    }
+}
+
+vector<Bullet>& Grid::getBullets() {
+    return bullets;
 }

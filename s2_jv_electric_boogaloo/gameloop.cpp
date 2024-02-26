@@ -86,7 +86,7 @@ void Gameloop :: readUserInput() {
             }
             if (userInput == ' ') {
                 cout << "Tirer" << endl;
-                arene.playerShooter.shoot();
+                arene.getBullets().push_back(*arene.playerShooter.shoot());
             }
         }
         arene.update();

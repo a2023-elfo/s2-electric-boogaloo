@@ -27,6 +27,8 @@ public:
 	vector<Enemy>& getEnemies();
 	Plant* getPlant(int index);
 	vector<Plant>& getPlants();
+	Bullet* getBullet(int index);
+	vector<Bullet>& getBullets();
 
 };
 
