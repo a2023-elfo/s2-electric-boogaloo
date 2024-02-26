@@ -17,11 +17,17 @@ private:
 	vector<Enemy> enemies;
 	vector<Plant> plants;
 	vector<Bullet> bullets;
-	Player playerShooter;
+	
 public:
+	Player playerShooter;
 	void update();
 	void display();
 	void placePlant(Plant);
+	Enemy* getEnemy(int index);
+	vector<Enemy>& getEnemies();
+	Plant* getPlant(int index);
+	vector<Plant>& getPlants();
+
 };
 
 #endif

@@ -14,11 +14,12 @@ protected:
 
 public:
 	bool checkHitBox(Bullet&);
-	bool decreaseHealth(int);
+	bool decreaseHealth(int damage);
 	char display();
-	void update(Bullet&, int);
-	Enemy(int);
-	Enemy();
+	void update(vector<Bullet>& bullets, int deplacement);
+	Enemy(int _health, int x);
+	int getHealth();
+	//enemy();
 };
 
 #endif

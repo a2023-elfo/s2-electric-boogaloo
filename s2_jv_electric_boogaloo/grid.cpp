@@ -9,8 +9,7 @@ void Grid::update()
 {
     // Mettre � jour les ennemis
     for (auto& enemy : enemies) {
-        // This will be changed by Zac's code!
-        //enemy.update();
+        enemy.update(bullets, 0);
     }
 
     // Mettre � jour les plantes
@@ -29,13 +28,6 @@ void Grid::update()
 
 void Grid::display()
 {
-    // Inject enemie for testing purpouses, should be deleted
-    enemies.push_back(Enemy(2));
-    enemies.push_back(Enemy(4));
-
-    playerShooter.setX(3);
-    playerShooter.setY(8);
-
 
     int x; //position dans la grille
     int y; //position dans la grille
@@ -75,8 +67,8 @@ void Grid::display()
     //Afficher joueur
     int playerX = playerShooter.getX();
     int playerY = playerShooter.getY();
-    if (playerX >= 0 && playerX < 10 && playerY >= 0 && playerY < 5) {
-        grille[playerY][playerX] = playerShooter.display(); //E pour ELFO ofc
+    if (playerX >= 0 && playerX < GRID_X && playerY >= 0 && playerY < GRID_Y) {
+        grille[playerX][playerY] = playerShooter.display(); //E pour ELFO ofc
     }
 
     /// Finalement, on affiche!
@@ -105,4 +97,31 @@ void Grid::placePlant(Plant plant)
 {
 	// Ajouter la plante 'p' � la liste des plantes dans la grille
 	plants.push_back(plant);
+}
+
+vector<Enemy>& Grid::getEnemies() {
+    return enemies;
+}
+
+Enemy* Grid::getEnemy(int index) {
+    if (index >= 0 && index < enemies.size()) {
+        return &enemies[index];
+    }
+    else {
+        return nullptr;
+    }
+}
+
+vector<Plant>& Grid::getPlants() {
+    return plants;
+}
+
+Plant* Grid::getPlant(int index) {
+    if (index >= 0 && index < plants.size()) {
+        return &plants[index];
+    }
+    else {
+        return nullptr;
+    }
+
 }

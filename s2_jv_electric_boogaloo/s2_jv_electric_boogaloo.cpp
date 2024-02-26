@@ -9,10 +9,7 @@ using namespace std;
 
 int main()
 {
-    Grid map;
-    map.display();
-
-    cout << "Hello World!\n";
+    cout << "Hello Elfo ! 😊\n";
 
     Gameloop test;
     test.readUserInput();

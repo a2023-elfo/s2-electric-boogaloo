@@ -17,26 +17,27 @@ char Enemy::display()
 	return 'X';
 }
 
-void Enemy::update(Bullet& boom, int deplacement)
+void Enemy::update(vector<Bullet>& bullets, int deplacement)
 {
 	setY(getY() + deplacement);
 
-	if (checkHitBox(boom)) {
-		decreaseHealth(1);
+	for (int i = 0; i < (int)bullets.size(); i++) {
+		if (checkHitBox(bullets.at(i))) {
+			decreaseHealth(1);
+		}
 	}
+	
 }
 
-Enemy::Enemy(int input)
+Enemy::Enemy(int _health, int x)
 {
-	setX(input);
-	setY(0);
-}
-
-Enemy::Enemy()
-{
+	health = _health;
 	setHeight(5);
 	setWidth(3);
-	srand(time(0));
-	setX(rand());
+	setX(x);
 	setY(0);
+}
+
+int Enemy::getHealth() {
+	return health;
 }

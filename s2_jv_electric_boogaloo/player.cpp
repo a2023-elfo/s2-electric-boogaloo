@@ -26,7 +26,7 @@ void Player::update()
 {
     // Audit 2 update behaviour, just to see if the movement works
     if (chiffre % 2) { // 1, 3, 5 on va
-        if (getX() < 0) {
+        if (getX() > 1) {
             setX(getX() - 1);
         }
         else {
@@ -35,7 +35,7 @@ void Player::update()
         }
     }
     else { // 0, 2, 4. On va vers la droite
-        if (getX() < 5) {
+        if (getX() < 4) {
             setX(getX() + 1);
         } else {
             chiffre++;
