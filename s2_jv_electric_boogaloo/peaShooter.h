@@ -9,7 +9,7 @@ class PeaShooter: public Plant
 public:
 	char display();
 	void update();
-	Bullet shoot();
+	Bullet* shoot();
 	PeaShooter(int x, int y, int health = 5);
 };
 

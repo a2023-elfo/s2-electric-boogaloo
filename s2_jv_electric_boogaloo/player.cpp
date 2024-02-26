@@ -15,7 +15,7 @@ Bullet* Player::shoot()
 
 char Player::display()
 {
-    return 'P';
+    return 'E';
 }
 
 void Player::move(int offset_x, int offset_y) {

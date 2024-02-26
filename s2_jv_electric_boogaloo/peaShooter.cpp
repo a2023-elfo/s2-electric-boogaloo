@@ -17,10 +17,10 @@ void PeaShooter::update()
     }
 }
 
-Bullet PeaShooter::shoot(){
+Bullet* PeaShooter::shoot(){
     int xBullet = this->getX();
     int yBullet = this->getY() + 1;
-    return Bullet(xBullet, yBullet);
+    return new Bullet(xBullet, yBullet);
 }
 
 PeaShooter::PeaShooter(int x, int y, int health)
