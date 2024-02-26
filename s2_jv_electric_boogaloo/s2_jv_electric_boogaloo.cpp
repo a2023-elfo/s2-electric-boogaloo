@@ -4,11 +4,18 @@
 #include <iostream>
 #include "gameloop.h"
 
+
 using namespace std;
 
 int main()
 {
+    grid grid;
+    grid.display();
+
     cout << "Hello World!\n";
+
+    gameloop test;
+    test.readUserInput();
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage

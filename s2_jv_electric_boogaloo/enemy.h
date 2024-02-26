@@ -4,6 +4,8 @@
 #pragma once
 #include "bullet.h"
 #include "displayObject.h"
+
+
 #include <random>
 class enemy : public displayObject
 {
@@ -14,7 +16,7 @@ public:
 	bool checkHitBox(bullet&);
 	bool decreaseHealth(int);
 	char display();
-	void update(bullet&);
+	void update(bullet&, int);
 	enemy(int);
 	enemy();
 };

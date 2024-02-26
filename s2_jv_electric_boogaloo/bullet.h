@@ -4,7 +4,7 @@
 #include "player.h"
 #include <stdlib.h>
 
-class bullet:displayObject
+class bullet:public displayObject
 {
 public:
 	bullet(int _posX, int _posY);

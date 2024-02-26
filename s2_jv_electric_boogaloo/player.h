@@ -1,9 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "displayObject.h"
-#include "bullet.h"
 
-class player:displayObject
+
+#include "bullet.h"
+class player:public displayObject
 {
 public:
 	player();
