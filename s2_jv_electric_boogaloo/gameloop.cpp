@@ -21,7 +21,6 @@ void gameloop::spawnEnemy(int enemyPos, bool theRock) {
     case 2:
         health = 5;
         position = 2;
-        //enemy theRock
         break;
     case 3:
         health = 5;
@@ -39,7 +38,7 @@ void gameloop::spawnEnemy(int enemyPos, bool theRock) {
     arene.getEnemies().push_back(zombie);
 }
 
-
+//update a chaque imput du joueur pour l'audit, gametick plus tard
 void gameloop :: readUserInput() {
 
     char userInput;
@@ -82,7 +81,7 @@ void gameloop :: readUserInput() {
             }
             if (userInput == 'r') {
                 cout << "Placer peashooter" << endl;
-                spawnPeashooter(10);
+                spawnPeashooter(3);
             }
             if (userInput == ' ') {
                 cout << "Tirer" << endl;
@@ -92,12 +91,16 @@ void gameloop :: readUserInput() {
         arene.update();
         arene.display();
         std::vector<enemy> zombieMort;
-        for (int i = 0; i < arene.getEnemies().size(); i++) {
+        for (int i = 0; i < arene.getEnemies().size();) {
             if (arene.getEnemies()[i].getY() == 9 || arene.getEnemies()[i].getHealth() <= 0) {
                 zombieMort.push_back(arene.getEnemies()[i]);
+                arene.getEnemies().erase(arene.getEnemies().begin() + i);
                 if (arene.getEnemies()[i].getY() == 9) {
                     gameOver();
                 }
+            }
+            else {
+                i++;
             }
         }
         charge += (int)zombieMort.size();
