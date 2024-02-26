@@ -7,7 +7,7 @@
 #include <Windows.h>
 
 
-class gameloop
+class Gameloop
 {
 public:
 	void readUserInput();
@@ -17,7 +17,6 @@ public:
 	void spawnPeashooter();
 	void spawnPotato();
 	void tremblementDeTerre();
-	player joueur;
 };
 
 #endif

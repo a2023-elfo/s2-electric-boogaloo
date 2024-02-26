@@ -1,10 +1,45 @@
 #include "player.h"
 
-char player::display()
+Player::Player()
 {
-    return 0;
+    x = 0;
+    y = 9;
+    width = 1;
+    height = 1;
 }
 
-void player::update()
+Bullet* Player::shoot()
 {
+    return new Bullet(this->getX(), this->getY());
+}
+
+char Player::display()
+{
+    return 'P';
+}
+
+void Player::move(int offset_x, int offset_y) {
+    // TODO, move player towards offset, but prevent from going out of bounds
+}
+
+void Player::update()
+{
+    // Audit 2 update behaviour, just to see if the movement works
+    if (chiffre % 2) { // 1, 3, 5 on va
+        if (getX() < 0) {
+            setX(getX() - 1);
+        }
+        else {
+            chiffre++;
+            update();
+        }
+    }
+    else { // 0, 2, 4. On va vers la droite
+        if (getX() < 5) {
+            setX(getX() + 1);
+        } else {
+            chiffre++;
+            update();
+        }
+    }
 }

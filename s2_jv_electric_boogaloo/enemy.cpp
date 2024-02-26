@@ -1,23 +1,23 @@
 #include "enemy.h"
 
 
-bool enemy::checkHitBox(bullet& bang)
+bool Enemy::checkHitBox(Bullet& bang)
 {	
 	return (bang.getY() == getY() && bang.getX() == getX());
 }
 
 //return false if actor has died, else return true
-bool enemy::decreaseHealth(int damage)
+bool Enemy::decreaseHealth(int damage)
 {
 	return (health -= damage) > 0;
 }
 
-char enemy::display()
+char Enemy::display()
 {
 	return 'X';
 }
 
-void enemy::update(bullet& boom, int deplacement)
+void Enemy::update(Bullet& boom, int deplacement)
 {
 	setY(getY() + deplacement);
 
@@ -26,12 +26,12 @@ void enemy::update(bullet& boom, int deplacement)
 	}
 }
 
-enemy::enemy(int input)
+Enemy::Enemy(int input)
 {
 	health = input;
 }
 
-enemy::enemy()
+Enemy::Enemy()
 {
 	setHeight(5);
 	setWidth(3);

@@ -4,13 +4,13 @@
 #pragma once
 #include "plant.h"
 
-class peaShooter: public plant
+class PeaShooter: public Plant
 {
 public:
 	char display();
 	void update();
-	bullet shoot();
-	peaShooter(int x, int y, int health = 5);
+	Bullet shoot();
+	PeaShooter(int x, int y, int health = 5);
 };
 
 #endif

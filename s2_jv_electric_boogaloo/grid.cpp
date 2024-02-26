@@ -1,14 +1,14 @@
 #include "grid.h"
 
-void grid::update()
+void Grid::update()
 {
 }
 
-void grid::display()
+void Grid::display()
 {
 	
 }
 
-void grid::placePlant(plant)
+void Grid::placePlant(Plant plant)
 {
 }

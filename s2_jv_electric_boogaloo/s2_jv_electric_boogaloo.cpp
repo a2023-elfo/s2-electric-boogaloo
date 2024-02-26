@@ -9,19 +9,13 @@ using namespace std;
 
 int main()
 {
-    grid map;
+    Grid map;
     map.display();
 
     cout << "Hello World!\n";
 
-    gameloop test;
+    Gameloop test;
     test.readUserInput();
-
-
-
-
-   
-
 
 }
 

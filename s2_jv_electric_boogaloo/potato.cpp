@@ -1,11 +1,11 @@
 #include "potato.h"
 
-char potato::display()
+char Potato::display()
 {
     return 'P';
 }
 
-void potato::update()
+void Potato::update()
 {
     // Verifier si la patate est touchee par un ennemi 
     if (checkHitBox(x, y)) {
@@ -17,7 +17,7 @@ void potato::update()
     }
 }
 
-potato::potato(int x, int y, int health)
+Potato::Potato(int x, int y, int health)
 {
     setX(x);
     setY(y);

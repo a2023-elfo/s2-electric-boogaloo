@@ -6,18 +6,18 @@
 #include "displayObject.h"
 
 #include <random>
-class enemy : public displayObject
+class Enemy : public DisplayObject
 {
 protected:
 	int health = 5;
 
 public:
-	bool checkHitBox(bullet&);
+	bool checkHitBox(Bullet&);
 	bool decreaseHealth(int);
 	char display();
-	void update(bullet&, int);
-	enemy(int);
-	enemy();
+	void update(Bullet&, int);
+	Enemy(int);
+	Enemy();
 };
 
 #endif

@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-class displayObject
+class DisplayObject
 {
 protected:
 	int x = 0;

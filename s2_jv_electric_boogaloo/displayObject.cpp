@@ -1,50 +1,52 @@
 #include "displayObject.h"
 
 
-char displayObject::display() {
+char DisplayObject::display() {
 	return('X');
 }
 
-void displayObject::update() {
+void DisplayObject::update() {
 	std::cout << "update non overwriter\n";
 }
 
-int displayObject::getX()
+int DisplayObject::getX()
 {
 	return x;
 }
 
-void displayObject::setX(int input)
-{
+void DisplayObject::setX(int input)
+{ 
+	// On va devoir mettre les bornes du grid ici, question d'empêcher
+	// les objets d'aller out of bounds
 	x = input;
 }
 
-int displayObject::getY()
+int DisplayObject::getY()
 {
 	return y;
 }
 
-void displayObject::setY(int input)
+void DisplayObject::setY(int input)
 {
 	y = input;
 }
 
-int displayObject::getWidth()
+int DisplayObject::getWidth()
 {
 	return width;
 }
 
-void displayObject::setWidth(int input)
+void DisplayObject::setWidth(int input)
 {
 	width = input;
 }
 
-int displayObject::getHeight()
+int DisplayObject::getHeight()
 {
 	return height;
 }
 
-void displayObject::setHeight(int input)
+void DisplayObject::setHeight(int input)
 {
 	height = input;
 }
