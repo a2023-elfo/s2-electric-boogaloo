@@ -26,7 +26,7 @@ void Player::update()
 {
     // Audit 2 update behaviour, just to see if the movement works
     if (chiffre % 2) { // 1, 3, 5 on va
-        if (getX() > 1) {
+        if (getX() > 0) {
             setX(getX() - 1);
         }
         else {

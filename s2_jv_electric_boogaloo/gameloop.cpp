@@ -22,7 +22,6 @@ void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
     case 2:
         health = 5;
         position = 2;
-        //enemy theRock
         break;
     case 3:
         health = 5;
@@ -50,7 +49,7 @@ void Gameloop :: readUserInput() {
     spawnEnemy(4,0);
     arene.display();
     while (true) {
-        std::this_thread::sleep_for(500ms);
+        std::this_thread::sleep_for(250ms);
         if (_kbhit()) {
             userInput = _getch();//fonctionne seulement sur Windows
             if (userInput == 'w'/*|| arduino*/) {
@@ -82,7 +81,7 @@ void Gameloop :: readUserInput() {
             }
             if (userInput == 'r') {
                 cout << "Placer peashooter" << endl;
-                spawnPeashooter(10);
+                spawnPeashooter(3);
             }
             if (userInput == ' ') {
                 cout << "Tirer" << endl;
@@ -93,12 +92,16 @@ void Gameloop :: readUserInput() {
         std::system("cls");
         arene.display();
         std::vector<Enemy> zombieMort;
-        for (int i = 0; i < arene.getEnemies().size(); i++) {
+        for (int i = 0; i < arene.getEnemies().size();) {
             if (arene.getEnemies()[i].getY() == 9 || arene.getEnemies()[i].getHealth() <= 0) {
                 zombieMort.push_back(arene.getEnemies()[i]);
+                arene.getEnemies().erase(arene.getEnemies().begin() + i);
                 if (arene.getEnemies()[i].getY() == 9) {
                     gameOver();
                 }
+            }
+            else {
+                i++;
             }
         }
         charge += (int)zombieMort.size();
