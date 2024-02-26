@@ -29,6 +29,14 @@ void Grid::update()
 
 void Grid::display()
 {
+    // Inject enemie for testing purpouses, should be deleted
+    enemies.push_back(Enemy(2));
+    enemies.push_back(Enemy(4));
+
+    playerShooter.setX(3);
+    playerShooter.setY(8);
+
+
     int x; //position dans la grille
     int y; //position dans la grille
 

@@ -28,7 +28,8 @@ void Enemy::update(Bullet& boom, int deplacement)
 
 Enemy::Enemy(int input)
 {
-	health = input;
+	setX(input);
+	setY(0);
 }
 
 Enemy::Enemy()
