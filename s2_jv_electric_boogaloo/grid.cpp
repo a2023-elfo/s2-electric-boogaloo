@@ -82,20 +82,20 @@ void Grid::display()
     /// Finalement, on affiche!
     //Premiere ligne sont des etoiles
     for (int j = 0; j < GRID_X * 4 + 1; ++j) {
-        std::cout << "*";
+        std::cout << "_";
     }
     std::cout << std::endl;
 
     for (int i = 0; i < GRID_Y; ++i) {
         for (int j = 0; j < GRID_X; ++j) {
-            std::cout << "* " << grille[j][i] << " ";
+            std::cout << "| " << grille[j][i] << " ";
         }
-        std::cout << "*" << std::endl;
+        std::cout << "|" << std::endl;
     }
 
     // Dernière ligne
     for (int j = 0; j < GRID_X * 4 + 1; ++j) {
-        std::cout << "*";
+        std::cout << "-";
     }
     std::cout << std::endl;
 
