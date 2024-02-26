@@ -21,8 +21,8 @@ void enemy::update(vector<bullet>& bullets, int deplacement)
 {
 	setY(getY() + deplacement);
 
-	for (int i = 0; i < bullets->size(); i++) {
-		if (checkHitBox(bullets->at(i))) {
+	for (int i = 0; i < (int)bullets.size(); i++) {
+		if (checkHitBox(bullets.at(i))) {
 			decreaseHealth(1);
 		}
 	}
@@ -38,7 +38,7 @@ enemy::enemy(int _health, int x)
 	setY(0);
 }
 
-enemy::getHealth() {
+int enemy::getHealth() {
 	return health;
 }
 

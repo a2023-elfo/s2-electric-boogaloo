@@ -92,3 +92,16 @@ void grid::placePlant(plant p)
 	// Ajouter la plante 'p' a la liste des plantes dans la grille
 	plants.push_back(p);
 }
+
+vector<enemy>& grid::getEnemies() {
+    return enemies;
+}
+
+enemy* grid::getEnemy(int index) {
+    if (index >= 0 && index < enemies.size()) {
+        return &enemies[index];
+    }
+    else {
+        return nullptr;
+    }
+}

@@ -18,7 +18,7 @@ public:
 	char display();
 	void update(vector<bullet>& bullets, int deplacement);
 	enemy(int _health, int x);
-	getHealth();
+	int getHealth();
 	//enemy();
 };
 

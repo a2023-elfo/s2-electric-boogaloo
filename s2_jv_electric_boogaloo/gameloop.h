@@ -5,7 +5,7 @@
 #include <conio.h>
 #include <cstdlib>
 #include <Windows.h>
-
+#include "grid.h"
 
 class gameloop
 {
@@ -13,7 +13,7 @@ public:
 	void readUserInput();
 	void translateUserInput();
 	//void spawnPlayer();
-	void spawnEnemy(int);
+	void spawnEnemy(int enemyPos, bool theRock);
 	void spawnPeashooter();
 	void spawnPotato();
 	void tremblementDeTerre();

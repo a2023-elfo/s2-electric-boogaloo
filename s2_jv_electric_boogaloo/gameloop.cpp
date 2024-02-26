@@ -1,53 +1,54 @@
 #include "gameloop.h"
 
-
 void gameloop::gameOver() {
 
     std::system("cls");
     std::cout << "GAME OVER" << std::endl;
 }
 
-void gameloop::spawnEnemy(int enemyType) {
+void gameloop::spawnEnemy(int enemyPos, bool theRock) {
 
-    switch (enemyType) {
+    int health = 0;
+    int position = 0;
+    switch (enemyPos) {
 
     case 0:
-        enemy John;
-        John = enemy(5, 0);
-        arene.enemies.push_back(John);
+        health = 5;
+        position = 0;
         break;
     case 1:
-        enemy Bob;
-        Bob = enemy(5, 1);
-        arene.enemies.push_back(Bob);
+        health = 5;
+        position = 1;
         break;
     case 2:
-        enemy TheRock;
-        TheRock = enemy(10, 2);
-        arene.enemies.push_back(TheRock);
+        health = 5;
+        position = 2;
+        //enemy theRock
         break;
     case 3:
-        enemy Bine;
-        Bine = enemy(5, 3);
-        arene.enemies.push_back(Bob);
+        health = 5;
+        position = 3;
         break;
     case 4:
-        enemy Joe;
-        Joe = enemy(5, 4);
-        arene.enemies.push_back(Joe);
+        health = 5;
+        position = 4;
         break;
     }
-
+    if (theRock) {
+        health = 20;
+    }
+    enemy zombie(health, position);
+    arene.getEnemies().push_back(zombie);
 }
 
 
 void gameloop :: readUserInput() {
     char userInput;
-    spawnEnemy(0);
-    spawnEnemy(1);
+    spawnEnemy(0,0);
+    spawnEnemy(1,0);
     //spawnEnemy(2);
-    spawnEnemy(3);
-    spawnEnemy(4);
+    spawnEnemy(3,0);
+    spawnEnemy(4,0);
     arene.display();
     while (true) {
         if (_kbhit()) {
@@ -75,8 +76,11 @@ void gameloop :: readUserInput() {
                 cout << "Tremblement de terre" << endl;
                 tremblementDeTerre();
             }
+            if (userInput == 't') {
+                cout << "Placer potato" << endl;
+            }
             if (userInput == 'r') {
-                cout << "Placer plante" << endl;
+                cout << "Placer peashooter" << endl;
                 //changer menu? ou bouger Elfo position?
             }
             if (userInput == ' ') {
@@ -86,11 +90,11 @@ void gameloop :: readUserInput() {
         }
         arene.update();
         arene.display();
-        std::vector<Enemy> zombieMort;// a modifier pour inclure tous les zombies mort
-        for (int i = 0; i < arene.enemies.size(); i++) {
-            if (arene.enemies[i].getY() == 9 || arene.enemies[i].getHealth() <= 0) {
-                zombieMort.push_back(arene.enemies[i]);
-                if (arene.enemies[i].getY() == 9) {
+        std::vector<enemy> zombieMort;// a modifier pour inclure tous les zombies mort
+        for (int i = 0; i < arene.getEnemies().size(); i++) {
+            if (arene.getEnemies()[i].getY() == 9 || arene.getEnemies()[i].getHealth() <= 0) {
+                zombieMort.push_back(arene.getEnemies()[i]);
+                if (arene.getEnemies()[i].getY() == 9) {
                     gameOver();
                 }
             }
