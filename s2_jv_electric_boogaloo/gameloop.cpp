@@ -1,7 +1,6 @@
 #include "gameloop.h"
 
 void gameloop::gameOver() {
-
     std::system("cls");
     std::cout << "GAME OVER" << std::endl;
 }
@@ -11,7 +10,6 @@ void gameloop::spawnEnemy(int enemyPos, bool theRock) {
     int health = 0;
     int position = 0;
     switch (enemyPos) {
-
     case 0:
         health = 5;
         position = 0;
@@ -43,7 +41,9 @@ void gameloop::spawnEnemy(int enemyPos, bool theRock) {
 
 
 void gameloop :: readUserInput() {
+
     char userInput;
+    charge = 0;
     spawnEnemy(0,0);
     spawnEnemy(1,0);
     spawnEnemy(2,1);
@@ -74,7 +74,7 @@ void gameloop :: readUserInput() {
             }
             if (userInput == 'e') {
                 cout << "Tremblement de terre" << endl;
-                tremblementDeTerre();
+                tremblementDeTerre(charge);
             }
             if (userInput == 't') {
                 cout << "Placer potato" << endl;
@@ -83,7 +83,6 @@ void gameloop :: readUserInput() {
             if (userInput == 'r') {
                 cout << "Placer peashooter" << endl;
                 spawnPeashooter(10);
-                //changer menu? ou bouger Elfo position?
             }
             if (userInput == ' ') {
                 cout << "Tirer" << endl;
@@ -92,7 +91,7 @@ void gameloop :: readUserInput() {
         }
         arene.update();
         arene.display();
-        std::vector<enemy> zombieMort;// a modifier pour inclure tous les zombies mort
+        std::vector<enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size(); i++) {
             if (arene.getEnemies()[i].getY() == 9 || arene.getEnemies()[i].getHealth() <= 0) {
                 zombieMort.push_back(arene.getEnemies()[i]);
@@ -101,6 +100,7 @@ void gameloop :: readUserInput() {
                 }
             }
         }
+        charge += (int)zombieMort.size();
         zombieMort.clear();
     }
 }
@@ -120,5 +120,10 @@ void gameloop :: spawnPotato(int health) {
     arene.getPlants().push_back(bigMama);
 
 }
-void gameloop :: tremblementDeTerre() {}
+void gameloop :: tremblementDeTerre(int charge) {
+    for (int i = 0; i < arene.getEnemies().size(); i++) {
+        arene.getEnemies()[i].decreaseHealth(charge);
+    }
+    charge = 0;
+}
 

@@ -16,10 +16,11 @@ public:
 	void spawnEnemy(int enemyPos, bool theRock);
 	void spawnPeashooter(int health);
 	void spawnPotato(int health);
-	void tremblementDeTerre();
+	void tremblementDeTerre(int charge);
 	void gameOver();
 private:
 	grid arene;
+	int charge;
 
 	
 };
