@@ -7,7 +7,7 @@ void grid::update()
 {
     // Mettre � jour les ennemis
     for (auto& enemy : enemies) {
-        enemy.update();
+        enemy.update(bullets, 1);
     }
 
     // Mettre � jour les plantes
@@ -41,7 +41,7 @@ void grid::display()
         y = enemy.getY();
         
         if (x >= 0 && x < 10 && y >= 0 && y < 5) {
-            grille[y][x] = 'X';
+            grille[y][x] = enemy.display();
         }
     }
     //Afficher plantes
@@ -89,6 +89,6 @@ void grid::display()
 
 void grid::placePlant(plant p)
 {
-	// Ajouter la plante 'p' � la liste des plantes dans la grille
+	// Ajouter la plante 'p' a la liste des plantes dans la grille
 	plants.push_back(p);
 }

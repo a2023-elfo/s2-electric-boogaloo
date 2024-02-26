@@ -3,7 +3,7 @@
 #pragma once
 #include "grid.h"
 #include <conio.h>
-
+#include <cstdlib>
 #include <Windows.h>
 
 
@@ -12,12 +12,16 @@ class gameloop
 public:
 	void readUserInput();
 	void translateUserInput();
-	void spawnPlayer();
-	void spawnEnemy();
+	//void spawnPlayer();
+	void spawnEnemy(int);
 	void spawnPeashooter();
 	void spawnPotato();
 	void tremblementDeTerre();
-	player joueur;
+	void gameOver();
+private:
+	grid arene;
+
+	
 };
 
 #endif

@@ -13,12 +13,13 @@ protected:
 	int health = 5;
 
 public:
-	bool checkHitBox(bullet&);
-	bool decreaseHealth(int);
+	bool checkHitBox(bullet& bang);
+	bool decreaseHealth(int damage);
 	char display();
-	void update(bullet&, int);
-	enemy(int);
-	enemy();
+	void update(vector<bullet>& bullets, int deplacement);
+	enemy(int _health, int x);
+	getHealth();
+	//enemy();
 };
 
 #endif
