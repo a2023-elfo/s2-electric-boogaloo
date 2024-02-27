@@ -41,6 +41,7 @@ void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
 
 void Gameloop :: readUserInput() {
     char userInput;
+    bool loop = true;
     charge = 0;
     spawnEnemy(0,0);
     spawnEnemy(1,0);
@@ -48,7 +49,7 @@ void Gameloop :: readUserInput() {
     spawnEnemy(3,0);
     spawnEnemy(4,0);
     arene.display();
-    while (true) {
+    while (loop) {
         std::this_thread::sleep_for(250ms);
         if (_kbhit()) {
             userInput = _getch();//fonctionne seulement sur Windows
@@ -99,6 +100,7 @@ void Gameloop :: readUserInput() {
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
                 if(arene.getEnemyNumber() <= 0) {
+                    loop = false;
                     gameOver();
                 }
 
