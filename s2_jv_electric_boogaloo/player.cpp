@@ -26,8 +26,7 @@ void Player::move(int offset_x, int offset_y) {
 
 void Player::update()
 {
-    setX(getX());
-    setY(getY());
+
 }
 
     // Audit 2 update behaviour, just to see if the movement works

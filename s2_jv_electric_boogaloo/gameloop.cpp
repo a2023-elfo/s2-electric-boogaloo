@@ -54,7 +54,7 @@ void Gameloop :: readUserInput() {
             userInput = _getch();//fonctionne seulement sur Windows
             if (userInput == 'w'/*|| arduino*/) {
                 cout << "Avancer" << endl;
-                arene.playerShooter.setX(arene.playerShooter.getY() - 1);
+                arene.playerShooter.setY(arene.playerShooter.getY() - 1);
             }
             if (userInput == 'a') {
                 cout << "Gauche" << endl;
@@ -62,7 +62,7 @@ void Gameloop :: readUserInput() {
             }
             if (userInput == 's') {
                 cout << "Reculer" << endl;
-                arene.playerShooter.setX(arene.playerShooter.getY() + 1);
+                arene.playerShooter.setY(arene.playerShooter.getY() + 1);
             }
             if (userInput == 'd') {
                 cout << "Droite" << endl;
@@ -93,12 +93,12 @@ void Gameloop :: readUserInput() {
         arene.display();
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
+
             if (arene.getEnemies()[i].getY() == 9 || arene.getEnemies()[i].getHealth() <= 0) {
+
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.getEnemies().erase(arene.getEnemies().begin() + i);
-                if (arene.getEnemies()[i].getY() == 9) {
-                    gameOver();
-                }
+                
             }
             else {
                 i++;
