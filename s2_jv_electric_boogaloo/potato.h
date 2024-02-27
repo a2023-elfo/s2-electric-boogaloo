@@ -8,7 +8,7 @@ class Potato: public Plant
 public:
 	char display();
 	void update();
-	Potato(int x, int y, int health = 10);
+	Potato(int health, int x, int y);
 protected:
 	int health = 10;
 };

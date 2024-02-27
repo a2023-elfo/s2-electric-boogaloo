@@ -4,17 +4,40 @@
 const int GRID_X = 5;
 const int GRID_Y = 10;
 char grille[GRID_X][GRID_Y];
+int i = 0;
+
+
+
 
 void Grid::update()
 {
+    i++;
     // Mettre � jour les ennemis
-    for (auto& enemy : enemies) {
-        enemy.update(bullets, 0);
+    for (auto& enemy : enemies) { 
+        if (i % 15 == 0) {
+            enemy.update(bullets, 1);
+        }
+        else {
+            enemy.update(bullets, 0);
+        }
+        
+        
     }
 
-    // Mettre � jour les plantes
-    for (auto& plant : plants) {
-        plant.update();
+
+    for (auto& peaShooter : peaShooters) {
+        if (i % 5 == 0) {
+            peaShooter.update(bullets, 1);
+        }
+        else {
+            peaShooter.update(bullets, 0);
+        }
+        
+       
+    }
+
+    for (auto& potato : potatoes) {
+        potato.update();
     }
 
     // Mettre � jour les balles
@@ -49,13 +72,30 @@ void Grid::display()
         }
     }
     //Afficher plantes
-    for (auto& plant : plants) {
+    /*for (auto& plant : plants) {
         x = plant.getX();
         y = plant.getY();
         if (x >= 0 && x < GRID_X && y >= 0 && y < GRID_Y) {
             grille[x][y] = plant.display();
         }
+    }*/
+
+    for (auto& peaShooter : peaShooters) {
+        x = peaShooter.getX();
+        y = peaShooter.getY();
+        if (x >= 0 && x < GRID_X && y >= 0 && y < GRID_Y) {
+            grille[x][y] = peaShooter.display();
+        }
     }
+
+    for (auto& potato : potatoes) {
+        x = potato.getX();
+        y = potato.getY();
+        if (x >= 0 && x < GRID_X && y >= 0 && y < GRID_Y) {
+            grille[x][y] = potato.display();
+        }
+    }
+
     // Afficher balles
     for (auto& bullet : bullets) {
         x = bullet.getX();
@@ -93,11 +133,6 @@ void Grid::display()
 
 }
 
-void Grid::placePlant(Plant plant)
-{
-	// Ajouter la plante 'p' � la liste des plantes dans la grille
-	plants.push_back(plant);
-}
 
 vector<Enemy>& Grid::getEnemies() {
     return enemies;
@@ -147,5 +182,33 @@ void Grid::deleteEnemy(int id)
 
 int Grid::getEnemyNumber()
 {
-    return enemies.size();
+    return enemies.size(); 
 }
+
+vector<PeaShooter>& Grid::getPeaShooters() {
+    return peaShooters;
+}
+PeaShooter* Grid::getPeaShooter(int index) {
+    if (index >= 0 && index < peaShooters.size()) {
+        return &peaShooters[index];
+    }
+    else {
+        return nullptr;
+    }
+
+}
+
+vector<Potato>& Grid::getPotatoes() {
+    return potatoes;
+}
+
+Potato* Grid::getPotato(int index) {
+    if (index >= 0 && index < potatoes.size()) {
+        return &potatoes[index];
+    }
+    else {
+        return nullptr;
+    }
+
+}
+  

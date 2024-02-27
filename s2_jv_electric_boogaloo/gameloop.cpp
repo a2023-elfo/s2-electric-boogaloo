@@ -78,18 +78,26 @@ void Gameloop :: readUserInput() {
             }
             if (userInput == 't') {
                 cout << "Placer potato" << endl;
-                spawnPotato(10);
+                if (charge > 0) {
+                    spawnPotato(10);
+                    charge--;
+                }
             }
             if (userInput == 'r') {
                 cout << "Placer peashooter" << endl;
-                spawnPeashooter(3);
+                if (charge > 0) {
+                    spawnPeashooter(5);
+                    charge--;
+                }
             }
             if (userInput == ' ') {
                 cout << "Tirer" << endl;
                 arene.getBullets().push_back(*arene.playerShooter.shoot());
             }
         }
+        
         arene.update();
+        //std::cout <<charge << std::endl;
         std::system("cls");
         arene.display();
         std::vector<Enemy> zombieMort;
@@ -121,12 +129,12 @@ void Gameloop :: translateUserInput() {
 
 
 void Gameloop :: spawnPeashooter(int health) {
-    PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() + 1);
-    arene.getPlants().push_back(piouPiou);
+    PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
+    arene.getPeaShooters().push_back(piouPiou);
 }
 void Gameloop :: spawnPotato(int health) {
-    PeaShooter bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() + 1);
-    arene.getPlants().push_back(bigMama);
+    Potato bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
+    arene.getPotatoes().push_back(bigMama);
 
 }
 void Gameloop:: tremblementDeTerre(int charge) {
@@ -135,4 +143,3 @@ void Gameloop:: tremblementDeTerre(int charge) {
     }
     charge = 0;
 }
-
