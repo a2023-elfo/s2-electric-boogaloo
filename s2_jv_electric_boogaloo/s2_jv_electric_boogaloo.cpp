@@ -9,13 +9,11 @@ using namespace std;
 
 int main()
 {
-    grid grid;
-    grid.display();
+    cout << "Hello Elfo ! 😊\n";
 
-    cout << "Hello World!\n";
-
-    gameloop test;
+    Gameloop test;
     test.readUserInput();
+
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage

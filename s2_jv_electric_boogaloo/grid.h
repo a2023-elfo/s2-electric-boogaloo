@@ -11,17 +11,25 @@
 #include "player.h"
 using namespace std;
 
-class grid
+class Grid
 {
 private:
-	vector<enemy> enemies;
-	vector<plant> plants;
-	vector<bullet> bullets;
-	player playerShooter;
+	vector<Enemy> enemies;
+	vector<Plant> plants;
+	vector<Bullet> bullets;
+	
 public:
+	Player playerShooter;
 	void update();
 	void display();
-	void placePlant(plant);
+	void placePlant(Plant);
+	Enemy* getEnemy(int index);
+	vector<Enemy>& getEnemies();
+	Plant* getPlant(int index);
+	vector<Plant>& getPlants();
+	Bullet* getBullet(int index);
+	vector<Bullet>& getBullets();
+
 };
 
 #endif

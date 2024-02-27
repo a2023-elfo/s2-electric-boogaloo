@@ -1,44 +1,45 @@
 #include "player.h"
 
-player::player()
+Player::Player()
 {
     x = 0;
-    y = 0;
+    y = 9;
     width = 1;
     height = 1;
 }
 
-player::~player()
+Bullet* Player::shoot()
 {
+    return new Bullet(this->getX(), this->getY());
 }
 
-void player::my_up()
+char Player::display()
 {
-    if(y != 0) y = y - 1;
+    return 'E';
 }
 
-void player::my_down()
-{
-    if(y != 5) y = y + 1;
+void Player::move(int offset_x, int offset_y) {
+    // TODO, move player towards offset, but prevent from going out of bounds
 }
 
-bullet* player::shoot()
+void Player::update()
 {
-    bullet* b = new bullet(this->getX(), this->getY());
-    return b;
-}
-
-char player::display()
-{
-    return 'P';
-}
-
-void player::update()
-{
-    for (int i = 0; i < 5; i++) { //Pour tester
-        my_down();
+    // Audit 2 update behaviour, just to see if the movement works
+    if (chiffre % 2) { // 1, 3, 5 on va
+        if (getX() > 0) {
+            setX(getX() - 1);
+        }
+        else {
+            chiffre++;
+            update();
+        }
     }
-    for (int i = 0; i < 5; i++) {
-        my_up();
+    else { // 0, 2, 4. On va vers la droite
+        if (getX() < 4) {
+            setX(getX() + 1);
+        } else {
+            chiffre++;
+            update();
+        }
     }
 }

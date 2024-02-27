@@ -4,17 +4,19 @@
 
 
 #include "bullet.h"
-class player:public displayObject
+
+class Player : public DisplayObject
 {
 public:
-	player();
-	~player();
-	void my_up();
-	void my_down();
-	bullet* shoot();
-
+	Player();
+	void move(int offset_x, int offset_y);
 	char display();
 	void update();
-};
-#endif
+	Bullet* shoot();
 
+private:
+	int chiffre = 0; // Variable temporaire pour l'audit 2
+
+};
+
+#endif

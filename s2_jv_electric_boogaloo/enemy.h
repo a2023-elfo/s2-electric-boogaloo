@@ -7,18 +7,19 @@
 
 
 #include <random>
-class enemy : public displayObject
+class Enemy : public DisplayObject
 {
 protected:
 	int health = 5;
 
 public:
-	bool checkHitBox(bullet&);
-	bool decreaseHealth(int);
+	bool checkHitBox(Bullet&);
+	bool decreaseHealth(int damage);
 	char display();
-	void update(bullet&, int);
-	enemy(int);
-	enemy();
+	void update(vector<Bullet>& bullets, int deplacement);
+	Enemy(int _health, int x);
+	int getHealth();
+	//enemy();
 };
 
 #endif
