@@ -137,3 +137,15 @@ Bullet* Grid::getBullet(int index) {
 vector<Bullet>& Grid::getBullets() {
     return bullets;
 }
+
+void Grid::deleteEnemy(int id)
+{
+    if (id <= enemies.size()){
+         enemies.erase((enemies.begin() + id));
+    }
+}
+
+int Grid::getEnemyNumber()
+{
+    return enemies.size();
+}

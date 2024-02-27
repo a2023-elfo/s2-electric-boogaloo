@@ -97,8 +97,11 @@ void Gameloop :: readUserInput() {
             if (arene.getEnemies()[i].getY() == 9 || arene.getEnemies()[i].getHealth() <= 0) {
 
                 zombieMort.push_back(arene.getEnemies()[i]);
-                arene.getEnemies().erase(arene.getEnemies().begin() + i);
-                
+                arene.deleteEnemy(i);
+                if(arene.getEnemyNumber() <= 0) {
+                    gameOver();
+                }
+
             }
             else {
                 i++;
