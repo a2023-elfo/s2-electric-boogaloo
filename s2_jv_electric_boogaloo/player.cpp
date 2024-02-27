@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-    x = 0;
+    x = 2;
     y = 9;
     width = 1;
     height = 1;
@@ -19,13 +19,19 @@ char Player::display()
 }
 
 void Player::move(int offset_x, int offset_y) {
+
     // TODO, move player towards offset, but prevent from going out of bounds
 }
 
+
 void Player::update()
 {
+    setX(getX());
+    setY(getY());
+}
+
     // Audit 2 update behaviour, just to see if the movement works
-    if (chiffre % 2) { // 1, 3, 5 on va
+    /*if (chiffre % 2) { // 1, 3, 5 on va
         if (getX() > 0) {
             setX(getX() - 1);
         }
@@ -41,5 +47,4 @@ void Player::update()
             chiffre++;
             update();
         }
-    }
-}
+    }*/
