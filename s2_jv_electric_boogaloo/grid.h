@@ -29,7 +29,8 @@ public:
 	vector<Plant>& getPlants();
 	Bullet* getBullet(int index);
 	vector<Bullet>& getBullets();
-
+	void deleteEnemy(int id);
+	int getEnemyNumber();
 };
 
 #endif
