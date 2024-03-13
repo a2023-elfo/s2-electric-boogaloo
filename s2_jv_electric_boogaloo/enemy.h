@@ -3,7 +3,6 @@
 
 #pragma once
 #include "bullet.h"
-//#include "potato.h"
 #include "displayObject.h"
 
 
