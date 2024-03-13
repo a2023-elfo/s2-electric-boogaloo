@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "displayObject.h"
+#include <thread>
+#include <conio.h>
 
 
 #include "bullet.h"

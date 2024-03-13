@@ -8,9 +8,9 @@ class PeaShooter: public Plant
 {
 public:
 	char display();
-	void update();
+	virtual void update(std::vector<Bullet>& bullets, bool fire);
 	Bullet* shoot();
-	PeaShooter(int x, int y, int health = 5);
+	PeaShooter(int health, int x, int y);
 };
 
 #endif
