@@ -97,7 +97,7 @@ void Gameloop :: readUserInput() {
         }
         
         arene.update();
-        //std::cout <<charge << std::endl;
+        
         std::system("cls");
         arene.display();
         std::vector<Enemy> zombieMort;
