@@ -45,6 +45,9 @@
     <ClCompile Include="gameloop.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="include\serial\SerialPort.cpp">
+      <Filter>Fichiers de ressources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="displayObject.h">
@@ -73,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="gameloop.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json.hpp">
+      <Filter>Fichiers de ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\serial\SerialPort.hpp">
+      <Filter>Fichiers de ressources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
