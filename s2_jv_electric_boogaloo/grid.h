@@ -27,7 +27,6 @@ public:
 	Player playerShooter;
 	void update();
 	void display();
-	//void placePlant(Plant);
 	Enemy* getEnemy(int index);
 	vector<Enemy>& getEnemies();
 	vector<PeaShooter>& getPeaShooters();
