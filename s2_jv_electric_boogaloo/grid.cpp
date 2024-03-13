@@ -32,8 +32,6 @@ void Grid::update()
         else {
             peaShooter.update(bullets, 0);
         }
-        
-       
     }
 
     for (auto& potato : potatoes) {
