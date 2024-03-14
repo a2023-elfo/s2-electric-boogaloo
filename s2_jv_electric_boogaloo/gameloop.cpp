@@ -70,7 +70,7 @@ void Gameloop :: readUserInput() {
 
     string raw_msg;
 
-    //Struct. Données JSON 
+    //Struct. Donnï¿½es JSON 
     int recuX = 0;
     int recuY = 0;
     int bouton = 0;
@@ -171,6 +171,7 @@ void Gameloop :: readUserInput() {
         }
 
         arene.update();
+        
         std::system("cls");
         arene.display();
         std::vector<Enemy> zombieMort;
@@ -203,12 +204,12 @@ void Gameloop :: translateUserInput() {
 
 
 void Gameloop :: spawnPeashooter(int health) {
-    PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() + 1);
-    arene.getPlants().push_back(piouPiou);
+    PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
+    arene.getPeaShooters().push_back(piouPiou);
 }
 void Gameloop :: spawnPotato(int health) {
-    PeaShooter bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() + 1);
-    arene.getPlants().push_back(bigMama);
+    Potato bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
+    arene.getPotatoes().push_back(bigMama);
 
 }
 void Gameloop:: tremblementDeTerre(int charge) {

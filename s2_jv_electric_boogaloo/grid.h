@@ -9,6 +9,9 @@
 #include "plant.h"
 #include "bullet.h"
 #include "player.h"
+#include <random>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 class Grid
@@ -16,15 +19,20 @@ class Grid
 private:
 	vector<Enemy> enemies;
 	vector<Plant> plants;
+	vector<PeaShooter> peaShooters;
+	vector<Potato> potatoes;
 	vector<Bullet> bullets;
 	
 public:
 	Player playerShooter;
 	void update();
 	void display();
-	void placePlant(Plant);
 	Enemy* getEnemy(int index);
 	vector<Enemy>& getEnemies();
+	vector<PeaShooter>& getPeaShooters();
+	PeaShooter* getPeaShooter(int index);
+	vector<Potato>& getPotatoes();
+	Potato* getPotato(int index);
 	Plant* getPlant(int index);
 	vector<Plant>& getPlants();
 	Bullet* getBullet(int index);
