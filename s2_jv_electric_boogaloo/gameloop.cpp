@@ -79,14 +79,14 @@ void Gameloop :: readUserInput() {
             if (userInput == 't') {
                 cout << "Placer potato" << endl;
                 if (charge > 0) {
-                    spawnPotato(10);
+                    spawnPotato(5);
                     charge--;
                 }
             }
             if (userInput == 'r') {
                 cout << "Placer peashooter" << endl;
                 if (charge > 0) {
-                    spawnPeashooter(5);
+                    spawnPeashooter(2);
                     charge--;
                 }
             }
@@ -117,6 +117,18 @@ void Gameloop :: readUserInput() {
                 i++;
             }
         }
+
+        for (int i = 0; i < arene.getPotatoes().size(); i++) {
+            if (arene.getPotatoes()[i].getHealth() <= 0) {
+                arene.deletePotato(i);
+            }
+        }
+        for (int i = 0; i < arene.getPeaShooters().size(); i++) {
+            if (arene.getPeaShooters()[i].getHealth() <= 0) {
+                arene.deletePeaShooter(i);
+            }
+        }
+        
         charge += (int)zombieMort.size();
         zombieMort.clear();
     }

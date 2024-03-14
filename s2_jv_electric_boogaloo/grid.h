@@ -39,6 +39,8 @@ public:
 	Bullet* getBullet(int index);
 	vector<Bullet>& getBullets();
 	void deleteEnemy(int id);
+	void deletePotato(int id);
+	void deletePeaShooter(int id);
 	int getEnemyNumber();
 };
 
