@@ -42,6 +42,7 @@ void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
 void Gameloop :: readUserInput() {
     char userInput;
     bool loop = true;
+    systemeArgent argent;
     charge = 0;
     spawnEnemy(0,0);
     spawnEnemy(1,0);
@@ -77,17 +78,23 @@ void Gameloop :: readUserInput() {
                 tremblementDeTerre(charge);
             }
             if (userInput == 't') {
-                cout << "Placer potato" << endl;
-                if (charge > 0) {
+                if (argent.checkFundsPotato()) {
+                    cout << "Placer patate" << endl;
                     spawnPotato(10);
-                    charge--;
+                    argent.buyPotato(); //enlever argent
+                }
+                else {
+                    cout << "Smells like broke" << endl;
                 }
             }
             if (userInput == 'r') {
-                cout << "Placer peashooter" << endl;
-                if (charge > 0) {
+                if (argent.checkFundsPeaShooter()) {
+                    cout << "Placer peashooter" << endl;
                     spawnPeashooter(5);
-                    charge--;
+                    argent.buyPeaShooter(); //enlever argent
+                }
+                else {
+                    cout << "Smells like broke" << endl;
                 }
             }
             if (userInput == ' ') {
@@ -107,6 +114,7 @@ void Gameloop :: readUserInput() {
 
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
+                argent.killZombie(); //ajouter argent quand zombie est mort
                 if(arene.getEnemyNumber() <= 0) {
                     loop = false;
                     gameOver();
