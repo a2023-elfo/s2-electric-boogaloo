@@ -107,6 +107,7 @@ void Gameloop :: readUserInput() {
         
         std::system("cls");
         arene.display();
+        cout << "Current money: " << argent.checkMoney() << endl;
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
 
