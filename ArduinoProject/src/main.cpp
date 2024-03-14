@@ -35,12 +35,23 @@ int pinPOT = A0;
 int pinjoy_X= A15;
 int pinjoy_Y= A14;
 
-int SW1 = 27 ;
-int SW2 = 25 ;
-int SW3 = 23 ;
-int SW4 = 29 ;
-int SW5 = 53 ;
-int SW6 = 31 ;
+int SW1 = 29;
+int SW2 = 23;
+int SW3 = 31;//PASOK
+int SW4 = 27;
+int SW5 = 53;
+int SW6 = 0;
+
+int bar1 = 51;
+int bar2 = 49;
+int bar3 = 47;
+int bar4 = 45;
+int bar5 = 43;
+int bar6 = 41;
+int bar7 = 33;
+int bar8 = 35;
+int bar9 = 37;
+int bar10 = 39;
 
 int bouton = 0 ;
  
@@ -57,24 +68,53 @@ void serialEvent();
 void setup() {
   Serial.begin(BAUD);               // Initialisation de la communication serielle
   pinMode(pinLED1, OUTPUT);
-  digitalWrite(pinLED1, HIGH);
   pinMode(pinLED2, OUTPUT);
-  digitalWrite(pinLED2, HIGH);
   pinMode(pinLED3, OUTPUT);
-  digitalWrite(pinLED3, HIGH);
   pinMode(pinLED4, OUTPUT);
-  digitalWrite(pinLED4, HIGH);
-  
-  pinMode(37, OUTPUT);
-  digitalWrite(37, HIGH);
+  pinMode(bar1, OUTPUT);
+  pinMode(bar2, OUTPUT);
+  pinMode(bar3, OUTPUT);
+  pinMode(bar4, OUTPUT);
+  pinMode(bar5, OUTPUT);
+  pinMode(bar6, OUTPUT);
+  pinMode(bar7, OUTPUT);
+  pinMode(bar8, OUTPUT);
+  pinMode(bar9, OUTPUT);
+  pinMode(bar10, OUTPUT);
+  pinMode(SW1, INPUT);
+  pinMode(SW3, INPUT);
   lcd.begin(16, 2);
   lcd.print("Lien Arduino-PC");
-
 }
 
 /* Boucle principale (infinie) */
 void loop() {
- 
+  if (digitalRead(SW1) == LOW)
+  {
+    Serial.print("Bouton 1");
+    delay(100);
+  }
+  if (digitalRead(SW2) == LOW)
+  {
+    Serial.print("Bouton 2");
+    delay(100);
+  }
+  if (digitalRead(SW3) == HIGH)
+  {
+    Serial.print("Bouton 3");
+    delay(200);
+  }
+  if (digitalRead(SW4) == LOW)
+  {
+    Serial.print("Bouton 4");
+    delay(100);
+  }
+  if (digitalRead(SW5) == LOW)
+  {
+    Serial.print("Bouton 5");
+    delay(100);
+  }
+  /*
    if (shouldRead_) {
       readMsg();
       sendMsg();
@@ -162,11 +202,8 @@ void loop() {
     bouton = 0;
   }
 
-
-  
-   
-  
   delay(10);  // delais de 10 ms
+  */
 }
 
 // 1023 - 800 // 0-200 // X et Y 
