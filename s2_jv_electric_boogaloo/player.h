@@ -2,6 +2,9 @@
 #define PLAYER_H
 #include "displayObject.h"
 #include "enemy.h"
+#include <thread>
+#include <conio.h>
+
 #include "bullet.h"
 
 class Player : public DisplayObject

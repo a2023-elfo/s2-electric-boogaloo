@@ -2,7 +2,7 @@
 
 char Potato::display()
 {
-    return 'P';
+    return 'O';
 }
 
 void Potato::update()
@@ -17,7 +17,7 @@ void Potato::update()
     }
 }
 
-Potato::Potato(int x, int y, int health)
+Potato::Potato(int health, int x, int y)
 {
     setX(x);
     setY(y);

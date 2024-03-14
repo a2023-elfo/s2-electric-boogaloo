@@ -41,6 +41,7 @@ void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
 
 void Gameloop :: readUserInput() {
     char userInput;
+    bool loop = true;
     charge = 0;
     spawnEnemy(0,0);
     spawnEnemy(1,0);
@@ -48,13 +49,13 @@ void Gameloop :: readUserInput() {
     spawnEnemy(3,0);
     spawnEnemy(4,0);
     arene.display();
-    while (true) {
+    while (loop) {
         std::this_thread::sleep_for(250ms);
         if (_kbhit()) {
             userInput = _getch();//fonctionne seulement sur Windows
             if (userInput == 'w'/*|| arduino*/) {
                 cout << "Avancer" << endl;
-                arene.playerShooter.setX(arene.playerShooter.getY() - 1);
+                arene.playerShooter.setY(arene.playerShooter.getY() - 1);
             }
             if (userInput == 'a') {
                 cout << "Gauche" << endl;
@@ -62,7 +63,7 @@ void Gameloop :: readUserInput() {
             }
             if (userInput == 's') {
                 cout << "Reculer" << endl;
-                arene.playerShooter.setX(arene.playerShooter.getY() + 1);
+                arene.playerShooter.setY(arene.playerShooter.getY() + 1);
             }
             if (userInput == 'd') {
                 cout << "Droite" << endl;
@@ -77,31 +78,54 @@ void Gameloop :: readUserInput() {
             }
             if (userInput == 't') {
                 cout << "Placer potato" << endl;
-                spawnPotato(10);
+                if (charge > 0) {
+                    spawnPotato(10);
+                    charge--;
+                }
             }
             if (userInput == 'r') {
                 cout << "Placer peashooter" << endl;
-                spawnPeashooter(3);
+                if (charge > 0) {
+                    spawnPeashooter(5);
+                    charge--;
+                }
             }
             if (userInput == ' ') {
                 cout << "Tirer" << endl;
                 arene.getBullets().push_back(*arene.playerShooter.shoot());
             }
+            if (userInput == 'p') {
+                Healthbar.decreaseHealth(1);
+            }
+            if (userInput == 'o') {
+                Healthbar.increaseHealth(1);
+            }
         }
+        
         arene.update();
+        
         std::system("cls");
         arene.display();
+        std::cout << Healthbar.displayBar();
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
-            if (arene.getEnemies()[i].getY() == 9 || arene.getEnemies()[i].getHealth() <= 0) {
+            if (arene.getEnemies()[i].getY() == 9) {
+                Healthbar.decreaseHealth(1);
                 zombieMort.push_back(arene.getEnemies()[i]);
-                arene.getEnemies().erase(arene.getEnemies().begin() + i);
-                if (arene.getEnemies()[i].getY() == 9) {
-                    gameOver();
-                }
+                arene.deleteEnemy(i);
+            }
+            else if (arene.getEnemies()[i].getHealth() <= 0) {
+
+                zombieMort.push_back(arene.getEnemies()[i]);
+                arene.deleteEnemy(i);
             }
             else {
                 i++;
+            }
+
+            if (Healthbar.getHealth() == 0 || arene.getEnemyNumber() <= 0) {
+                loop = false;
+                gameOver();
             }
         }
         charge += (int)zombieMort.size();
@@ -116,12 +140,12 @@ void Gameloop :: translateUserInput() {
 
 
 void Gameloop :: spawnPeashooter(int health) {
-    PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() + 1);
-    arene.getPlants().push_back(piouPiou);
+    PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
+    arene.getPeaShooters().push_back(piouPiou);
 }
 void Gameloop :: spawnPotato(int health) {
-    PeaShooter bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() + 1);
-    arene.getPlants().push_back(bigMama);
+    Potato bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
+    arene.getPotatoes().push_back(bigMama);
 
 }
 void Gameloop:: tremblementDeTerre(int charge) {
@@ -130,4 +154,3 @@ void Gameloop:: tremblementDeTerre(int charge) {
     }
     charge = 0;
 }
-
