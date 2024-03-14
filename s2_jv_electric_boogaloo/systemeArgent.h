@@ -8,7 +8,7 @@ class systemeArgent
 private:
 		int money;
 public:
-	systemeArgent() : money(0) {};
+	systemeArgent();
 	void killZombie();
 	bool checkFundsPeaShooter();
 	bool checkFundsPotato();

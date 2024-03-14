@@ -2,7 +2,9 @@
 
 
 //initialiser l'argent a zero
-systemeArgent::systemeArgent() : money(0) {}; 
+systemeArgent::systemeArgent(){
+	money = 0;
+} 
 
 //regarder si un zombie est mort et ajouter argent
 void systemeArgent::killZombie() {
