@@ -28,6 +28,11 @@ void healthBar::setMaxHealth(int amount)
 {
 	if (amount > 0) {
 		this->maxhealth = amount;
+		this->health = maxhealth;
+	}
+	else {
+		this->maxhealth = 1;
+		this->health = 1;
 	}
 }
 
@@ -46,6 +51,9 @@ void healthBar::increaseHealth(int amount)
 {
 	if (amount > 0) {
 		this->health += amount;
+		if (this->health > this->maxhealth) {
+			this->health = maxhealth;
+		}
 	}
 }
 
