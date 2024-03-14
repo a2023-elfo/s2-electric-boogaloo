@@ -94,27 +94,38 @@ void Gameloop :: readUserInput() {
                 cout << "Tirer" << endl;
                 arene.getBullets().push_back(*arene.playerShooter.shoot());
             }
+            if (userInput == 'p') {
+                Healthbar.decreaseHealth(1);
+            }
+            if (userInput == 'o') {
+                Healthbar.increaseHealth(1);
+            }
         }
         
         arene.update();
         
         std::system("cls");
         arene.display();
+        std::cout << Healthbar.displayBar();
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
-
-            if (arene.getEnemies()[i].getY() == 9 || arene.getEnemies()[i].getHealth() <= 0) {
+            if (arene.getEnemies()[i].getY() == 9) {
+                Healthbar.decreaseHealth(1);
+                zombieMort.push_back(arene.getEnemies()[i]);
+                arene.deleteEnemy(i);
+            }
+            else if (arene.getEnemies()[i].getHealth() <= 0) {
 
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
-                if(arene.getEnemyNumber() <= 0) {
-                    loop = false;
-                    gameOver();
-                }
-
             }
             else {
                 i++;
+            }
+
+            if (Healthbar.getHealth() == 0 || arene.getEnemyNumber() <= 0) {
+                loop = false;
+                gameOver();
             }
         }
         charge += (int)zombieMort.size();

@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <Windows.h>
 #include "grid.h"
-
+#include "healthBar.h"
 
 class Gameloop
 {
@@ -21,6 +21,7 @@ public:
 private:
 	Grid arene;
 	int charge;
+	healthBar Healthbar = healthBar(5);
 };
 
 #endif
