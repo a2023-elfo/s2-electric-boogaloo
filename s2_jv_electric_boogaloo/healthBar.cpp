@@ -3,7 +3,8 @@
 healthBar::healthBar(int baseHealth)
 {
 	if (baseHealth > 0) {
-		this->health = baseHealth;
+		this->setMaxHealth(baseHealth);
+		this->setHealth(baseHealth);
 	}
 }
 
