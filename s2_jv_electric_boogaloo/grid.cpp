@@ -11,7 +11,7 @@ void Grid::update()
     for (auto& enemy : enemies) {
         enemy.update(bullets, 0);
     }
-
+     
     // Mettre � jour les plantes
     for (auto& plant : plants) {
         plant.update();
@@ -23,7 +23,7 @@ void Grid::update()
     }
 
     // Mettre � jour le joueur
-    playerShooter.update();
+    playerShooter.update(bullets, enemies);
 }
 
 void Grid::display()
