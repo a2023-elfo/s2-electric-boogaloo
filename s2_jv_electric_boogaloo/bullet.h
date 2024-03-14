@@ -1,14 +1,13 @@
 #ifndef BULLET_H
 #define BULLET_H
 #include "displayObject.h"
-#include "player.h"
 #include <stdlib.h>
 
-class bullet:public displayObject
+class Bullet:public DisplayObject
 {
 public:
-	bullet(int _posX, int _posY);
-	~bullet();
+	Bullet(int _posX, int _posY);
+	~Bullet();
 
 	char display();
 	void update();

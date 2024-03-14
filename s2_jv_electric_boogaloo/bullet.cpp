@@ -1,23 +1,25 @@
 #include "bullet.h"
 
-bullet::bullet(int _posX, int _posY)
+Bullet::Bullet(int x, int y)
 {
-	_posX = x;
-	_posY = y;
-	width = 1;
-	height = 1;
+	this->setX(x);
+	this->setY(y);
 }
 
-bullet::~bullet()
+
+Bullet::~Bullet()
 {
 }
 
-char bullet::display()
+char Bullet::display()
 {
 	return 'B';
 }
 
-void bullet::update()
+void Bullet::update()
 {
-	x = x + 1;
+	y = y - 1;
+	if (y < 0) {
+		// We should delete the bullet, it is out of the grid!
+	}
 }

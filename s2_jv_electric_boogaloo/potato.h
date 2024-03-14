@@ -3,12 +3,12 @@
 
 #pragma once
 #include "plant.h"
-class potato: public plant
+class Potato: public Plant
 {
 public:
 	char display();
 	void update();
-	potato(int, int, int);
+	Potato(int health, int x, int y);
 protected:
 	int health = 10;
 };

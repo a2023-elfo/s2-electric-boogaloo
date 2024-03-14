@@ -1,30 +1,31 @@
 #include "plant.h"
 #include <iostream>
 
-bool plant::checkHitBox(int, int)
+bool Plant::checkHitBox(int, int)
 {
     return false;
 }
 
-bool plant::decreaseHealth(int amount)
+int Plant::getHealth()
 {
-    // Réduire la sante de la plante de la quantite specifiee (amount)
+    return this->health;
+}
+
+// Returns false once plant has died
+bool Plant::decreaseHealth(int amount)
+{
+    // Reduire la sante de la plante de la quantite specifiee (amount)
     health -= amount;
-    // Vérifier si la sante est tombee à zero ou moins
-    if (health <= 0) {
-        // La plante est morte
-        return true;
-    }
-    // La plante est toujours en vie
-    return false;
+
+    return health > 0;
 }
 
-char plant::display()
+char Plant::display()
 {
     return 'P';
 }
 
-void plant::update()
+void Plant::update()
 {
     // Mise à jour de l'etat de la plante
     if (checkHitBox(x, y)) {
@@ -34,10 +35,4 @@ void plant::update()
             std::cout << "La plante a ete detruite !" << std::endl;
         }
     }
-}
-
-bullet* plant::shoot()
-{
-    bullet* b = new bullet(x, y);
-    return b;
 }
