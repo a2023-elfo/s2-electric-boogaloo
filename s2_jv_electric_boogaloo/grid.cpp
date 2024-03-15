@@ -34,15 +34,8 @@ void Grid::update()
         }
     }
 
-     
-    // Mettre � jour les plantes
-    for (auto& plant : plants) {
-        plant.update();
-    }
-
     for (auto& potato : potatoes) {
         potato.update();
-
     }
 
     // Mettre � jour les balles
@@ -51,7 +44,7 @@ void Grid::update()
     }
 
     // Mettre � jour le joueur
-    playerShooter.update(bullets, enemies);
+    playerShooter.update();
 }
 
 void Grid::display()
