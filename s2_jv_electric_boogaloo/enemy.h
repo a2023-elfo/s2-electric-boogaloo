@@ -3,6 +3,8 @@
 
 #pragma once
 #include "bullet.h"
+#include "potato.h"
+#include "peaShooter.h"
 #include "displayObject.h"
 
 
@@ -10,15 +12,18 @@
 class Enemy : public DisplayObject
 {
 protected:
-	int health = 5;
+	int health;
 
 public:
 	bool checkHitBox(Bullet& bang);
 	bool decreaseHealth(int damage);
 	char display();
-	void update(vector<Bullet>& bullets, int deplacement);
+	void update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters);
 	Enemy(int _health, int x);
 	int getHealth();
+	void setDeplacement(int mouvement);
+private:
+	int deplacement;
 };
 
 #endif
