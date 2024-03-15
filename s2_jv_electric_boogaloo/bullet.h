@@ -11,6 +11,11 @@ public:
 
 	char display();
 	void update();
+
+	BulletType getBulletType();
+	void setBulletType(BulletType bulletType);
+private:
+	BulletType bulletType;
 };
 
 #endif

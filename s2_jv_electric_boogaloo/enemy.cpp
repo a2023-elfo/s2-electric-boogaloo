@@ -41,7 +41,6 @@ void Enemy::update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaS
 			decreaseHealth(1);
 		}
 	}
-	
 }
 
 Enemy::Enemy(int _health, int x)
