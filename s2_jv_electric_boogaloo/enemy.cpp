@@ -26,7 +26,6 @@ void Enemy::update(vector<Bullet>& bullets, int deplacement)
 			decreaseHealth(1);
 		}
 	}
-	
 }
 
 Enemy::Enemy(int _health, int x)
