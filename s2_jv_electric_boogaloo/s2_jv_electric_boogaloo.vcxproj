@@ -145,6 +145,7 @@
     <ClCompile Include="gameloop.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="include\serial\SerialPort.cpp" />
+    <ClCompile Include="healthBar.cpp" />
     <ClCompile Include="peaShooter.cpp" />
     <ClCompile Include="plant.cpp" />
     <ClCompile Include="player.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="grid.h" />
     <ClInclude Include="include\json.hpp" />
     <ClInclude Include="include\serial\SerialPort.hpp" />
+    <ClInclude Include="healthBar.h" />
     <ClInclude Include="peaShooter.h" />
     <ClInclude Include="plant.h" />
     <ClInclude Include="player.h" />

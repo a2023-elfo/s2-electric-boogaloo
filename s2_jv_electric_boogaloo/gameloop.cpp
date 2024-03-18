@@ -94,12 +94,13 @@ void Gameloop :: readUserInput() {
         // Envoie message Arduino
         j_msg_send["Affichage"] = "Mouvement" + to_string(bouge) + " B=" + to_string(bouton);
 
-        // Reception message Arduino
+        
         if (!SendToSerial(arduino, j_msg_send)) {
             cerr << "Erreur lors de l'envoie du message. " << endl;
         }
 
         j_msg_rcv.clear();
+        // Reception message Arduino
         if (!RcvFromSerial(arduino, raw_msg)) {
             cerr << "Erreur lors de la reception du message. " << endl;
             break;
@@ -118,7 +119,7 @@ void Gameloop :: readUserInput() {
         if (_kbhit())
             userInput = _getch();
         else
-            userInput = '/';
+            userInput = '/'; // On prends un char qui n'Est jamais
 
         if (userInput == 'w' || bouge == 1)
             arene.playerShooter.setY(arene.playerShooter.getY() - 1);
@@ -141,22 +142,39 @@ void Gameloop :: readUserInput() {
         
         std::system("cls");
         arene.display();
+        std::cout << Healthbar.displayBar();
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
-
-            if (arene.getEnemies()[i].getY() == 9 || arene.getEnemies()[i].getHealth() <= 0) {
-
+            if (arene.getEnemies()[i].getY() == 9) {
+                Healthbar.decreaseHealth(1);
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
-                if (arene.getEnemyNumber() <= 0) {
-                    loop = false;
-                    gameOver();
-                }
+            }
+            else if (arene.getEnemies()[i].getHealth() <= 0) {
+                zombieMort.push_back(arene.getEnemies()[i]);
+                arene.deleteEnemy(i);
             }
             else {
                 i++;
             }
+
+            if (Healthbar.getHealth() == 0 || arene.getEnemyNumber() <= 0) {
+                loop = false;
+                gameOver();
+            }
         }
+
+        for (int i = 0; i < arene.getPotatoes().size(); i++) {
+            if (arene.getPotatoes()[i].getHealth() <= 0) {
+                arene.deletePotato(i);
+            }
+        }
+        for (int i = 0; i < arene.getPeaShooters().size(); i++) {
+            if (arene.getPeaShooters()[i].getHealth() <= 0) {
+                arene.deletePeaShooter(i);
+            }
+        }
+        
         charge += (int)zombieMort.size();
         zombieMort.clear();
     }

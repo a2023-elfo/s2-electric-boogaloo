@@ -47,6 +47,8 @@
     </ClCompile>
     <ClCompile Include="include\serial\SerialPort.cpp">
       <Filter>Fichiers de ressources</Filter>
+    <ClCompile Include="healthBar.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +84,9 @@
     </ClInclude>
     <ClInclude Include="include\serial\SerialPort.hpp">
       <Filter>Fichiers de ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="healthBar.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
