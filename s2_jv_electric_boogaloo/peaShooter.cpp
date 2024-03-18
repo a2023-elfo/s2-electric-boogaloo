@@ -30,9 +30,23 @@ Bullet* PeaShooter::shoot(){
 }
 
 PeaShooter::PeaShooter(int health, int x, int y)
-{
-    health = 5;
-    this->setX(x);
-    this->setY(y);
+{    
+    setX(x);
+    setY(y);
     this->health = health;
+}
+
+bool PeaShooter::checkHitBox(int x, int y)
+{
+    return (y + 1 == getY() && x == getX());
+}
+
+bool PeaShooter::decreaseHealth(int damage)
+{
+    return (health -= damage) > 0;
+}
+
+int PeaShooter::getHealth()
+{
+    return health;
 }
