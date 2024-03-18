@@ -101,8 +101,8 @@ void loop() {
     bouton = 1;
   if (digitalRead(SW2) == LOW)
     bouton = 2;
-  if (digitalRead(SW3) == LOW)
-    bouton = 3;
+  //if (digitalRead(SW3) == LOW)
+    //bouton = 3;
   if (digitalRead(SW4) == LOW)
     bouton = 4;
   if (digitalRead(SW5) == LOW)

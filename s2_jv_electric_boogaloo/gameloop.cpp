@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-
 #include "gameloop.h"
 #include "thread"
 #include "include/serial/SerialPort.hpp"
@@ -11,13 +10,11 @@ using json = nlohmann::json;
 #define BAUD 9600           // Frequence de transmission serielle
 #define MSG_MAX_SIZE 1024   // Longueur maximale d'un message
 
-
 /*------------------------- Prototypes de fonctions -------------------------*/
 bool SendToSerial(SerialPort* arduino, json j_msg);
 bool RcvFromSerial(SerialPort* arduino, string& msg);
 
 SerialPort* arduino; //doit etre un objet global!
-
 
 void Gameloop::gameOver() {
     std::system("cls");
@@ -71,8 +68,7 @@ void Gameloop :: readUserInput() {
     string raw_msg;
 
     //Struct. Donn�es JSON 
-    int recuX = 0;
-    int recuY = 0;
+    int bouge = 0;
     int bouton = 0;
 
     // Initialisation du port de communication
@@ -96,15 +92,12 @@ void Gameloop :: readUserInput() {
         std::this_thread::sleep_for(250ms);
 
         // Envoie message Arduino
-        j_msg_send["Affichage"] = "X=" + to_string(recuX) + " Y=" + to_string(recuY) + " B=" + to_string(bouton);
-
+        j_msg_send["Affichage"] = "Mouvement" + to_string(bouge) + " B=" + to_string(bouton);
 
         // Reception message Arduino
-
         if (!SendToSerial(arduino, j_msg_send)) {
             cerr << "Erreur lors de l'envoie du message. " << endl;
         }
-
 
         j_msg_rcv.clear();
         if (!RcvFromSerial(arduino, raw_msg)) {
@@ -112,63 +105,37 @@ void Gameloop :: readUserInput() {
             break;
         }
 
-
         // Impression du message de l'Arduino si valide
         if (raw_msg.size() > 0) {
             // cout << "raw_msg: " << raw_msg << endl;  // debug
             // Transfert du message en json
             j_msg_rcv = json::parse(raw_msg);
 
-
-            recuX = j_msg_rcv.value("X", 0);
-            recuY = j_msg_rcv.value("Y", 0);
+            bouge = j_msg_rcv.value("mouvement", 0);
             bouton = j_msg_rcv.value("Bouton", 0);
-
-
         }
-        if (_kbhit()) {
+
+        if (_kbhit())
             userInput = _getch();
-        }
-        else {
+        else
             userInput = '/';
-        }
 
-        if (userInput == 'w' || (recuX == 0 && recuY == 1)) {
-            cout << "Avancer" << endl;
+        if (userInput == 'w' || bouge == 1)
             arene.playerShooter.setY(arene.playerShooter.getY() - 1);
-        }
-        
-        if (userInput == 'a' || (recuX == -1 && recuY == 0)) {
-            cout << "Gauche" << endl;
+        if (userInput == 'a' || bouge == 3)
             arene.playerShooter.setX(arene.playerShooter.getX() - 1);
-        }
-        if (userInput == 's' || (recuX == 0 && recuY == -1)) {
-            cout << "Reculer" << endl;
+        if (userInput == 's' || bouge == 2)
             arene.playerShooter.setY(arene.playerShooter.getY() + 1);
-        }
-        if (userInput == 'd' ||( recuX == 1 && recuY == 0)) {
-            cout << "Droite" << endl;
+        if (userInput == 'd' || bouge == 4)
             arene.playerShooter.setX(arene.playerShooter.getX() + 1);
-        }
-        if (userInput == 'q'/* || bouton = ++ */ ) {
-            cout << "Do nothing" << endl;
-        }
-        if (userInput == 'e') {
-            cout << "Tremblement de terre" << endl;
-            tremblementDeTerre(charge);
-        }
-        if (userInput == 't'|| bouton == 3) {
-            cout << "Placer potato" << endl;
+        if (userInput == 't' || bouton == 2)
             spawnPotato(10);
-        }
-        if (userInput == 'r'|| bouton == 4) {
-            cout << "Placer peashooter" << endl;
+        if (userInput == 'r' || bouton == 4)
             spawnPeashooter(3);
-        }
-        if (userInput == ' '|| bouton==1) {
-            cout << "Tirer" << endl;
+        if (userInput == ' ' || bouton == 1)
             arene.getBullets().push_back(*arene.playerShooter.shoot());
-        }
+        if (userInput == 'e' || bouton == 3)
+            tremblementDeTerre(charge);
 
         arene.update();
         
@@ -185,7 +152,6 @@ void Gameloop :: readUserInput() {
                     loop = false;
                     gameOver();
                 }
-
             }
             else {
                 i++;
@@ -200,8 +166,6 @@ void Gameloop :: readUserInput() {
 void Gameloop :: translateUserInput() {
    
 }
-
-
 
 void Gameloop :: spawnPeashooter(int health) {
     PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
@@ -226,7 +190,6 @@ bool SendToSerial(SerialPort* arduino, json j_msg) {
     bool ret = arduino->writeSerialPort(msg.c_str(), msg.length());
     return ret;
 }
-
 
 bool RcvFromSerial(SerialPort* arduino, string& msg) {
     // Return 0 if error
