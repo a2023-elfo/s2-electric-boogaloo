@@ -75,9 +75,11 @@ void Gameloop :: readUserInput() {
     string com;
     cout << "Entrer le port de communication du Arduino: ";
     cin >> com;
+    bool keyboardOnly = com == "ELFO";
+
     arduino = new SerialPort(com.c_str(), BAUD);
 
-    if (!arduino->isConnected()) {
+    if (!arduino->isConnected() && !keyboardOnly) {
         cerr << "Impossible de se connecter au port " << string(com) << ". Fermeture du programme!" << endl;
         exit(1);
     }
@@ -94,16 +96,17 @@ void Gameloop :: readUserInput() {
         // Envoie message Arduino
         j_msg_send["Affichage"] = "Mouvement" + to_string(bouge) + " B=" + to_string(bouton);
 
-        
-        if (!SendToSerial(arduino, j_msg_send)) {
-            cerr << "Erreur lors de l'envoie du message. " << endl;
-        }
+        if (!keyboardOnly) {
+            if (!SendToSerial(arduino, j_msg_send)) {
+                cerr << "Erreur lors de l'envoie du message. " << endl;
+            }
 
-        j_msg_rcv.clear();
-        // Reception message Arduino
-        if (!RcvFromSerial(arduino, raw_msg)) {
-            cerr << "Erreur lors de la reception du message. " << endl;
-            break;
+            j_msg_rcv.clear();
+            // Reception message Arduino
+            if (!RcvFromSerial(arduino, raw_msg)) {
+                cerr << "Erreur lors de la reception du message. " << endl;
+                break;
+            }
         }
 
         // Impression du message de l'Arduino si valide
