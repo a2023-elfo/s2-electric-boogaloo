@@ -47,6 +47,7 @@
     </ClCompile>
     <ClCompile Include="include\serial\SerialPort.cpp">
       <Filter>Fichiers de ressources</Filter>
+    </ClCompile>
     <ClCompile Include="healthBar.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
