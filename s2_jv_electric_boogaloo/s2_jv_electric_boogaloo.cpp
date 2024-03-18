@@ -3,13 +3,16 @@
 
 #include <iostream>
 #include "gameloop.h"
+#include "include/serial/SerialPort.hpp"
+#include "include/json.hpp"
+using json = nlohmann::json;
 
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello Elfo ! 😊\n";
+   
 
     Gameloop test;
     test.readUserInput();
