@@ -1,13 +1,13 @@
 #pragma once
 #include "displayObject.h"
 
-class healthBar : public DisplayObject
+class HealthBar : public DisplayObject
 {
 private:
 	int health = 5;
 	int maxhealth = 5;
 public:
-	healthBar(int baseHealth);
+	HealthBar(int baseHealth);
 	void setHealth(int amount);
 	int getHealth();
 	int getMaxHealth();

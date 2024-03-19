@@ -6,6 +6,7 @@
 #include <conio.h>
 
 #include "bullet.h"
+#include "healthBar.h"
 
 class Player : public DisplayObject
 {
@@ -18,10 +19,7 @@ public:
 	Bullet* shoot();
 	bool checkHitBullet(Bullet& bang);
 	bool checkHitEnemy(Enemy& enemy);
-
-private:
-	int chiffre = 0; // Variable temporaire pour l'audit 2
-
+	HealthBar health = HealthBar(5);
 };
 
 #endif

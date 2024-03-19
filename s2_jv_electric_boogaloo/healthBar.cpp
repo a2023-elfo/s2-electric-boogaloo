@@ -1,6 +1,6 @@
 #include "healthBar.h"
 
-healthBar::healthBar(int baseHealth)
+HealthBar::HealthBar(int baseHealth)
 {
 	if (baseHealth > 0) {
 		this->setMaxHealth(baseHealth);
@@ -8,7 +8,7 @@ healthBar::healthBar(int baseHealth)
 	}
 }
 
-void healthBar::setHealth(int amount)
+void HealthBar::setHealth(int amount)
 {
 	if (amount > 0) {
 	        if (amount > this->getMaxHealth()) {
@@ -21,17 +21,17 @@ void healthBar::setHealth(int amount)
 	}
 }
 
-int healthBar::getHealth()
+int HealthBar::getHealth()
 {
 	return health;
 }
 
-int healthBar::getMaxHealth()
+int HealthBar::getMaxHealth()
 {
 	return maxhealth;
 }
 
-void healthBar::setMaxHealth(int amount)
+void HealthBar::setMaxHealth(int amount)
 {
 	if (amount > 0) {
 		this->maxhealth = amount;
@@ -43,7 +43,7 @@ void healthBar::setMaxHealth(int amount)
 	}
 }
 
-int healthBar::decreaseHealth(int amount)
+int HealthBar::decreaseHealth(int amount)
 {
 	if (amount >= health) {
 		health = 0;
@@ -54,7 +54,7 @@ int healthBar::decreaseHealth(int amount)
 	return health;
 }
 
-void healthBar::increaseHealth(int amount)
+void HealthBar::increaseHealth(int amount)
 {
 	if (amount > 0) {
 		this->health += amount;
@@ -64,7 +64,7 @@ void healthBar::increaseHealth(int amount)
 	}
 }
 
-string healthBar::displayBar()
+string HealthBar::displayBar()
 {
 	string displayHealth = "HEALTH: ";
 	for (int i = 0; i < health; i++)

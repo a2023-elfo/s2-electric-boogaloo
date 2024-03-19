@@ -18,7 +18,6 @@ char Enemy::display()
 }
 
 
-
 void Enemy::update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters)
 {
 
