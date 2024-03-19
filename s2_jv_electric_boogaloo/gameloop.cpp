@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <chrono>
 #include "gameloop.h"
 #include "thread"
 #include "include/serial/SerialPort.hpp"
@@ -56,20 +57,59 @@ void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
     arene.getEnemies().push_back(zombie);
 }
 
+void Gameloop::setupDirector() {
+    // Set base of random, current time
+    // For debug, replace director random for a known value and the same result will happen every time
+    auto currentTime = std::chrono::system_clock::now().time_since_epoch();
+    directorRandom = std::chrono::duration_cast<std::chrono::seconds>(currentTime).count();
+}
+
+void Gameloop::inputUpdateDirector(vector<GameControls>& inputVect) {
+    directorRandom++;
+    for (int i = 0; i < inputVect.size(); i++) {
+        directorRandom += (long)inputVect.at(i);
+    }
+}
+
+int Gameloop::generateValue(int min, int max) {
+    int range = std::abs(max - min);
+
+    if (range == 0) {
+        return 1;
+    }
+    else {
+        int value = directorRandom % range;
+        value += min;
+        directorRandom += 3; // Offset random for next generated value
+        return value;
+    }
+}
+
+void Gameloop::generateEnemy() {
+    // Add funds for trying to generate
+    directorFunds += generateValue(1, 25);
+
+
+    // Try to generate enemy if sufficient funds
+    if (directorFunds >= NORMAL && generateValue(1, 10) == 1) { // Enough funds. If we get more types, this algorithm will have to change
+        
+        // We are spawning an enemy, choose position
+        int desiredPosition = generateValue(0, arene.GRID_X - 1);
+
+        if (arene.grille[desiredPosition][0] == ' ') {  // Empty, we can spawn
+            spawnEnemy(desiredPosition, false);
+        }
+    }
+}
 
 bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>& inputVect) {
     return std::find(inputVect.begin(), inputVect.end(), checkedInput) != inputVect.end();
 }
 
-void Gameloop ::mainLoop() {
+void Gameloop::mainLoop() {
     char userInput;
     bool loop = true;
     charge = 0;
-    spawnEnemy(0,0);
-    spawnEnemy(1,0);
-    spawnEnemy(2,1);
-    spawnEnemy(3,0);
-    spawnEnemy(4,0);
     arene.display();
 
     string raw_msg;
@@ -128,6 +168,8 @@ void Gameloop ::mainLoop() {
             j_msg_rcv = json::parse(R"({})");
         }
 
+
+        // Lecture de l'input du joueur
         inputs = readUserInput(j_msg_rcv);
 
         if (checkPlayerInput(UP, inputs))
@@ -146,6 +188,11 @@ void Gameloop ::mainLoop() {
             arene.getBullets().push_back(*arene.playerShooter.shoot());
         if (checkPlayerInput(BTN_3, inputs))
             tremblementDeTerre(charge);
+
+        // Update du random, c'est au tour du directeur
+        inputUpdateDirector(inputs);
+
+        generateEnemy();
 
         arene.update();
         
@@ -167,7 +214,7 @@ void Gameloop ::mainLoop() {
                 i++;
             }
 
-            if (Healthbar.getHealth() == 0 || arene.getEnemyNumber() <= 0) {
+            if (Healthbar.getHealth() == 0) {
                 loop = false;
                 gameOver();
             }

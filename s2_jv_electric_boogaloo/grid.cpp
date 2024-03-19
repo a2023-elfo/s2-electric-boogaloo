@@ -1,13 +1,7 @@
 #include "grid.h"
 #include <iostream>
 
-const int GRID_X = 5;
-const int GRID_Y = 10;
-char grille[GRID_X][GRID_Y];
 int i = 0;
-
-
-
 
 void Grid::update()
 {

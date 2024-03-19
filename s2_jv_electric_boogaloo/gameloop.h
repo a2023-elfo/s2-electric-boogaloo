@@ -22,6 +22,8 @@ public:
 	void tremblementDeTerre(int charge);
 	void gameOver();
 	void setupDirector();
+	void inputUpdateDirector(vector<GameControls>& inputVect);
+	void muonUpdateDirector();
 	void generateEnemy();
 	void generatePosition();
 	int generateValue(int min, int max);
@@ -32,7 +34,7 @@ private:
 	healthBar Healthbar = healthBar(5);
 
 	// Directpr values
-	int directorRandom = 1;
+	long long directorRandom = 1;
 	int directorFunds = 0;
 };
 
