@@ -71,6 +71,7 @@ void Gameloop::inputUpdateDirector(vector<GameControls>& inputVect) {
     }
 }
 
+// Generate a value between min (included) and max (excluded)
 int Gameloop::generateValue(int min, int max) {
     int range = std::abs(max - min);
 
@@ -87,14 +88,17 @@ int Gameloop::generateValue(int min, int max) {
 
 void Gameloop::generateEnemy() {
     // Add funds for trying to generate
-    directorFunds += generateValue(1, 25);
-
+    directorFunds += generateValue(1, 20);
 
     // Try to generate enemy if sufficient funds
+    // Lower the max value of the generation to increase chance of spawn. Could be difficulty curve with time.
     if (directorFunds >= NORMAL && generateValue(1, 10) == 1) { // Enough funds. If we get more types, this algorithm will have to change
         
+        // Remove funds, even if we don't spawn. Prevents overpopulation
+        directorFunds -= NORMAL;
+
         // We are spawning an enemy, choose position
-        int desiredPosition = generateValue(0, arene.GRID_X - 1);
+        int desiredPosition = generateValue(0, arene.GRID_X);
 
         if (arene.grille[desiredPosition][0] == ' ') {  // Empty, we can spawn
             spawnEnemy(desiredPosition, false);
