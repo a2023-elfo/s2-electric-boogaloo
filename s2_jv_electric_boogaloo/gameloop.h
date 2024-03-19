@@ -31,7 +31,6 @@ public:
 private:
 	Grid arene;
 	int charge;
-	healthBar Healthbar = healthBar(5);
 
 	// Directpr values
 	long long directorRandom = 1;

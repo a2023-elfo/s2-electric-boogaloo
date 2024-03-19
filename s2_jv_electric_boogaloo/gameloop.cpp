@@ -198,11 +198,11 @@ void Gameloop::mainLoop() {
         
         std::system("cls");
         arene.display();
-        std::cout << Healthbar.displayBar();
+        std::cout << arene.playerShooter.health.displayBar();
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
-            if (arene.getEnemies()[i].getY() == 9) {
-                Healthbar.decreaseHealth(1);
+            if (arene.getEnemies()[i].getY() == arene.GRID_Y - 1) {
+                arene.playerShooter.health.decreaseHealth(9999); // Enemy reached the end, you're dead!
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
             }
@@ -214,7 +214,7 @@ void Gameloop::mainLoop() {
                 i++;
             }
 
-            if (Healthbar.getHealth() == 0) {
+            if (arene.playerShooter.health.getHealth() == 0) {
                 loop = false;
                 gameOver();
             }
