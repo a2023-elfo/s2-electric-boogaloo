@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include "gameloop.h"
 #include "thread"
 #include "include/serial/SerialPort.hpp"
@@ -55,6 +56,11 @@ void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
     arene.getEnemies().push_back(zombie);
 }
 
+
+bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>& inputVect) {
+    return std::find(inputVect.begin(), inputVect.end(), checkedInput) != inputVect.end();
+}
+
 void Gameloop ::mainLoop() {
     char userInput;
     bool loop = true;
@@ -90,9 +96,9 @@ void Gameloop ::mainLoop() {
     
     // Structure de donnees JSON pour envoie et reception
     json j_msg_send, j_msg_rcv;
+    std::vector<GameControls> inputs;
 
     while (loop) {
-        std::this_thread::sleep_for(250ms);
 
         // Envoie message Arduino
         j_msg_send["Affichage"] = "Mouvement" + to_string(bouge) + " B=" + to_string(bouton);
@@ -102,7 +108,6 @@ void Gameloop ::mainLoop() {
                 cerr << "Erreur lors de l'envoie du message. " << endl;
             }
 
-            j_msg_rcv.clear();
             // Reception message Arduino
             if (!RcvFromSerial(arduino, raw_msg)) {
                 cerr << "Erreur lors de la reception du message. " << endl;
@@ -119,27 +124,27 @@ void Gameloop ::mainLoop() {
             bouge = j_msg_rcv.value("mouvement", 0);
             bouton = j_msg_rcv.value("Bouton", 0);
         }
+        else {
+            j_msg_rcv = json::parse(R"({})");
+        }
 
-        if (_kbhit())
-            userInput = _getch();
-        else
-            userInput = NONE;
+        inputs = readUserInput(j_msg_rcv);
 
-        if (userInput == UP || bouge == 1)
+        if (checkPlayerInput(UP, inputs))
             arene.playerShooter.setY(arene.playerShooter.getY() - 1);
-        if (userInput == LEFT || bouge == 3)
+        if (checkPlayerInput(LEFT, inputs))
             arene.playerShooter.setX(arene.playerShooter.getX() - 1);
-        if (userInput == DOWN || bouge == 2)
+        if (checkPlayerInput(DOWN, inputs))
             arene.playerShooter.setY(arene.playerShooter.getY() + 1);
-        if (userInput == RIGHT || bouge == 4)
+        if (checkPlayerInput(RIGHT, inputs))
             arene.playerShooter.setX(arene.playerShooter.getX() + 1);
-        if (userInput == BTN_2 || bouton == 2)
+        if (checkPlayerInput(BTN_2, inputs))
             spawnPotato(10);
-        if (userInput == BTN_4 || bouton == 4)
+        if (checkPlayerInput(BTN_4, inputs))
             spawnPeashooter(3);
-        if (userInput == BTN_1 || bouton == 1)
+        if (checkPlayerInput(BTN_1, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
-        if (userInput == BTN_3 || bouton == 3)
+        if (checkPlayerInput(BTN_3, inputs))
             tremblementDeTerre(charge);
 
         arene.update();
@@ -181,11 +186,44 @@ void Gameloop ::mainLoop() {
         
         charge += (int)zombieMort.size();
         zombieMort.clear();
+        std::this_thread::sleep_for(250ms);
     }
     
 }
 
-void Gameloop :: translateUserInput() {
+// Lecture du JSON et des entrées du clavier
+std::vector<GameControls> Gameloop :: readUserInput(json yeet) {
+    vector<GameControls> inputs = {};
+    char keyboardInput;
+    int bouge = yeet.value("mouvement", 0);
+    int bouton = yeet.value("Bouton", 0);
+
+    if (bouge == 1)
+        inputs.push_back(UP);
+    if (bouge == 3)
+        inputs.push_back(LEFT);
+    if (bouge == 2)
+        inputs.push_back(DOWN);
+    if (bouge == 4)
+        inputs.push_back(RIGHT);
+    if (bouton == 2)
+        inputs.push_back(BTN_2);
+    if (bouton == 4)
+        inputs.push_back(BTN_4);
+    if (bouton == 1)
+        inputs.push_back(BTN_1);
+    if (bouton == 3)
+        inputs.push_back(BTN_3);
+
+    if (_kbhit())
+        keyboardInput = _getch();
+    else
+        keyboardInput = NONE;
+    
+    // Check if keyboard input is already in the vector. If not, lets add it.
+    inputs.push_back((GameControls)keyboardInput);
+
+    return inputs;
    
 }
 

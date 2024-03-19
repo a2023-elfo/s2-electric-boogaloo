@@ -7,12 +7,15 @@
 #include <Windows.h>
 #include "grid.h"
 #include "healthBar.h"
+#include "include/json.hpp"
+#include "enums.h"
 
 class Gameloop
 {
 public:
 	void mainLoop();
-	void translateUserInput();
+	vector<GameControls> readUserInput(nlohmann::json json_msg);
+	bool checkPlayerInput(GameControls checkedInput, vector<GameControls>& inputVect);
 	void spawnEnemy(int enemyPos, bool theRock);
 	void spawnPeashooter(int health);
 	void spawnPotato(int health);
