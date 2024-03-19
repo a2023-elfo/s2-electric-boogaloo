@@ -24,7 +24,7 @@ int pinLED1 = 42;
 int pinLED2 = 40;
 int pinLED3 = 38;
 int pinLED4 = 36;
-
+int del[4] = {pinLED1, pinLED2, pinLED3, pinLED4};
 //JOYSTICK
 int pinjoy_X= A15;
 int pinjoy_Y= A14;
@@ -48,11 +48,15 @@ int bar7 = 33;
 int bar8 = 35;
 int bar9 = 37;
 int bar10 = 39;
+int bargraph[10] = {bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10};
 
 int bouton = 0 ;
 int mouvement = 0;
 int joy_X_Value = 0;
 int joy_Y_Value = 0;
+int vie = 10;
+int nb_power = 0;
+bool pouvoir = false;
 
 /*------------------------- Prototypes de fonctions -------------------------*/
 void sendMsg(); 
@@ -79,6 +83,10 @@ void setup() {
   pinMode(bar10, OUTPUT);
   lcd.begin(16, 2);
   lcd.print("Lien Arduino-PC");
+  for (int i = 0; i < vie; i++)
+  {
+    digitalWrite(bargraph[i], HIGH);
+  }
 }
 
 /* Boucle principale (infinie) */
@@ -101,7 +109,7 @@ void loop() {
     bouton = 1;
   if (digitalRead(SW2) == LOW)
     bouton = 2;
-  //if (digitalRead(SW3) == LOW)
+  //if (digitalRead(SW3) == HIGH)
     //bouton = 3;
   if (digitalRead(SW4) == LOW)
     bouton = 4;
@@ -114,7 +122,8 @@ void loop() {
     sendMsg();
   }
 
-  delay(10);
+  if (nb_power > 0)
+    pouvoir = true; //Si shake manette
 }
 
 /*---------------------------Definition de fonctions ------------------------*/
@@ -134,7 +143,7 @@ void sendMsg() {
   doc["time"] = millis();
   doc["mouvement"] = mouvement;
   doc["Bouton"] = bouton;
-
+  doc["pouvoir"] = pouvoir;
   // Serialisation
   serializeJson(doc, Serial);
 
@@ -172,6 +181,18 @@ void readMsg(){
     lcd.clear();
     lcd.setCursor(0,1);  
     lcd.print(parse_msg.as<String>());
+  }
+
+  vie = doc["vie"];
+  for (int i = vie; i < 10; i++)
+  {
+    digitalWrite(bargraph[i], LOW);
+  }
+
+  nb_power = doc["nbpower"];
+  for (int i = 0; i < nb_power; i++)
+  {
+    digitalWrite(del[i], HIGH);
   }
 }
 

@@ -94,7 +94,8 @@ void Gameloop :: readUserInput() {
         std::this_thread::sleep_for(250ms);
 
         // Envoie message Arduino
-        j_msg_send["Affichage"] = "Mouvement" + to_string(bouge) + " B=" + to_string(bouton);
+        j_msg_send["Affichage"] = "Mouvement=" + to_string(bouge) + " B=" + to_string(bouton);
+        j_msg_send["vie"] = Healthbar.getHealth();
 
         if (!keyboardOnly) {
             if (!SendToSerial(arduino, j_msg_send)) {
