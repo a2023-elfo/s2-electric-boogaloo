@@ -12,11 +12,8 @@ using namespace std;
 
 int main()
 {
-   
-
-    Gameloop test;
-    test.readUserInput();
-
+    Gameloop electricBoogaloo;
+    electricBoogaloo.mainLoop();
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage

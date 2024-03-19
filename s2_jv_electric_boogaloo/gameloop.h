@@ -11,17 +11,26 @@
 class Gameloop
 {
 public:
-	void readUserInput();
+	void mainLoop();
 	void translateUserInput();
 	void spawnEnemy(int enemyPos, bool theRock);
 	void spawnPeashooter(int health);
 	void spawnPotato(int health);
 	void tremblementDeTerre(int charge);
 	void gameOver();
+	void setupDirector();
+	void generateEnemy();
+	void generatePosition();
+	int generateValue(int min, int max);
+
 private:
 	Grid arene;
 	int charge;
 	healthBar Healthbar = healthBar(5);
+
+	// Directpr values
+	int directorRandom = 1;
+	int directorFunds = 0;
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include "thread"
 #include "include/serial/SerialPort.hpp"
 #include "include/json.hpp"
+#include "enums.h"
 using json = nlohmann::json;
 
 /*------------------------------ Constantes ---------------------------------*/
@@ -26,26 +27,26 @@ void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
     int health = 0;
     int position = 0;
     switch (enemyPos) {
-    case 0:
-        health = 5;
-        position = 0;
-        break;
-    case 1:
-        health = 5;
-        position = 1;
-        break;
-    case 2:
-        health = 5;
-        position = 2;
-        break;
-    case 3:
-        health = 5;
-        position = 3;
-        break;
-    case 4:
-        health = 5;
-        position = 4;
-        break;
+        case 0:
+            health = 5;
+            position = 0;
+            break;
+        case 1:
+            health = 5;
+            position = 1;
+            break;
+        case 2:
+            health = 5;
+            position = 2;
+            break;
+        case 3:
+            health = 5;
+            position = 3;
+            break;
+        case 4:
+            health = 5;
+            position = 4;
+            break;
     }
     if (theRock) {
         health = 20;
@@ -54,7 +55,7 @@ void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
     arene.getEnemies().push_back(zombie);
 }
 
-void Gameloop :: readUserInput() {
+void Gameloop ::mainLoop() {
     char userInput;
     bool loop = true;
     charge = 0;
@@ -122,23 +123,23 @@ void Gameloop :: readUserInput() {
         if (_kbhit())
             userInput = _getch();
         else
-            userInput = '/'; // On prends un char qui n'Est jamais
+            userInput = NONE;
 
-        if (userInput == 'w' || bouge == 1)
+        if (userInput == UP || bouge == 1)
             arene.playerShooter.setY(arene.playerShooter.getY() - 1);
-        if (userInput == 'a' || bouge == 3)
+        if (userInput == LEFT || bouge == 3)
             arene.playerShooter.setX(arene.playerShooter.getX() - 1);
-        if (userInput == 's' || bouge == 2)
+        if (userInput == DOWN || bouge == 2)
             arene.playerShooter.setY(arene.playerShooter.getY() + 1);
-        if (userInput == 'd' || bouge == 4)
+        if (userInput == RIGHT || bouge == 4)
             arene.playerShooter.setX(arene.playerShooter.getX() + 1);
-        if (userInput == 't' || bouton == 2)
+        if (userInput == BTN_2 || bouton == 2)
             spawnPotato(10);
-        if (userInput == 'r' || bouton == 4)
+        if (userInput == BTN_4 || bouton == 4)
             spawnPeashooter(3);
-        if (userInput == ' ' || bouton == 1)
+        if (userInput == BTN_1 || bouton == 1)
             arene.getBullets().push_back(*arene.playerShooter.shoot());
-        if (userInput == 'e' || bouton == 3)
+        if (userInput == BTN_3 || bouton == 3)
             tremblementDeTerre(charge);
 
         arene.update();
