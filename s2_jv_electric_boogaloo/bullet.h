@@ -1,19 +1,23 @@
 #ifndef BULLET_H
 #define BULLET_H
 #include "displayObject.h"
-#include <Windows.h>
 #include <stdlib.h>
 #include <mmsystem.h> 
 #pragma comment(lib, "Winmm.lib")
 
-class bullet:public displayObject
+class Bullet:public DisplayObject
 {
 public:
-	bullet(int _posX, int _posY);
-	~bullet();
+	Bullet(int _posX, int _posY);
+	~Bullet();
 
 	char display();
 	void update();
+
+	BulletType getBulletType();
+	void setBulletType(BulletType bulletType);
+private:
+	BulletType bulletType;
 };
 
 #endif

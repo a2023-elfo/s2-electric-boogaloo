@@ -3,19 +3,17 @@
 
 #include <iostream>
 #include "gameloop.h"
+#include "include/serial/SerialPort.hpp"
+#include "include/json.hpp"
+using json = nlohmann::json;
 
 
 using namespace std;
 
 int main()
 {
-    grid grid;
-    grid.display();
-
-    cout << "Hello World!\n";
-
-    gameloop test;
-    test.readUserInput();
+    Gameloop electricBoogaloo;
+    electricBoogaloo.mainLoop();
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage

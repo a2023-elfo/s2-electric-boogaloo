@@ -3,19 +3,20 @@
 #pragma once
 #include "displayObject.h"
 #include "bullet.h"
-#include "enemy.h"
+#include <vector>
 
-class plant :public displayObject
+
+class Plant:public DisplayObject
 {
 protected:
 	int health = 1;
 
 public:
-	bool checkHitBox(int, int);
+	int getHealth();
+	virtual bool checkHitBox(int, int);
 	bool decreaseHealth(int);
 	virtual char display();
 	virtual void update();
-	bullet* shoot();
 };
 
 #endif

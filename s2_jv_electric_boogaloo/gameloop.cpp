@@ -1,4 +1,13 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <chrono>
 #include "gameloop.h"
+#include "thread"
+#include "include/serial/SerialPort.hpp"
+#include "include/json.hpp"
+#include "enums.h"
+using json = nlohmann::json;
 
 /*------------------------------ Constantes ---------------------------------*/
 #define BAUD 9600           // Frequence de transmission serielle
@@ -8,13 +17,46 @@
 bool SendToSerial(SerialPort* arduino, json j_msg);
 bool RcvFromSerial(SerialPort* arduino, string& msg);
 
-SerialPort* arduino; //doit etre un objet global!
+SerialPort* arduino; //doit etre un objet global!!!!
+
 
 void Gameloop::gameOver() {
     std::system("cls");
     std::cout << "GAME OVER" << std::endl;
 }
 
+void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
+
+    int health = 0;
+    int position = 0;
+    switch (enemyPos) {
+        case 0:
+            health = 5;
+            position = 0;
+            break;
+        case 1:
+            health = 5;
+            position = 1;
+            break;
+        case 2:
+            health = 5;
+            position = 2;
+            break;
+        case 3:
+            health = 5;
+            position = 3;
+            break;
+        case 4:
+            health = 5;
+            position = 4;
+            break;
+    }
+    if (theRock) {
+        health = 20;
+    }
+    Enemy zombie(health, position);
+    arene.getEnemies().push_back(zombie);
+}
 
 void Gameloop::setupDirector() {
     // Set base of random, current time
@@ -31,7 +73,6 @@ void Gameloop::inputUpdateDirector(vector<GameControls>& inputVect) {
 }
 
 // Generate a value between min (included) and max (excluded)
-// Having a small range can cause issues
 int Gameloop::generateValue(int min, int max) {
     int range = std::abs(max - min);
 
@@ -46,45 +87,14 @@ int Gameloop::generateValue(int min, int max) {
     }
 }
 
-
-
 void Gameloop::generateEnemy() {
     // Add funds for trying to generate
+    directorFunds += generateValue(1, 20);
 
-    directorFunds += generateValue(1, 20+nbEnemyKilled);
-    //std::cout << nbEnemyKilled << std::endl;
-    
+    // Try to generate enemy if sufficient funds
+    // Lower the max value of the generation to increase chance of spawn. Could be difficulty curve with time.
     if (directorFunds >= NORMAL && generateValue(1, 10) == 1) { // Enough funds. If we get more types, this algorithm will have to change
         
-        // Remove funds, even if we don't spawn. Prevents overpopulation
-        directorFunds -= NORMAL;
-
-        // We are spawning an enemy, choose position
-        int desiredPosition = generateValue(0, arene.GRID_X);
-        bool theRock = false;
-        if (generateValue(1, 50) <= 10) {
-            theRock = true;
-        }
-        
-        if (arene.grille[desiredPosition][0] == ' ') {  // Empty, we can spawn
-            if (theRock) {
-                Enemy zombie(20, desiredPosition, 'W');
-                arene.getEnemies().push_back(zombie);
-            }
-            else{
-                Enemy zombie(8, desiredPosition, 'X');
-                arene.getEnemies().push_back(zombie);
-            }
-        }
-    }
-}
-
-bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>& inputVect) {
-    return std::find(inputVect.begin(), inputVect.end(), checkedInput) != inputVect.end();
-}
-
-void Gameloop::mainLoop() {
-    
         // Remove funds, even if we don't spawn. Prevents overpopulation
         directorFunds -= NORMAL;
 
@@ -101,6 +111,49 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>&
     return std::find(inputVect.begin(), inputVect.end(), checkedInput) != inputVect.end();
 }
 
+void Gameloop::mainLoop() {
+    char userInput;
+    bool loop = true;
+    systemeArgent argent;
+    charge = 0;
+    arene.display();
+
+    string raw_msg;
+
+    //Struct. Donnï¿½es JSON 
+    int bouge = 0;
+    int bouton = 0;
+
+    // Initialisation du port de communication
+    string com;
+    cout << "Entrer le port de communication du Arduino: ";
+    cin >> com;
+    bool keyboardOnly = com == "ELFO";
+
+    arduino = new SerialPort(com.c_str(), BAUD);
+
+    if (!arduino->isConnected() && !keyboardOnly) {
+        cerr << "Impossible de se connecter au port " << string(com) << ". Fermeture du programme!" << endl;
+        exit(1);
+    }
+    else {
+        cout << "Connexion OK " << endl;
+    }
+    
+    // Structure de donnees JSON pour envoie et reception
+    json j_msg_send, j_msg_rcv;
+    std::vector<GameControls> inputs;
+
+    while (loop) {
+
+        // Envoie message Arduino
+        j_msg_send["Affichage"] = "Mouvement=" + to_string(bouge) + " B=" + to_string(bouton);
+        j_msg_send["vie"] = arene.playerShooter.health.getHealth();
+
+        if (!keyboardOnly) {
+            if (!SendToSerial(arduino, j_msg_send)) {
+                cerr << "Erreur lors de l'envoie du message. " << endl;
+            }
 
             // Reception message Arduino
             if (!RcvFromSerial(arduino, raw_msg)) {
@@ -135,12 +188,18 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>&
         if (checkPlayerInput(RIGHT, inputs))
             arene.playerShooter.setX(arene.playerShooter.getX() + 1);
         if (checkPlayerInput(BTN_2, inputs))
-            spawnPotato(10);
+            if (argent.checkFundsPotato()) {
+                argent.buyPotato();
+                spawnPotato(10);
+            }
         if (checkPlayerInput(BTN_4, inputs))
-            spawnPeashooter(3);
+            if (argent.checkFundsPeaShooter()) {
+                argent.buyPeaShooter();
+                spawnPeashooter(3);
+            }
+            
         if (checkPlayerInput(BTN_1, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
-            //PlaySound(TEXT("C:\\Users\\davec\\OneDrive\\Bureau\\Bruits Elfo\\Shoot.mp3"), NULL, SND_FILENAME | SND_ASYNC);
         if (checkPlayerInput(BTN_3, inputs))
             tremblementDeTerre(charge);
 
@@ -153,7 +212,10 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>&
         
         std::system("cls");
         arene.display();
-        std::cout << arene.playerShooter.health.displayBar();
+
+        std::cout << arene.playerShooter.health.displayBar() << endl << endl;
+        cout << "Current money: " << argent.checkMoney() << endl;
+
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
             if (arene.getEnemies()[i].getY() == arene.GRID_Y - 1) {
@@ -162,9 +224,9 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>&
                 arene.deleteEnemy(i);
             }
             else if (arene.getEnemies()[i].getHealth() <= 0) {
-                nbEnemyKilled++;
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
+                argent.killZombie(); //ajouter argent quand zombie est mort
             }
             else {
                 i++;
@@ -190,18 +252,18 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>&
         charge += (int)zombieMort.size();
         zombieMort.clear();
         std::this_thread::sleep_for(250ms);
-        std::cout << arene.getBullets().size() << std::endl;
     }
     
 }
 
-// Lecture du JSON et des entrées du clavier
+// Lecture du JSON et des entrÃ©es du clavier
 std::vector<GameControls> Gameloop :: readUserInput(json yeet) {
     vector<GameControls> inputs = {};
-    char keyboardInput;
+    char keyboardInput = NONE;
     int bouge = yeet.value("mouvement", 0);
     int bouton = yeet.value("Bouton", 0);
 
+    // Lecture de la manette
     if (bouge == 1)
         inputs.push_back(UP);
     if (bouge == 3)
@@ -219,31 +281,23 @@ std::vector<GameControls> Gameloop :: readUserInput(json yeet) {
     if (bouton == 3)
         inputs.push_back(BTN_3);
 
-    if (_kbhit())
+    // CRead keyboard input. All values that are not valid are still used to offset directorRandom, so we keep em
+    while (_kbhit()) {
         keyboardInput = _getch();
-    else
-        keyboardInput = NONE;
-    
-    // Check if keyboard input is already in the vector. If not, lets add it.
-    inputs.push_back((GameControls)keyboardInput);
+        inputs.push_back((GameControls)keyboardInput);
+    }
 
     return inputs;
-   
 }
 
 void Gameloop :: spawnPeashooter(int health) {
-    if (charge > 9) {
-        PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
-        arene.getPeaShooters().push_back(piouPiou);
-        charge-= 10;
-    }
+    PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
+    arene.getPeaShooters().push_back(piouPiou);
 }
 void Gameloop :: spawnPotato(int health) {
-    if (charge > 9) {
-        Potato bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
-        arene.getPotatoes().push_back(bigMama);
-        charge-= 10;
-    }
+    Potato bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
+    arene.getPotatoes().push_back(bigMama);
+
 }
 void Gameloop:: tremblementDeTerre(int charge) {
     for (int i = 0; i < arene.getEnemies().size(); i++) {
@@ -258,22 +312,6 @@ bool SendToSerial(SerialPort* arduino, json j_msg) {
     string msg = j_msg.dump();
     bool ret = arduino->writeSerialPort(msg.c_str(), msg.length());
     return ret;
-    Potato bigMama(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
-    arene.getPotatoes().push_back(bigMama);
-bool RcvFromSerial(SerialPort* arduino, string& msg) {
-    // Return 0 if error
-    // Message output in msg
-    string str_buffer;
-    char char_buffer[MSG_MAX_SIZE];
-    int buffer_size;
-
-    msg.clear(); // clear string
-// Version fonctionnelle dans VScode et Visual Studio
-    buffer_size = arduino->readSerialPort(char_buffer, MSG_MAX_SIZE);
-    str_buffer.assign(char_buffer, buffer_size);
-    msg.append(str_buffer);
-    return true;
-}    return ret;
 }
 
 bool RcvFromSerial(SerialPort* arduino, string& msg) {

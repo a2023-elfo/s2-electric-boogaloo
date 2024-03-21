@@ -1,20 +1,25 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "displayObject.h"
-
+#include "enemy.h"
+#include <thread>
+#include <conio.h>
 
 #include "bullet.h"
-class player:public displayObject
+#include "healthBar.h"
+
+class Player : public DisplayObject
 {
 public:
-	player();
-	~player();
-	void my_up();
-	void my_down();
-	bullet* shoot();
-
+	Player();
+	void move(int offset_x, int offset_y);
 	char display();
-	void update();
-};
-#endif
+	void update(std::vector<Bullet>& bullets, std::vector<Enemy>& enemies);
 
+	Bullet* shoot();
+	bool checkHitBullet(Bullet& bang);
+	bool checkHitEnemy(Enemy& enemy);
+	HealthBar health = HealthBar(5);
+};
+
+#endif

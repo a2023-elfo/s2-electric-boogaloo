@@ -4,15 +4,18 @@
 #pragma once
 #include "plant.h"
 
-
-class peaShooter: public plant
+class PeaShooter: public Plant
 {
 public:
+	bool checkHitBox(int x, int y);
+	bool decreaseHealth(int damage);
+	int getHealth();
 	char display();
-	void update();
-	peaShooter(int, int, int);
+	virtual void update(std::vector<Bullet>& bullets, bool fire);
+	Bullet* shoot();
+	PeaShooter(int health, int x, int y);
 protected:
-	int health = 5;
+	int health;
 };
 
 #endif

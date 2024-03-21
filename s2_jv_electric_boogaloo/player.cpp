@@ -1,44 +1,52 @@
 #include "player.h"
 
-player::player()
+Player::Player()
 {
-    x = 0;
-    y = 0;
+    x = 2;
+    y = 9;
     width = 1;
     height = 1;
 }
 
-player::~player()
+Bullet* Player::shoot()
 {
+    return new Bullet(this->getX(), this->getY());
 }
 
-void player::my_up()
+char Player::display()
 {
-    if(y != 0) y = y - 1;
+    return 'E';
 }
 
-void player::my_down()
-{
-    if(y != 5) y = y + 1;
+void Player::move(int offset_x, int offset_y) {
+
+    // TODO, move player towards offset, but prevent from going out of bounds
 }
 
-bullet* player::shoot()
+void Player::update(vector<Bullet>& bullets, vector<Enemy>& enemies)
 {
-    bullet* b = new bullet(this->getX(), this->getY());
-    return b;
-}
-
-char player::display()
-{
-    return 'P';
-}
-
-void player::update()
-{
-    for (int i = 0; i < 5; i++) { //Pour tester
-        my_down();
+    //verirfie pour ne pas se tuer avec ses balles
+    for (int i = 0; i < (int)bullets.size(); i++) {
+        if (checkHitBullet(bullets.at(i)) && bullets.at(i).getBulletType() == friendlyFire) {
+            cout << "ouch les bullets font mal a elfo" << endl;
+            health.decreaseHealth(1);
+        }
     }
-    for (int i = 0; i < 5; i++) {
-        my_up();
+    //verirfie dommage enemy
+    for (int i = 0; i < (int)enemies.size(); i++) {
+        if (checkHitEnemy(enemies.at(i))) {
+            cout << "ouch les enemy font mal a elfo" << endl;
+            health.decreaseHealth(1);
+        }
     }
 }
+bool Player::checkHitBullet(Bullet& bang)
+{
+    return bang.getX() == getX() && bang.getY() == getY();
+}
+
+bool Player::checkHitEnemy(Enemy& enemy)
+{
+    return enemy.getX() == getX() && enemy.getY() == getY();
+}
+

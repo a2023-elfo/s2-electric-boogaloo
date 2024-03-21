@@ -1,31 +1,52 @@
 #include "peaShooter.h"
 
-char peaShooter::display()
+
+char PeaShooter::display()
 {
     return 'P';
 }
 
-void peaShooter::update()
+void PeaShooter::update(std::vector<Bullet>& bullets, bool fire) 
 {
-    // Vérifier si le pea shooter est touche par un ennemi 
+    
     if (checkHitBox(x, y)) {
-        // Si le peashooter est touche
-        if (decreaseHealth(1)) {
+        // Si le peashooter est touchee, reduire sa sante de 1
+        if (!decreaseHealth(1)) {
             // Si la sante atteint 0 ou moins
-            std::cout << "Le pea shooter est détruit !" << std::endl;
+            std::cout << "La patate est detruite !" << std::endl;
         }
     }
+
+    if (fire) {
+        bullets.push_back(*shoot());
+    }
+    
 }
 
-bullet peaShooter::shoot(){
-    int xBullet = bullet.getX();
-    int yBullet = bullet.getY() + 1;
-    return bullet(xBullet, yBullet);
+Bullet* PeaShooter::shoot(){
+    
+    return new Bullet(this->getX() , this->getY());
+    
 }
 
-peaShooter::peaShooter(int health, int x, int y)
+PeaShooter::PeaShooter(int health, int x, int y)
+{    
+    setX(x);
+    setY(y);
+    this->health = health;
+}
+
+bool PeaShooter::checkHitBox(int x, int y)
 {
-    x = plant.getX();
-    y = plant.getY();
-    health = 5;
+    return (y + 1 == getY() && x == getX());
+}
+
+bool PeaShooter::decreaseHealth(int damage)
+{
+    return (health -= damage) > 0;
+}
+
+int PeaShooter::getHealth()
+{
+    return health;
 }

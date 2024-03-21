@@ -1,30 +1,40 @@
 #include "potato.h"
 
-char potato::display()
+char Potato::display()
 {
-    return 'P';
+    return 'O';
 }
 
-void potato::update()
+void Potato::update()
 {
-    // Vérifier si la patate est touchee par un ennemi 
+    // Verifier si la patate est touchee par un ennemi 
     if (checkHitBox(x, y)) {
-        // Si le peashooter est touchee, réduire sa santé de 1
-        if (decreaseHealth(1)) {
-            // Si la santé atteint 0 ou moins
+        // Si le peashooter est touchee, reduire sa sante de 1
+        if (!decreaseHealth(1)) {
+            // Si la sante atteint 0 ou moins
             std::cout << "La patate est detruite !" << std::endl;
         }
     }
 }
 
-bullet potato::shoot()
+Potato::Potato(int health, int x, int y)
 {
-    return bullet(x,y);
+    setX(x);
+    setY(y);
+    this->health = health;
 }
 
-potato::potato(int health, int x, int y)
+bool Potato::checkHitBox(int x, int y)
 {
-    x = plant.getX();
-    y = plant.getY();
-    health = 10;
+    return (y + 1 == getY() && x == getX());
+}
+
+bool Potato::decreaseHealth(int damage)
+{
+    return (health -= damage) > 0;
+}
+
+int Potato::getHealth()
+{
+    return health;
 }

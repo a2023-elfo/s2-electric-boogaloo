@@ -1,17 +1,18 @@
 #include "bullet.h"
 
-bullet::bullet(int _posX, int _posY)
+Bullet::Bullet(int x, int y)
 {
 	this->setX(x);
 	this->setY(y);
-	bulletType = notFriendlyFire;	
+	bulletType = notFriendlyFire;
 }
 
-bullet::~bullet()
+
+Bullet::~Bullet()
 {
 }
 
-char bullet::display()
+char Bullet::display()
 {
 	return 'B';
 }
@@ -24,6 +25,14 @@ void Bullet::update()
 	}
 }
 
+void Bullet::update()
+{
+	y = y - 1;
+	if (y < 0) {
+		// We should delete the bullet, it is out of the grid!
+	}
+}
+
 Bullet::BulletType Bullet::getBulletType()
 {
 	return bulletType;
@@ -31,5 +40,5 @@ Bullet::BulletType Bullet::getBulletType()
 
 void Bullet::setBulletType(BulletType type)
 {
-	x = x + 1;
+	bulletType = type;
 }

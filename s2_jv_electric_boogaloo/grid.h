@@ -9,19 +9,41 @@
 #include "plant.h"
 #include "bullet.h"
 #include "player.h"
+#include <random>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
-class grid
+class Grid
 {
 private:
-	vector<enemy> enemies;
-	vector<plant> plants;
-	vector<bullet> bullets;
-	player playerShooter;
+	vector<Enemy> enemies;
+	vector<Plant> plants;
+	vector<PeaShooter> peaShooters;
+	vector<Potato> potatoes;
+	vector<Bullet> bullets;
+	
 public:
+	Player playerShooter;
 	void update();
 	void display();
-	void placePlant(plant);
+	Enemy* getEnemy(int index);
+	vector<Enemy>& getEnemies();
+	vector<PeaShooter>& getPeaShooters();
+	PeaShooter* getPeaShooter(int index);
+	vector<Potato>& getPotatoes();
+	Potato* getPotato(int index);
+	Plant* getPlant(int index);
+	vector<Plant>& getPlants();
+	Bullet* getBullet(int index);
+	vector<Bullet>& getBullets();
+	void deleteEnemy(int id);
+	void deletePotato(int id);
+	void deletePeaShooter(int id);
+	int getEnemyNumber();
+	static const int GRID_X = 5;
+	static const int GRID_Y = 10;
+	char grille[GRID_X][GRID_Y];
 };
 
 #endif
