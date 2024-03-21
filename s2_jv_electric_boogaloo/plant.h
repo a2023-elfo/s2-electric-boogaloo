@@ -3,7 +3,8 @@
 #pragma once
 #include "displayObject.h"
 #include "bullet.h"
-#include "enemy.h"
+#include <vector>
+
 
 class Plant:public DisplayObject
 {
@@ -12,7 +13,7 @@ protected:
 
 public:
 	int getHealth();
-	bool checkHitBox(int, int);
+	virtual bool checkHitBox(int, int);
 	bool decreaseHealth(int);
 	virtual char display();
 	virtual void update();

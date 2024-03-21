@@ -8,7 +8,6 @@
 #include <ArduinoJson.h>
 #include <LiquidCrystal.h>
 
-
 /*------------------------------ Constantes ---------------------------------*/
 
 #define BAUD 9600        // Frequence de transmission serielle
@@ -20,156 +19,112 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 volatile bool shouldSend_ = false;  // Drapeau prêt à envoyer un message
 volatile bool shouldRead_ = false;  // Drapeau prêt à lire un message
 
-int ledState = 0;
-int potValue = 0;
-int joy_X_Value = 0;
-int joy_Y_Value = 0;
-int joy_X_etat = 0;
-int joy_Y_etat = 0;
-
+//LED
 int pinLED1 = 42;
 int pinLED2 = 40;
 int pinLED3 = 38;
 int pinLED4 = 36;
-int pinPOT = A0;
+int del[4] = {pinLED1, pinLED2, pinLED3, pinLED4};
+//JOYSTICK
 int pinjoy_X= A15;
 int pinjoy_Y= A14;
 
-int SW1 = 27 ;
-int SW2 = 25 ;
-int SW3 = 23 ;
-int SW4 = 29 ;
-int SW5 = 53 ;
-int SW6 = 31 ;
+//BOUTONS
+int SW1 = 29;
+int SW2 = 23;
+int SW3 = 31;//PASOK
+int SW4 = 27;
+int SW5 = 53;
+int SW6 = 0;
+
+//BARGRAPH
+int bar1 = 51;
+int bar2 = 49;
+int bar3 = 47;
+int bar4 = 45;
+int bar5 = 43;
+int bar6 = 41;
+int bar7 = 33;
+int bar8 = 35;
+int bar9 = 37;
+int bar10 = 39;
+int bargraph[10] = {bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10};
 
 int bouton = 0 ;
- 
+int mouvement = 0;
+int joy_X_Value = 0;
+int joy_Y_Value = 0;
+int vie = 10;
+int nb_power = 0;
+bool pouvoir = false;
 
 /*------------------------- Prototypes de fonctions -------------------------*/
 void sendMsg(); 
 void readMsg();
 void serialEvent();
 
-
-
 /*---------------------------- Fonctions "Main" -----------------------------*/
 
 void setup() {
-  Serial.begin(BAUD);               // Initialisation de la communication serielle
+  Serial.begin(BAUD); // Initialisation de la communication serielle
   pinMode(pinLED1, OUTPUT);
-  digitalWrite(pinLED1, HIGH);
   pinMode(pinLED2, OUTPUT);
-  digitalWrite(pinLED2, HIGH);
   pinMode(pinLED3, OUTPUT);
-  digitalWrite(pinLED3, HIGH);
   pinMode(pinLED4, OUTPUT);
-  digitalWrite(pinLED4, HIGH);
-  
-  pinMode(37, OUTPUT);
-  digitalWrite(37, HIGH);
+  pinMode(bar1, OUTPUT);
+  pinMode(bar2, OUTPUT);
+  pinMode(bar3, OUTPUT);
+  pinMode(bar4, OUTPUT);
+  pinMode(bar5, OUTPUT);
+  pinMode(bar6, OUTPUT);
+  pinMode(bar7, OUTPUT);
+  pinMode(bar8, OUTPUT);
+  pinMode(bar9, OUTPUT);
+  pinMode(bar10, OUTPUT);
   lcd.begin(16, 2);
   lcd.print("Lien Arduino-PC");
-
+  for (int i = 0; i < vie; i++)
+  {
+    digitalWrite(bargraph[i], HIGH);
+  }
 }
 
 /* Boucle principale (infinie) */
 void loop() {
- 
-   if (shouldRead_) {
-      readMsg();
-      sendMsg();
-    }
-
   joy_X_Value = analogRead(pinjoy_X);
   joy_Y_Value = analogRead(pinjoy_Y);
+  mouvement = 0;
+  bouton = 0;
 
-  if(joy_X_Value>800 && joy_Y_Value<580 && joy_Y_Value>480){
-
-    joy_X_etat = 1; 
-  }
-   else if (joy_Y_Value>800 && joy_X_Value<580 && joy_X_Value>480){
-
-    joy_Y_etat = -1;
-  }
-  else if (joy_X_Value<200 && joy_Y_Value<580 && joy_Y_Value>480){
-
-    joy_X_etat = -1;
-  }
-  else if (joy_Y_Value<200 && joy_X_Value<580 && joy_X_Value>480){
-
-    joy_Y_etat = 1;
-  }
-  //DIAGONALE
-  else if (joy_Y_Value<200 && joy_X_Value>800 ){
-
-    joy_Y_etat = 1;
-    joy_X_etat = 1;
-  }
-  else if (joy_Y_Value<200 && joy_X_Value<200 ){
-
-    joy_Y_etat = 1;
-    joy_X_etat = -1;
-  }
-  else if (joy_Y_Value>800 && joy_X_Value<200 ){
-
-    joy_Y_etat = -1;
-    joy_X_etat = -1;
-  }
-  else if (joy_Y_Value>800 && joy_X_Value>800 ){
-
-    joy_Y_etat = -1;
-    joy_X_etat = 1;
-  }
-
-  else{
-    joy_X_etat = 0;
-    joy_Y_etat =0;
-  }
-
-  // Bouton 
-  if (digitalRead(SW1)== LOW)
-  {
+  if (joy_Y_Value < 100)
+    mouvement = 1;
+  else if (joy_Y_Value > 1000)
+    mouvement = 2;
+  else if (joy_X_Value < 100)
+    mouvement = 3;
+  else if (joy_X_Value > 1000)
+    mouvement = 4;
+  
+  if (digitalRead(SW1) == LOW)
     bouton = 1;
-    delay(10);
-  }
-  else if (digitalRead(SW2)== LOW)
-  {
+  if (digitalRead(SW2) == LOW)
     bouton = 2;
-    delay(10);
-  }
-  else if (digitalRead(SW3)== LOW)
-  {
-    bouton = 3;
-    delay(10);
-  }
-  else if (digitalRead(SW4)== LOW)
-  {
+  //if (digitalRead(SW3) == HIGH)
+    //bouton = 3;
+  if (digitalRead(SW4) == LOW)
     bouton = 4;
-    delay(10);
-  }
-  else if (digitalRead(SW5)== LOW)
-  {
+  if (digitalRead(SW5) == LOW)
     bouton = 5;
-    delay(10);
-  }
-  else if (digitalRead(SW6)== LOW)
+  
+  if (shouldRead_) 
   {
-    bouton = 6;
-    delay(10);
-  }
-  else
-  {
-    bouton = 0;
+    readMsg();
+    sendMsg();
   }
 
-
-  
-   
-  
-  delay(10);  // delais de 10 ms
+  if (nb_power > 0)
+    pouvoir = true; //Si shake manette
 }
-
-// 1023 - 800 // 0-200 // X et Y 
 
 /*---------------------------Definition de fonctions ------------------------*/
 
@@ -186,10 +141,9 @@ void sendMsg() {
   StaticJsonDocument<500> doc;
   // Elements du message
   doc["time"] = millis();
-  doc["X"] = joy_X_etat;
-  doc["Y"] = joy_Y_etat;
+  doc["mouvement"] = mouvement;
   doc["Bouton"] = bouton;
-
+  doc["pouvoir"] = pouvoir;
   // Serialisation
   serializeJson(doc, Serial);
 
@@ -220,13 +174,25 @@ void readMsg(){
     return;
   }
   
-  // Analyse des éléments du message message
+  // Analyse des éléments du message
   parse_msg = doc["Affichage"];
   
   if (!parse_msg.isNull()) {
     lcd.clear();
     lcd.setCursor(0,1);  
     lcd.print(parse_msg.as<String>());
+  }
+
+  vie = doc["vie"];
+  for (int i = vie; i < 10; i++)
+  {
+    digitalWrite(bargraph[i], LOW);
+  }
+
+  nb_power = doc["nbpower"];
+  for (int i = 0; i < nb_power; i++)
+  {
+    digitalWrite(del[i], HIGH);
   }
 }
 
