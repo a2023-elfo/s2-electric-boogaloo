@@ -114,7 +114,7 @@ void Gameloop::mainLoop() {
     char userInput;
     bool loop = true;
     systemeArgent argent;
-    charge = 0;
+    charge = 9;
     arene.display();
 
     string raw_msg;
@@ -193,7 +193,7 @@ void Gameloop::mainLoop() {
         if (checkPlayerInput(BTN_1, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
         if (checkPlayerInput(BTN_3, inputs))
-            tremblementDeTerre(charge);
+            activerTremblementDeTerre(&charge);
 
         // Update du random, c'est au tour du directeur
         inputUpdateDirector(inputs);
@@ -207,7 +207,7 @@ void Gameloop::mainLoop() {
 
         std::cout << arene.playerShooter.health.displayBar() << endl << endl;
         cout << "Current money: " << argent.checkMoney() << endl;
-        tremblementDeTerre(charge);
+        tremblementDeTerre(&charge);
 
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
@@ -294,47 +294,43 @@ void Gameloop :: spawnPotato(int health) {
     arene.getPotatoes().push_back(bigMama);
 
 }
-void Gameloop:: tremblementDeTerre(int charge) {
+void Gameloop:: tremblementDeTerre(int* charge) {
     const int maxCharge = 10; // Charge maximale pour le super
-    int nombreBarres = (charge * 10) / maxCharge;
 
    // Toujours afficher la barre de chargement en bas de la grille
     std::cout << "Super: [";
 
-    // Afficher la barre de chargement vide si la charge est a zero
-    if (charge == 0) {
+    // Afficher la barre de chargement vide si la charge est à zéro
+    if (*charge == 0) {
         for (int i = 0; i < maxCharge; ++i) {
-            std::cout << " |";
+        std::cout << " |";
         }
-    }
-    else {
-        // Calculer le nombre de barres pleines
-        int nombreBarres = (charge * 10) / maxCharge;
-        if (nombreBarres > 0) {
-            std::cout << "X ";
-            nombreBarres--;
+    } else {
+     // Afficher les barres de chargement en remplaçant les | par des X
+        for (int i = 0; i < maxCharge; ++i) {
+            if (i < *charge) {
+                std::cout << "X ";
+            } else {
+                std::cout << "| ";
+            }
         }
-        for (int i = 0; i < nombreBarres; i++) {
-            std::cout << "| ";
-        }
-        // Afficher le reste des barres vides
-        for (int i = nombreBarres; i < 10; i++) {
-            std::cout << "| ";
-        }
-
-        // Reinitialiser la charge a zero apres l'utilisation du super
-        charge = 0;
     }
     std::cout << "]" << std::endl;
 
-    // Si la charge est suffisante pour utiliser le super
-    if (nombreBarres == 10) {
-        // Supprimer tous les ennemis
-        arene.getEnemies().clear();
+    // Si la barre est pleine de X, la charge est suffisante pour utiliser le super
+    if (*charge == 10) {
+        // tremblement de terre active
         std::cout << "Tous les ennemis ont ete elimines par le tremblement de terre!" << std::endl;
     }
     else {
         std::cout << "La charge du tremblement de terre est insuffisante." << std::endl;
+    }
+}
+void Gameloop::activerTremblementDeTerre(int* charge) {
+    //activer tremblement de terre en appuyant sur e
+    if (*charge == 10) {
+        arene.getEnemies().clear();
+        *charge = 0;
     }
 }
 
