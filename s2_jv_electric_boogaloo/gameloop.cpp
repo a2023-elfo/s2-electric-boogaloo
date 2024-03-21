@@ -126,7 +126,7 @@ void Gameloop::mainLoop() {
         // Envoie message Arduino
         j_msg_send["Affichage"] = "Mouvement=" + to_string(bouge) + " B=" + to_string(bouton);
         j_msg_send["vie"] = arene.playerShooter.health.getHealth();
-
+        j_msg_send["charge"] = charge;
         if (!keyboardOnly) {
             if (!SendToSerial(arduino, j_msg_send)) {
                 cerr << "Erreur lors de l'envoie du message. " << endl;
@@ -174,10 +174,10 @@ void Gameloop::mainLoop() {
                 argent.buyPeaShooter();
                 spawnPeashooter(1);
             }
-          
-        if (checkPlayerInput(BTN_1, inputs))
+
+        if (checkPlayerInput(BTN_6, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
-        if (checkPlayerInput(BTN_3, inputs))
+        if (checkPlayerInput(ACCELERO, inputs))
             activerTremblementDeTerre(&charge);
 
         // Update du random, c'est au tour du directeur
@@ -213,6 +213,8 @@ void Gameloop::mainLoop() {
 
             if (arene.playerShooter.health.getHealth() == 0) {
                 loop = false;
+                j_msg_send["vie"] = arene.playerShooter.health.getHealth();
+                SendToSerial(arduino, j_msg_send);
                 gameOver();
             }
         }
@@ -233,7 +235,6 @@ void Gameloop::mainLoop() {
         std::this_thread::sleep_for(250ms);
         
     }
-    
 }
 
 // Lecture du JSON et des entrées du clavier
@@ -242,7 +243,7 @@ std::vector<GameControls> Gameloop :: readUserInput(json yeet) {
     char keyboardInput = NONE;
     int bouge = yeet.value("mouvement", 0);
     int bouton = yeet.value("Bouton", 0);
-
+    bool tbt = yeet.value("pouvoir", 0);
     // Lecture de la manette
     if (bouge == 1)
         inputs.push_back(UP);
@@ -260,6 +261,12 @@ std::vector<GameControls> Gameloop :: readUserInput(json yeet) {
         inputs.push_back(BTN_1);
     if (bouton == 3)
         inputs.push_back(BTN_3);
+    if (bouton == 5)
+        inputs.push_back(BTN_5);
+    if (bouton == 6)
+        inputs.push_back(BTN_6);
+    if (tbt)
+        inputs.push_back(ACCELERO);
 
     // CRead keyboard input. All values that are not valid are still used to offset directorRandom, so we keep em
     while (_kbhit()) {

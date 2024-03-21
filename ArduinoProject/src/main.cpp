@@ -57,7 +57,9 @@ int joy_Y_Value = 0;
 int vie = 10;
 int nb_power = 0;
 bool pouvoir = false;
-
+int charge = 0;
+float total_charge = 4.0;
+float result = 0.0;
 /*------------------------- Prototypes de fonctions -------------------------*/
 void sendMsg(); 
 void readMsg();
@@ -95,6 +97,7 @@ void loop() {
   joy_Y_Value = analogRead(pinjoy_Y);
   mouvement = 0;
   bouton = 0;
+  pouvoir = false;
 
   if (joy_Y_Value < 100)
     mouvement = 1;
@@ -118,6 +121,9 @@ void loop() {
   if (digitalRead(SW6) == LOW)
     bouton = 6;
 
+  if (analogRead(A3) > 600)
+    pouvoir = true;
+
   if (shouldRead_) 
   {
     readMsg();
@@ -127,7 +133,7 @@ void loop() {
   if (nb_power > 0)
     pouvoir = true; //Si shake manette
 }
-
+   
 /*---------------------------Definition de fonctions ------------------------*/
 
 void serialEvent() { shouldRead_ = true; }
@@ -182,7 +188,7 @@ void readMsg(){
   if (!parse_msg.isNull()) {
     lcd.clear();
     lcd.setCursor(0,1);  
-    lcd.print(parse_msg.as<String>());
+    //lcd.print(parse_msg.as<String>());
   }
 
   vie = doc["vie"];
@@ -195,6 +201,28 @@ void readMsg(){
   for (int i = 0; i < nb_power; i++)
   {
     digitalWrite(del[i], HIGH);
+  }
+
+  charge = doc["charge"];
+  result = charge / total_charge;
+  lcd.print(result);
+  if (result >= 0.25 && result < 0.5) {
+    digitalWrite(pinLED4, HIGH);
+  }
+  else if (result >= 0.5 && result < 0.75) {
+    digitalWrite(pinLED3, HIGH);
+  }
+  else if (result >= 0.75 && result < 1) {
+    digitalWrite(pinLED2, HIGH);
+  }
+  else if (result == 1) {
+    digitalWrite(pinLED1, HIGH);
+  }
+  else {
+    digitalWrite(pinLED1, LOW);
+    digitalWrite(pinLED2, LOW);
+    digitalWrite(pinLED3, LOW);
+    digitalWrite(pinLED4, LOW);
   }
 }
 

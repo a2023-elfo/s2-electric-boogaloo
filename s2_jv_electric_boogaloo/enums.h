@@ -9,7 +9,10 @@ enum GameControls {
     BTN_2 = 't',
     BTN_3 = 'e',
     BTN_4 = 'r',
-    NONE = -1
+    BTN_5 = 'k',
+    BTN_6 = ' ',
+    NONE = -1,
+    ACCELERO = 'q'
 };
 
 enum EnemyTypes { // Text value and cost for director
