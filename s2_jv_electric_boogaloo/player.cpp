@@ -25,18 +25,18 @@ void Player::move(int offset_x, int offset_y) {
 
 void Player::update(vector<Bullet>& bullets, vector<Enemy>& enemies)
 {
- //verirfie pour ne pas se tuer avec ses balles
+    //verirfie pour ne pas se tuer avec ses balles
     for (int i = 0; i < (int)bullets.size(); i++) {
         if (checkHitBullet(bullets.at(i)) && bullets.at(i).getBulletType() == friendlyFire) {
             cout << "ouch les bullets font mal a elfo" << endl;
-            //TODO implematation barre de vie
+            health.decreaseHealth(1);
         }
     }
     //verirfie dommage enemy
     for (int i = 0; i < (int)enemies.size(); i++) {
         if (checkHitEnemy(enemies.at(i))) {
             cout << "ouch les enemy font mal a elfo" << endl;
-            //TODO implematation barre de vie
+            health.decreaseHealth(1);
         }
     }
 }

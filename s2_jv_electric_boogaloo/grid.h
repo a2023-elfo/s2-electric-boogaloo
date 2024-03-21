@@ -41,6 +41,9 @@ public:
 	void deletePotato(int id);
 	void deletePeaShooter(int id);
 	int getEnemyNumber();
+	static const int GRID_X = 5;
+	static const int GRID_Y = 10;
+	char grille[GRID_X][GRID_Y];
 };
 
 #endif

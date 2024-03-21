@@ -142,14 +142,17 @@
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="displayObject.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enums.h" />
     <ClCompile Include="gameloop.cpp" />
     <ClCompile Include="grid.cpp" />
+    <ClCompile Include="include\serial\SerialPort.cpp" />
     <ClCompile Include="healthBar.cpp" />
     <ClCompile Include="peaShooter.cpp" />
     <ClCompile Include="plant.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="potato.cpp" />
     <ClCompile Include="s2_jv_electric_boogaloo.cpp" />
+    <ClCompile Include="systemeArgent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bullet.h" />
@@ -157,11 +160,14 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="gameloop.h" />
     <ClInclude Include="grid.h" />
+    <ClInclude Include="include\json.hpp" />
+    <ClInclude Include="include\serial\SerialPort.hpp" />
     <ClInclude Include="healthBar.h" />
     <ClInclude Include="peaShooter.h" />
     <ClInclude Include="plant.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="potato.h" />
+    <ClInclude Include="systemeArgent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
