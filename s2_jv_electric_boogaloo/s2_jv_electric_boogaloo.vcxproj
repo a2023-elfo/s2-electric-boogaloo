@@ -152,7 +152,6 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="potato.cpp" />
     <ClCompile Include="s2_jv_electric_boogaloo.cpp" />
-    <ClCompile Include="systemeArgent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bullet.h" />
@@ -167,7 +166,6 @@
     <ClInclude Include="plant.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="potato.h" />
-    <ClInclude Include="systemeArgent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,7 +6,6 @@
 #include <cstdlib>
 #include <Windows.h>
 #include "grid.h"
-#include "systemeArgent.h"
 #include "healthBar.h"
 #include "include/json.hpp"
 #include "enums.h"
