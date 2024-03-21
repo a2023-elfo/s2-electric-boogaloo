@@ -99,9 +99,4 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Media Include="..\..\..\..\OneDrive\Bureau\Bruits Elfo\Shoot.mp3">
-      <Filter>Fichiers de ressources</Filter>
-    </Media>
-  </ItemGroup>
 </Project>
