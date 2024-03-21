@@ -18,9 +18,9 @@ char Enemy::display()
 }
 
 
-void Enemy::update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters)
+void Enemy::update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters, vector<Enemy>& enemies)
 {
-
+	
 	for (int i = 0; i < (int)potatoes.size(); i++) {
 		if (getY() + 1 == potatoes[i].getY() && getX() == potatoes[i].getX()) {
 			setDeplacement(0);
@@ -33,6 +33,13 @@ void Enemy::update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaS
 
 		}
 	}
+	for (int i = 0; i < (int)enemies.size(); i++) {
+		if (getY()+1 == enemies[i].getY() && getX() == enemies[i].getX()) {
+			setDeplacement(0);
+
+		}
+	}
+	
 	setY(getY() + deplacement);
 
 	for (int i = 0; i < (int)bullets.size(); i++) {
@@ -42,7 +49,7 @@ void Enemy::update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaS
 	}
 }
 
-Enemy::Enemy(int _health, int x)
+Enemy::Enemy(int _health, int x, char appearance)
 {
 	setDeplacement(1);
 	health = _health;

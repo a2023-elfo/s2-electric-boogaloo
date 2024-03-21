@@ -14,15 +14,16 @@ protected:
 	int health;
 
 public:
-	Enemy(int _health, int x);
+	Enemy(int _health, int x, char appearance);
 	bool checkHitBox(Bullet& bang);
 	bool decreaseHealth(int damage);
 	char display();
-	void update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters);
+	void update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters, vector<Enemy>& enemies);
 	int getHealth();
 	void setDeplacement(int mouvement);
 private:
 	int deplacement;
+	char apparence;
 };
 
 #endif
