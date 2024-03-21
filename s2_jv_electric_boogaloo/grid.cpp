@@ -7,7 +7,7 @@ void Grid::update()
 {
     i++;
     bool enemyAvance;
-    if (i % 15 == 0) {
+    if (i % 6 == 0) {
         enemyAvance = true;
     }
     else {
