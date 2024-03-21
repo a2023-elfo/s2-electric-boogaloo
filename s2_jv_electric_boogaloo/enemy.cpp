@@ -38,6 +38,7 @@ void Enemy::update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaS
 	for (int i = 0; i < (int)bullets.size(); i++) {
 		if (checkHitBox(bullets.at(i))) {
 			decreaseHealth(1);
+			bullets.erase(bullets.begin() + i);
 		}
 	}
 }
