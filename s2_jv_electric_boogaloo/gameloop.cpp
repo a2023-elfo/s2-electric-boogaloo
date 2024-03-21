@@ -178,7 +178,7 @@ void Gameloop::mainLoop() {
         if (checkPlayerInput(BTN_1, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
         if (checkPlayerInput(BTN_3, inputs))
-            tremblementDeTerre(charge);
+            activerTremblementDeTerre(&charge);
 
         // Update du random, c'est au tour du directeur
         inputUpdateDirector(inputs);
@@ -192,6 +192,7 @@ void Gameloop::mainLoop() {
 
         std::cout << arene.playerShooter.health.displayBar() << endl << endl;
         cout << "Current money: " << argent.checkMoney() << endl;
+        tremblementDeTerre(&charge);
 
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
@@ -278,11 +279,44 @@ void Gameloop :: spawnPotato(int health) {
     arene.getPotatoes().push_back(bigMama);
 
 }
-void Gameloop:: tremblementDeTerre(int charge) {
-    for (int i = 0; i < arene.getEnemies().size(); i++) {
-        arene.getEnemies()[i].decreaseHealth(charge);
+void Gameloop:: tremblementDeTerre(int* charge) {
+    const int maxCharge = 10; // Charge maximale pour le super
+
+   // Toujours afficher la barre de chargement en bas de la grille
+    std::cout << "Super: [";
+
+    // Afficher la barre de chargement vide si la charge est à zéro
+    if (*charge == 0) {
+        for (int i = 0; i < maxCharge; ++i) {
+        std::cout << " |";
+        }
+    } else {
+     // Afficher les barres de chargement en remplaçant les | par des X
+        for (int i = 0; i < maxCharge; ++i) {
+            if (i < *charge) {
+                std::cout << "X ";
+            } else {
+                std::cout << "| ";
+            }
+        }
     }
-    charge = 0;
+    std::cout << "]" << std::endl;
+
+    // Si la barre est pleine de X, la charge est suffisante pour utiliser le super
+    if (*charge >= 10) {
+        // tremblement de terre active
+        std::cout << "Tous les ennemis ont ete elimines par le tremblement de terre!" << std::endl;
+    }
+    else {
+        std::cout << "La charge du tremblement de terre est insuffisante." << std::endl;
+    }
+}
+void Gameloop::activerTremblementDeTerre(int* charge) {
+    //activer tremblement de terre en appuyant sur e
+    if (*charge >= 10) {
+        arene.getEnemies().clear();
+        *charge = 0;
+    }
 }
 
 /*---------------------------Definition de fonctions JSON------------------------*/
