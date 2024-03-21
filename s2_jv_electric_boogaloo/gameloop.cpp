@@ -20,43 +20,13 @@ bool RcvFromSerial(SerialPort* arduino, string& msg);
 SerialPort* arduino; //doit etre un objet global!!!!
 
 
-void Gameloop::gameOver() {
+void Gameloop::gameOver(){
     std::system("cls");
     std::cout << "GAME OVER" << std::endl;
+    std::cout << "Score : " << arene.nbEnemyKilled << std::endl;
 }
 
-void Gameloop::spawnEnemy(int enemyPos, bool theRock) {
 
-    int health = 0;
-    int position = 0;
-    switch (enemyPos) {
-        case 0:
-            health = 5;
-            position = 0;
-            break;
-        case 1:
-            health = 5;
-            position = 1;
-            break;
-        case 2:
-            health = 5;
-            position = 2;
-            break;
-        case 3:
-            health = 5;
-            position = 3;
-            break;
-        case 4:
-            health = 5;
-            position = 4;
-            break;
-    }
-    if (theRock) {
-        health = 20;
-    }
-    Enemy zombie(health, position);
-    arene.getEnemies().push_back(zombie);
-}
 
 void Gameloop::setupDirector() {
     // Set base of random, current time
@@ -93,7 +63,7 @@ void Gameloop::generateEnemy() {
 
     // Try to generate enemy if sufficient funds
     // Lower the max value of the generation to increase chance of spawn. Could be difficulty curve with time.
-    if (directorFunds >= NORMAL && generateValue(1, 10) == 1) { // Enough funds. If we get more types, this algorithm will have to change
+    if (directorFunds+arene.nbEnemyKilled >= NORMAL && generateValue(1, 10) == 1) { // Enough funds. If we get more types, this algorithm will have to change
         
         // Remove funds, even if we don't spawn. Prevents overpopulation
         directorFunds -= NORMAL;
@@ -102,7 +72,14 @@ void Gameloop::generateEnemy() {
         int desiredPosition = generateValue(0, arene.GRID_X);
 
         if (arene.grille[desiredPosition][0] == ' ') {  // Empty, we can spawn
-            spawnEnemy(desiredPosition, false);
+            if (generateValue(1, 50) < 10) {
+                Enemy zombie(20, desiredPosition, 'W');
+                arene.getEnemies().push_back(zombie);
+            }
+            else {
+                Enemy zombie(6, desiredPosition, 'X');
+                arene.getEnemies().push_back(zombie);
+            }
         }
     }
 }
@@ -190,12 +167,12 @@ void Gameloop::mainLoop() {
         if (checkPlayerInput(BTN_2, inputs))
             if (argent.checkFundsPotato()) {
                 argent.buyPotato();
-                spawnPotato(10);
+                spawnPotato(4);
             }
         if (checkPlayerInput(BTN_4, inputs))
             if (argent.checkFundsPeaShooter()) {
                 argent.buyPeaShooter();
-                spawnPeashooter(3);
+                spawnPeashooter(1);
             }
             
         if (checkPlayerInput(BTN_1, inputs))
@@ -226,6 +203,7 @@ void Gameloop::mainLoop() {
             else if (arene.getEnemies()[i].getHealth() <= 0) {
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
+                arene.nbEnemyKilled++;
                 argent.killZombie(); //ajouter argent quand zombie est mort
             }
             else {
@@ -252,6 +230,7 @@ void Gameloop::mainLoop() {
         charge += (int)zombieMort.size();
         zombieMort.clear();
         std::this_thread::sleep_for(250ms);
+        
     }
     
 }

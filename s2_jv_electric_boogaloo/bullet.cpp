@@ -22,6 +22,8 @@ void Bullet::update()
 	y = y - 1;
 }
 
+
+
 Bullet::BulletType Bullet::getBulletType()
 {
 	return bulletType;
