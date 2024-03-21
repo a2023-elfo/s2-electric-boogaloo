@@ -35,7 +35,7 @@ int SW2 = 23;
 int SW3 = 31;//PASOK
 int SW4 = 27;
 int SW5 = 53;
-int SW6 = 0;
+int SW6 = 25;
 
 //BARGRAPH
 int bar1 = 51;
@@ -109,13 +109,15 @@ void loop() {
     bouton = 1;
   if (digitalRead(SW2) == LOW)
     bouton = 2;
-  //if (digitalRead(SW3) == HIGH)
-    //bouton = 3;
+  if (digitalRead(SW3) == LOW)
+    bouton = 3;
   if (digitalRead(SW4) == LOW)
     bouton = 4;
   if (digitalRead(SW5) == LOW)
     bouton = 5;
-  
+  if (digitalRead(SW6) == LOW)
+    bouton = 6;
+
   if (shouldRead_) 
   {
     readMsg();
