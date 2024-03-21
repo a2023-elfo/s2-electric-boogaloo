@@ -20,8 +20,8 @@ public:
 	void spawnEnemy(int enemyPos, bool theRock);
 	void spawnPeashooter(int health);
 	void spawnPotato(int health);
-	void tremblementDeTerre(int* charge);
 	void activerTremblementDeTerre(int* charge);
+	void afficherTremblementDeTerre(int* charge);
 	void gameOver();
 	void setupDirector();
 	void inputUpdateDirector(vector<GameControls>& inputVect);
