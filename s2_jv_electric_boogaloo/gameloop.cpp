@@ -145,7 +145,8 @@ void Gameloop::mainLoop() {
     while (loop) {
 
         // Envoie message Arduino
-        j_msg_send["Affichage"] = "Mouvement" + to_string(bouge) + " B=" + to_string(bouton);
+        j_msg_send["Affichage"] = "Mouvement=" + to_string(bouge) + " B=" + to_string(bouton);
+        j_msg_send["vie"] = Healthbar.getHealth();
 
         if (!keyboardOnly) {
             if (!SendToSerial(arduino, j_msg_send)) {
