@@ -13,6 +13,7 @@ void Grid::update()
     else {
         enemyAvance = false;
     }
+    //lol
     // Mettre � jour les ennemis
     for (auto& enemy : enemies) { 
         if (enemyAvance) {
