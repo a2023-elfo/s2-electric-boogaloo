@@ -23,12 +23,24 @@ bool systemeArgent::checkFundsPotato() {
 
 //acheter pea shooter et enlever argent
 void systemeArgent::buyPeaShooter() {
-	money -= 20;
+	if (checkFundsPeaShooter()) {
+		money -= 20;
+		std::cout << "Pea Shooter achete!!";
+	}
+	else {
+		std::cout << "Smells like broke\n";
+	}
 }
 
 //acheter patate et enlever argent
 void systemeArgent::buyPotato() {
-	money -= 30;
+	if (checkFundsPotato()) {
+		money -= 30;
+		std::cout << "Patate achete!!";
+	}
+	else {
+		std::cout << "Smells like broke\n";
+	}
 }
 
 //regarder le montant d'argent qu'on a
