@@ -23,3 +23,18 @@ Potato::Potato(int health, int x, int y)
     setY(y);
     this->health = health;
 }
+
+bool Potato::checkHitBox(int x, int y)
+{
+    return (y + 1 == getY() && x == getX());
+}
+
+bool Potato::decreaseHealth(int damage)
+{
+    return (health -= damage) > 0;
+}
+
+int Potato::getHealth()
+{
+    return health;
+}
