@@ -1,24 +1,27 @@
 #include "grid.h"
 #include <iostream>
 
-const int GRID_X = 5;
-const int GRID_Y = 10;
-char grille[GRID_X][GRID_Y];
 int i = 0;
-
-
-
 
 void Grid::update()
 {
     i++;
+    bool enemyAvance;
+    if (i % 15 == 0) {
+        enemyAvance = true;
+    }
+    else {
+        enemyAvance = false;
+    }
     // Mettre � jour les ennemis
     for (auto& enemy : enemies) { 
-        if (i % 15 == 0) {
-            enemy.update(bullets, 1);
+        if (enemyAvance) {
+            enemy.setDeplacement(1);
+            enemy.update(bullets, potatoes, peaShooters);
         }
         else {
-            enemy.update(bullets, 0);
+            enemy.setDeplacement(0);
+            enemy.update(bullets, potatoes, peaShooters);
         }
         
         
@@ -32,10 +35,28 @@ void Grid::update()
         else {
             peaShooter.update(bullets, 0);
         }
+        for (auto& enemy : enemies) {
+            if (peaShooter.checkHitBox(enemy.getX(), enemy.getY()) && enemyAvance) {
+                peaShooter.decreaseHealth(1);
+            }
+        }
+        
+       
+    }
+
+     
+    // Mettre � jour les plantes
+    for (auto& plant : plants) {
+        plant.update();
     }
 
     for (auto& potato : potatoes) {
         potato.update();
+        for (auto& enemy : enemies) {
+            if (potato.checkHitBox(enemy.getX(), enemy.getY()) && enemyAvance) {
+                potato.decreaseHealth(1);
+            }
+        }
     }
 
     // Mettre � jour les balles
@@ -44,7 +65,7 @@ void Grid::update()
     }
 
     // Mettre � jour le joueur
-    playerShooter.update();
+    playerShooter.update(bullets, enemies);
 }
 
 void Grid::display()
@@ -175,6 +196,20 @@ void Grid::deleteEnemy(int id)
 {
     if (id <= enemies.size()){
          enemies.erase((enemies.begin() + id));
+    }
+}
+
+void Grid::deletePotato(int id)
+{
+    if (id <= potatoes.size()) {
+        potatoes.erase((potatoes.begin() + id));
+    }
+}
+
+void Grid::deletePeaShooter(int id)
+{
+    if (id <= peaShooters.size()) {
+        peaShooters.erase((peaShooters.begin() + id));
     }
 }
 
