@@ -17,7 +17,8 @@ using json = nlohmann::json;
 bool SendToSerial(SerialPort* arduino, json j_msg);
 bool RcvFromSerial(SerialPort* arduino, string& msg);
 
-SerialPort* arduino; //doit etre un objet global!
+SerialPort* arduino; //doit etre un objet global!!!!
+
 
 void Gameloop::gameOver() {
     std::system("cls");
