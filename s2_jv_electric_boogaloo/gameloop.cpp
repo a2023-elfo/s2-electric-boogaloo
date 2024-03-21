@@ -207,6 +207,7 @@ void Gameloop::mainLoop() {
 
         std::cout << arene.playerShooter.health.displayBar() << endl << endl;
         cout << "Current money: " << argent.checkMoney() << endl;
+        tremblementDeTerre(charge);
 
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
