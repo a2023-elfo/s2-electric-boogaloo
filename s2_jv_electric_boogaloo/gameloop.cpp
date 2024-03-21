@@ -113,6 +113,7 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>&
 void Gameloop::mainLoop() {
     char userInput;
     bool loop = true;
+    systemeArgent argent;
     charge = 0;
     arene.display();
 
@@ -142,8 +143,7 @@ void Gameloop::mainLoop() {
     json j_msg_send, j_msg_rcv;
     std::vector<GameControls> inputs;
 
-    while (loop) {
-
+    while (loop) 
         // Envoie message Arduino
         j_msg_send["Affichage"] = "Mouvement=" + to_string(bouge) + " B=" + to_string(bouton);
         j_msg_send["vie"] = arene.playerShooter.health.getHealth();
@@ -203,6 +203,7 @@ void Gameloop::mainLoop() {
         
         std::system("cls");
         arene.display();
+        cout << "Current money: " << argent.checkMoney() << endl;
         std::cout << arene.playerShooter.health.displayBar();
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
@@ -214,6 +215,13 @@ void Gameloop::mainLoop() {
             else if (arene.getEnemies()[i].getHealth() <= 0) {
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
+                argent.killZombie(); //ajouter argent quand zombie est mort
+                if(arene.getEnemyNumber() <= 0) {
+                    loop = false;
+                    gameOver();
+                }
+
+
             }
             else {
                 i++;
