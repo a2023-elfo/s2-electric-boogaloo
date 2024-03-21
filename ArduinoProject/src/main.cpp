@@ -50,6 +50,10 @@ int bar9 = 37;
 int bar10 = 39;
 int bargraph[10] = {bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10};
 
+//Detecteur Muons
+int detecteur = 48;
+int randomCounter = 0;
+
 int bouton = 0 ;
 int mouvement = 0;
 int joy_X_Value = 0;
@@ -95,6 +99,8 @@ void loop() {
   joy_Y_Value = analogRead(pinjoy_Y);
   mouvement = 0;
   bouton = 0;
+
+  readMuons();
 
   if (joy_Y_Value < 100)
     mouvement = 1;
@@ -144,12 +150,16 @@ void sendMsg() {
   doc["mouvement"] = mouvement;
   doc["Bouton"] = bouton;
   doc["pouvoir"] = pouvoir;
+  doc["muons"] = randomCounter;
   // Serialisation
   serializeJson(doc, Serial);
 
   // Envoie
   Serial.println();
   shouldSend_ = false;
+
+  // Remettre compteur à zéro après lecture
+  randomCounter = 0; 
 }
 
 /*---------------------------Definition de fonctions ------------------------
@@ -196,3 +206,14 @@ void readMsg(){
   }
 }
 
+/*---------------------------Definition de fonctions ------------------------
+Fonction de Réception + Compteur de muons + Envoi du compteur 
+Entrée : Détecteur de muon
+Sortie : Aucun
+Traitement : Envoi du message
+-----------------------------------------------------------------------------*/
+void readMuons() {
+  // Compteur
+  //randomCounter += digitalRead(detecteur);
+  randomCounter += random(200);
+}
