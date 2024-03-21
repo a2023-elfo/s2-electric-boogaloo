@@ -113,6 +113,7 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>&
 void Gameloop::mainLoop() {
     char userInput;
     bool loop = true;
+    systemeArgent argent;
     charge = 0;
     arene.display();
 
@@ -203,7 +204,10 @@ void Gameloop::mainLoop() {
         
         std::system("cls");
         arene.display();
-        std::cout << arene.playerShooter.health.displayBar();
+
+        std::cout << arene.playerShooter.health.displayBar() << endl << endl;
+        cout << "Current money: " << argent.checkMoney() << endl;
+
         std::vector<Enemy> zombieMort;
         for (int i = 0; i < arene.getEnemies().size();) {
             if (arene.getEnemies()[i].getY() == arene.GRID_Y - 1) {
@@ -214,6 +218,7 @@ void Gameloop::mainLoop() {
             else if (arene.getEnemies()[i].getHealth() <= 0) {
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
+                argent.killZombie(); //ajouter argent quand zombie est mort
             }
             else {
                 i++;
