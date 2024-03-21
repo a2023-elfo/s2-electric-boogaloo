@@ -251,10 +251,11 @@ void Gameloop::mainLoop() {
 // Lecture du JSON et des entrées du clavier
 std::vector<GameControls> Gameloop :: readUserInput(json yeet) {
     vector<GameControls> inputs = {};
-    char keyboardInput;
+    char keyboardInput = NONE;
     int bouge = yeet.value("mouvement", 0);
     int bouton = yeet.value("Bouton", 0);
 
+    // Lecture de la manette
     if (bouge == 1)
         inputs.push_back(UP);
     if (bouge == 3)
@@ -272,16 +273,13 @@ std::vector<GameControls> Gameloop :: readUserInput(json yeet) {
     if (bouton == 3)
         inputs.push_back(BTN_3);
 
-    if (_kbhit())
+    // CRead keyboard input. All values that are not valid are still used to offset directorRandom, so we keep em
+    while (_kbhit()) {
         keyboardInput = _getch();
-    else
-        keyboardInput = NONE;
-    
-    // Check if keyboard input is already in the vector. If not, lets add it.
-    inputs.push_back((GameControls)keyboardInput);
+        inputs.push_back((GameControls)keyboardInput);
+    }
 
     return inputs;
-   
 }
 
 void Gameloop :: spawnPeashooter(int health) {
