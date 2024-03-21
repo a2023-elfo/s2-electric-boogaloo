@@ -23,6 +23,7 @@ SerialPort* arduino; //doit etre un objet global!!!!
 void Gameloop::gameOver(){
     std::system("cls");
     std::cout << "GAME OVER" << std::endl;
+    std::cout << "Score : " << arene.nbEnemyKilled << std::endl;
 }
 
 
@@ -229,7 +230,7 @@ void Gameloop::mainLoop() {
         charge += (int)zombieMort.size();
         zombieMort.clear();
         std::this_thread::sleep_for(250ms);
-        std::cout << arene.nbEnemyKilled << std::endl;
+        
     }
     
 }
