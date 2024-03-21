@@ -39,11 +39,11 @@ void DisplayObject::setY(int input)
 	if (input < 0) {
 		y = 0;
 	}
-	if (input > 9) {
+	else if (input > 9) {
 		y = 9;
 	}
 	else {
-	y = input;
+		y = input;
 	}
 }
 
