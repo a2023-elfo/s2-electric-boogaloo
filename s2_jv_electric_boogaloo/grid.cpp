@@ -30,6 +30,7 @@ void Grid::update()
 
 
     for (auto& peaShooter : peaShooters) {
+        // Attack speed. Lower number is higher attack speed
         if (i % 8 == 0) {
             peaShooter.update(bullets, 1);
         }
