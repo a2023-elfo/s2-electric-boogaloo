@@ -23,7 +23,7 @@ public:
 	Bullet* shoot();
 	bool checkHitBullet(Bullet& bang);
 	bool checkHitEnemy(Enemy& enemy);
-	HealthBar health = HealthBar(5);
+	HealthBar health = HealthBar(10);
 };
 
 #endif

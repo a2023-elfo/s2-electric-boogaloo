@@ -7,6 +7,7 @@ void Grid::update()
 {
     
     bool enemyAvance;
+
     if (i % 8 == 0 && i != 0) {
         enemyAvance = true;
     }
