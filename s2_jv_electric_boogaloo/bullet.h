@@ -2,8 +2,7 @@
 #define BULLET_H
 #include "displayObject.h"
 #include <stdlib.h>
-#include <mmsystem.h> 
-#pragma comment(lib, "Winmm.lib")
+
 
 class Bullet:public DisplayObject
 {
