@@ -7,7 +7,7 @@ void Grid::update()
 {
     i++;
     bool enemyAvance;
-    if (i % 15 == 0) {
+    if (i % 6 == 0) {
         enemyAvance = true;
     }
     else {
@@ -18,11 +18,11 @@ void Grid::update()
     for (auto& enemy : enemies) { 
         if (enemyAvance) {
             enemy.setDeplacement(1);
-            enemy.update(bullets, potatoes, peaShooters);
+            enemy.update(bullets, potatoes, peaShooters, enemies);
         }
         else {
             enemy.setDeplacement(0);
-            enemy.update(bullets, potatoes, peaShooters);
+            enemy.update(bullets, potatoes, peaShooters, enemies);
         }
         
         
@@ -30,7 +30,8 @@ void Grid::update()
 
 
     for (auto& peaShooter : peaShooters) {
-        if (i % 5 == 0) {
+        // Attack speed. Lower number is higher attack speed
+        if (i % 8 == 0) {
             peaShooter.update(bullets, 1);
         }
         else {
@@ -63,6 +64,11 @@ void Grid::update()
     // Mettre � jour les balles
     for (auto& bullet : bullets) {
         bullet.update();
+        for (i = 0; i < (int)bullets.size(); i++) {
+            if (bullets.at(i).getY() < 0) {
+                bullets.erase(bullets.begin() + i);
+            }
+        }
     }
 
     // Mettre � jour le joueur
@@ -211,6 +217,7 @@ void Grid::deletePeaShooter(int id)
 {
     if (id <= peaShooters.size()) {
         peaShooters.erase((peaShooters.begin() + id));
+        nbEnemyKilled++;
     }
 }
 
