@@ -114,7 +114,7 @@ void Gameloop::mainLoop() {
     char userInput;
     bool loop = true;
     systemeArgent argent;
-    charge = 9;
+    charge = 0;
     arene.display();
 
     string raw_msg;
@@ -318,7 +318,7 @@ void Gameloop:: tremblementDeTerre(int* charge) {
     std::cout << "]" << std::endl;
 
     // Si la barre est pleine de X, la charge est suffisante pour utiliser le super
-    if (*charge == 10) {
+    if (*charge >= 10) {
         // tremblement de terre active
         std::cout << "Tous les ennemis ont ete elimines par le tremblement de terre!" << std::endl;
     }
@@ -328,7 +328,7 @@ void Gameloop:: tremblementDeTerre(int* charge) {
 }
 void Gameloop::activerTremblementDeTerre(int* charge) {
     //activer tremblement de terre en appuyant sur e
-    if (*charge == 10) {
+    if (*charge >= 10) {
         arene.getEnemies().clear();
         *charge = 0;
     }
