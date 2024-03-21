@@ -4,6 +4,7 @@
 #pragma once
 #include "bullet.h"
 #include "displayObject.h"
+#include <random>
 
 
 #include <random>
@@ -13,12 +14,16 @@ protected:
 	int health = 5;
 
 public:
-	bool checkHitBox(bullet&);
-	bool decreaseHealth(int);
+	Enemy(int _health, int x, char appearance);
+	bool checkHitBox(Bullet& bang);
+	bool decreaseHealth(int damage);
 	char display();
-	void update(bullet&, int);
-	enemy(int);
-	enemy();
+	void update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters);
+	int getHealth();
+	void setDeplacement(int mouvement);
+	char apparence;
+private:
+	int deplacement;
 };
 
 #endif

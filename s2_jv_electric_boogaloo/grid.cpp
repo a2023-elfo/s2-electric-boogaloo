@@ -6,10 +6,33 @@ char grille[5][10];
 void grid::update()
 {
     // Mettre � jour les ennemis
-    for (auto& enemy : enemies) {
-        enemy.update();
+    for (auto& enemy : enemies) { 
+        if (enemyAvance) {
+            enemy.setDeplacement(1);
+            enemy.update(bullets, potatoes, peaShooters);
+        }
+        else {
+            enemy.setDeplacement(0);
+            enemy.update(bullets, potatoes, peaShooters);
+        }
     }
 
+
+    for (auto& peaShooter : peaShooters) {
+        if (i % 5 == 0) {
+            peaShooter.update(bullets, 1);
+        }
+        else {
+            peaShooter.update(bullets, 0);
+        }
+        for (auto& enemy : enemies) {
+            if (peaShooter.checkHitBox(enemy.getX(), enemy.getY()) && enemyAvance) {
+                peaShooter.decreaseHealth(1);
+            }
+        }
+    }
+
+     
     // Mettre � jour les plantes
     for (auto& plant : plants) {
         plant.update();

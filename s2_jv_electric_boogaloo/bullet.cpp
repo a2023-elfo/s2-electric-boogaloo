@@ -2,10 +2,9 @@
 
 bullet::bullet(int _posX, int _posY)
 {
-	_posX = x;
-	_posY = y;
-	width = 1;
-	height = 1;
+	this->setX(x);
+	this->setY(y);
+	bulletType = notFriendlyFire;	
 }
 
 bullet::~bullet()
@@ -17,7 +16,20 @@ char bullet::display()
 	return 'B';
 }
 
-void bullet::update()
+void Bullet::update()
+{
+ 	y = y - 1;
+	if (y < 0) {
+		// We should delete the bullet, it is out of the grid!
+	}
+}
+
+Bullet::BulletType Bullet::getBulletType()
+{
+	return bulletType;
+}
+
+void Bullet::setBulletType(BulletType type)
 {
 	x = x + 1;
 }

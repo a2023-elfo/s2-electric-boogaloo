@@ -161,6 +161,9 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="potato.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\..\OneDrive\Bureau\Bruits Elfo\Shoot.mp3" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

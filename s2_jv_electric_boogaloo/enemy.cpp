@@ -14,7 +14,7 @@ bool enemy::decreaseHealth(int damage)
 
 char enemy::display()
 {
-	return 'X';
+	return apparence;
 }
 
 void enemy::update(bullet& boom, int deplacement)
@@ -31,11 +31,12 @@ enemy::enemy(int input)
 	health = input;
 }
 
-enemy::enemy()
+Enemy::Enemy(int _health, int x, char appearance)
 {
 	setHeight(5);
 	setWidth(3);
 	srand(time(0));
 	setX(rand());
 	setY(0);
+	apparence = appearance;
 }
