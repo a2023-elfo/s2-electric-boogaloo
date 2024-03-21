@@ -17,7 +17,8 @@ using json = nlohmann::json;
 bool SendToSerial(SerialPort* arduino, json j_msg);
 bool RcvFromSerial(SerialPort* arduino, string& msg);
 
-SerialPort* arduino; //doit etre un objet global!
+SerialPort* arduino; //doit etre un objet global!!!!
+
 
 void Gameloop::gameOver() {
     std::system("cls");
@@ -187,9 +188,16 @@ void Gameloop::mainLoop() {
         if (checkPlayerInput(RIGHT, inputs))
             arene.playerShooter.setX(arene.playerShooter.getX() + 1);
         if (checkPlayerInput(BTN_2, inputs))
-            spawnPotato(10);
+            if (argent.checkFundsPotato()) {
+                argent.buyPotato();
+                spawnPotato(10);
+            }
         if (checkPlayerInput(BTN_4, inputs))
-            spawnPeashooter(3);
+            if (argent.checkFundsPeaShooter()) {
+                argent.buyPeaShooter();
+                spawnPeashooter(3);
+            }
+            
         if (checkPlayerInput(BTN_1, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
         if (checkPlayerInput(BTN_3, inputs))
