@@ -40,6 +40,22 @@ void Player::update(vector<Bullet>& bullets, vector<Enemy>& enemies)
         }
     }
 }
+void Player::setY(int input)
+{
+    if (input < 2) {
+        y = 2;
+    }
+    else if (input > 9) {
+        y = 9;
+    }
+    else {
+        y = input;
+    }
+}
+int Player::getY()
+{
+    return y;
+}
 bool Player::checkHitBullet(Bullet& bang)
 {
     return bang.getX() == getX() && bang.getY() == getY();

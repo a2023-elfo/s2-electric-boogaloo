@@ -63,21 +63,31 @@ void Gameloop::generateEnemy() {
 
     // Try to generate enemy if sufficient funds
     // Lower the max value of the generation to increase chance of spawn. Could be difficulty curve with time.
-    if (directorFunds+arene.nbEnemyKilled >= NORMAL && generateValue(1, 10) == 1) { // Enough funds. If we get more types, this algorithm will have to change
+    if (directorFunds + arene.nbEnemyKilled >= NORMAL && generateValue(1, 10) == 1) { // Enough funds. If we get more types, this algorithm will have to change
         
         // Remove funds, even if we don't spawn. Prevents overpopulation
         directorFunds -= NORMAL;
 
         // We are spawning an enemy, choose position
         int desiredPosition = generateValue(0, arene.GRID_X);
+        int bossHealth = 10 + arene.nbEnemyKilled / 7;
+        int enemyHealth = 5 + arene.nbEnemyKilled / 10;
+        if (bossHealth > 20) {
+            bossHealth = 20;
+        }
+        if (enemyHealth > 12) {
+            enemyHealth = 12;
+        }
 
-        if (arene.grille[desiredPosition][0] == ' ') {  // Empty, we can spawn
-            if (generateValue(1, 50) < 10) {
-                Enemy zombie(20, desiredPosition, 'W');
+        if (arene.grille[desiredPosition][0] == ' ' || arene.grille[desiredPosition][0] == 'B') {  // Empty, we can spawn
+            
+            int spawnRock = generateValue(1, 100);
+            if (spawnRock <= arene.nbEnemyKilled) {
+                Enemy zombie(bossHealth, desiredPosition, 'W');
                 arene.getEnemies().push_back(zombie);
             }
             else {
-                Enemy zombie(6, desiredPosition, 'X');
+                Enemy zombie(enemyHealth, desiredPosition, 'X');
                 arene.getEnemies().push_back(zombie);
             }
         }
@@ -155,6 +165,7 @@ void Gameloop::mainLoop() {
 
         // Lecture de l'input du joueur
         inputs = readUserInput(j_msg_rcv);
+        char positionPlant = arene.grille[arene.playerShooter.getX()][arene.playerShooter.getY() - 1];
 
         if (checkPlayerInput(UP, inputs))
             arene.playerShooter.setY(arene.playerShooter.getY() - 1);
@@ -165,16 +176,21 @@ void Gameloop::mainLoop() {
         if (checkPlayerInput(RIGHT, inputs))
             arene.playerShooter.setX(arene.playerShooter.getX() + 1);
         if (checkPlayerInput(BTN_2, inputs))
-            if (argent.checkFundsPotato()) {
-                argent.buyPotato();
-                spawnPotato(4);
+            if (positionPlant != 'P' && positionPlant != 'O') {
+                if (argent.checkFundsPotato()) {
+                    argent.buyPotato();
+                    spawnPotato(4);
+                }
             }
-        if (checkPlayerInput(BTN_4, inputs))
-            if (argent.checkFundsPeaShooter()) {
-                argent.buyPeaShooter();
-                spawnPeashooter(1);
+        if (checkPlayerInput(BTN_4, inputs)){
+            if (positionPlant != 'P' && positionPlant != 'O') {
+                if (argent.checkFundsPeaShooter()) {
+                    argent.buyPeaShooter();
+                    spawnPeashooter(2);
+                }
             }
-
+        }
+        
         if (checkPlayerInput(BTN_6, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
         if (checkPlayerInput(ACCELERO, inputs))
@@ -278,6 +294,7 @@ std::vector<GameControls> Gameloop :: readUserInput(json yeet) {
 }
 
 void Gameloop :: spawnPeashooter(int health) {
+    
     PeaShooter piouPiou(health, arene.playerShooter.getX(), arene.playerShooter.getY() - 1);
     arene.getPeaShooters().push_back(piouPiou);
 }
