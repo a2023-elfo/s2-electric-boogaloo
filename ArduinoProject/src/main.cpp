@@ -132,8 +132,6 @@ void loop() {
 
   if (nb_power > 0)
     pouvoir = true; //Si shake manette
-  
-  
 }
    
 /*---------------------------Definition de fonctions ------------------------*/
