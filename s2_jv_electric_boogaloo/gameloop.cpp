@@ -104,6 +104,7 @@ void Gameloop::mainLoop() {
     systemeArgent argent;
     charge = 1;
     arene.display();
+    bool usecharge = false;
 
     string raw_msg;
 
@@ -194,7 +195,7 @@ void Gameloop::mainLoop() {
         if (checkPlayerInput(BTN_6, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
         if (checkPlayerInput(ACCELERO, inputs))
-            activerTremblementDeTerre(&charge);
+            activerTremblementDeTerre(&charge, &usecharge);
 
         // Update du random, c'est au tour du directeur
         inputUpdateDirector(inputs);
@@ -245,8 +246,15 @@ void Gameloop::mainLoop() {
                 arene.deletePeaShooter(i);
             }
         }
-        
-        charge += (int)zombieMort.size();
+        if (!usecharge) {
+            charge += (int)zombieMort.size();
+            if (charge > 10) {
+                charge = 10;
+            }
+        }
+        else {
+            usecharge = false;
+        }
         zombieMort.clear();
         std::this_thread::sleep_for(250ms);
         
@@ -312,14 +320,14 @@ void Gameloop:: afficherTremblementDeTerre(int* charge) {
      // Afficher les barres de chargement en remplaçant les | par des X
     for (int i = 0; i < maxCharge; ++i) {
         if (i < *charge) {
-            std::cout << "■";
+            std::cout << "O";
         } else {
-            std::cout << "□";
+            std::cout << "-";
         }
     }
     std::cout << "]" << std::endl;
 }
-void Gameloop::activerTremblementDeTerre(int* charge) {
+void Gameloop::activerTremblementDeTerre(int* charge, bool* usecharge) {
 
     // Si la barre est pleine de X, la charge est suffisante pour utiliser le super
     if (*charge >= 10) {
@@ -329,6 +337,7 @@ void Gameloop::activerTremblementDeTerre(int* charge) {
         }
         std::cout << "Tous les ennemis ont ete elimines par le tremblement de terre!" << std::endl;
         *charge = 0;
+        *usecharge = true;
     }
     else {
         std::cout << "La charge du tremblement de terre est insuffisante." << std::endl;
