@@ -90,6 +90,16 @@ void Grid::display()
             grille[i][j] = ' ';
         }
     }
+
+    // Afficher balles
+    for (auto& bullet : bullets) {
+        x = bullet.getX();
+        y = bullet.getY();
+        if (x >= 0 && x < GRID_X && y >= 0 && y < GRID_Y) {
+            grille[x][y] = bullet.display();
+        }
+    }
+
     /// Stockage des enemies dans la grid a afficher
     //Afficher ennemis
     for (auto& enemy : enemies) {
@@ -100,14 +110,6 @@ void Grid::display()
             grille[x][y] = enemy.display();
         }
     }
-    //Afficher plantes
-    /*for (auto& plant : plants) {
-        x = plant.getX();
-        y = plant.getY();
-        if (x >= 0 && x < GRID_X && y >= 0 && y < GRID_Y) {
-            grille[x][y] = plant.display();
-        }
-    }*/
 
     for (auto& peaShooter : peaShooters) {
         x = peaShooter.getX();
@@ -125,14 +127,6 @@ void Grid::display()
         }
     }
 
-    // Afficher balles
-    for (auto& bullet : bullets) {
-        x = bullet.getX();
-        y = bullet.getY();
-        if (x >= 0 && x < GRID_X && y >= 0 && y < GRID_Y) {
-            grille[x][y] = bullet.display();
-        }
-    }
     //Afficher joueur
     int playerX = playerShooter.getX();
     int playerY = playerShooter.getY();
