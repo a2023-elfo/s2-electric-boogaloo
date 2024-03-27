@@ -204,8 +204,8 @@ void readMsg(){
   }
 
   charge = doc["charge"];
-  result = charge/10;
-  lcd.print(charge);
+  result = charge / total_charge;
+  lcd.print(result);
   if (result >= 0.25 && result < 0.5) {
     digitalWrite(pinLED4, HIGH);
   }
