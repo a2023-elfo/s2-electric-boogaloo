@@ -4,8 +4,8 @@
 class HealthBar : public DisplayObject
 {
 private:
-	int health = 5;
-	int maxhealth = 5;
+	int health = 10;
+	int maxhealth = 10;
 public:
 	HealthBar(int baseHealth);
 	void setHealth(int amount);

@@ -18,8 +18,8 @@ public:
 	virtual void update();
 	int getX();
 	void setX(int);
-	int getY();
-	void setY(int);
+	virtual int getY();
+	virtual void setY(int);
 	int getWidth();
 	void setWidth(int);
 	int getHeight();

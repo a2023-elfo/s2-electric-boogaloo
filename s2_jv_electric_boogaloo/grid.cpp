@@ -5,9 +5,10 @@ int i = 0;
 
 void Grid::update()
 {
-    i++;
+    
     bool enemyAvance;
-    if (i % 15 == 0) {
+
+    if (i % 8 == 0 && i != 0) {
         enemyAvance = true;
     }
     else {
@@ -31,7 +32,7 @@ void Grid::update()
 
     for (auto& peaShooter : peaShooters) {
         // Attack speed. Lower number is higher attack speed
-        if (i % 8 == 0) {
+        if (i % 5 == 0) {
             peaShooter.update(bullets, 1);
         }
         else {
@@ -73,6 +74,8 @@ void Grid::update()
 
     // Mettre � jour le joueur
     playerShooter.update(bullets, enemies);
+    i++;
+    
 }
 
 void Grid::display()
