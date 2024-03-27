@@ -58,7 +58,7 @@ int vie = 10;
 int nb_power = 0;
 bool pouvoir = false;
 float charge = 0;
-float total_charge = 4.0;
+float total_charge = 10.0;
 float result = 0.0;
 /*------------------------- Prototypes de fonctions -------------------------*/
 void sendMsg(); 
