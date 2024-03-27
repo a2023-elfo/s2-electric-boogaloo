@@ -57,7 +57,7 @@ int joy_Y_Value = 0;
 int vie = 10;
 int nb_power = 0;
 bool pouvoir = false;
-int charge = 0;
+float charge = 0;
 float total_charge = 4.0;
 float result = 0.0;
 /*------------------------- Prototypes de fonctions -------------------------*/
@@ -121,7 +121,8 @@ void loop() {
   if (digitalRead(SW6) == LOW)
     bouton = 6;
 
-  if (analogRead(A3) > 600)
+  if (analogRead(A3) > 350)
+
     pouvoir = true;
 
   if (shouldRead_) 
@@ -132,6 +133,8 @@ void loop() {
 
   if (nb_power > 0)
     pouvoir = true; //Si shake manette
+  
+  
 }
    
 /*---------------------------Definition de fonctions ------------------------*/
@@ -204,8 +207,8 @@ void readMsg(){
   }
 
   charge = doc["charge"];
-  result = charge / total_charge;
-  lcd.print(result);
+  result = charge/10;
+  lcd.print(charge);
   if (result >= 0.25 && result < 0.5) {
     digitalWrite(pinLED4, HIGH);
   }
