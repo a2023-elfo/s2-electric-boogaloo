@@ -20,23 +20,19 @@ char Enemy::display()
 
 void Enemy::update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters, vector<Enemy>& enemies)
 {
-	
 	for (int i = 0; i < (int)potatoes.size(); i++) {
 		if (getY() + 1 == potatoes[i].getY() && getX() == potatoes[i].getX()) {
 			setDeplacement(0);
-			
 		}
 	}
 	for (int i = 0; i < (int)peaShooters.size(); i++) {
 		if (getY() + 1 == peaShooters[i].getY() && getX() == peaShooters[i].getX()) {
 			setDeplacement(0);
-
 		}
 	}
 	for (int i = 0; i < (int)enemies.size(); i++) {
 		if (getY()+1 == enemies[i].getY() && getX() == enemies[i].getX()) {
 			setDeplacement(0);
-
 		}
 	}
 	
