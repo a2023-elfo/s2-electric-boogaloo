@@ -122,7 +122,6 @@ void loop() {
     bouton = 6;
 
   if (analogRead(A3) > 350)
-
     pouvoir = true;
 
   if (shouldRead_) 
