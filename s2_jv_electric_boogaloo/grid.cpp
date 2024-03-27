@@ -5,7 +5,15 @@ int i = 0;
 
 void Grid::update()
 {
-    
+    for (auto& bullet : bullets) {
+        bullet.update();
+        for (i = 0; i < (int)bullets.size(); i++) {
+            if (bullets.at(i).getY() < 0) {
+                bullets.erase(bullets.begin() + i);
+            }
+        }
+    }
+
     bool enemyAvance;
 
     if (i % 8 == 0 && i != 0) {
@@ -63,14 +71,7 @@ void Grid::update()
     }
 
     // Mettre � jour les balles
-    for (auto& bullet : bullets) {
-        bullet.update();
-        for (i = 0; i < (int)bullets.size(); i++) {
-            if (bullets.at(i).getY() < 0) {
-                bullets.erase(bullets.begin() + i);
-            }
-        }
-    }
+    
 
     // Mettre � jour le joueur
     playerShooter.update(bullets, enemies);
