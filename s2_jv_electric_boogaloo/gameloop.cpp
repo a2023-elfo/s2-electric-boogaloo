@@ -142,8 +142,6 @@ void Gameloop::mainLoop() {
                 cerr << "Erreur lors de l'envoie du message. " << endl;
             }
 
- 
-            
           // Reception message Arduino
             if (!RcvFromSerial(arduino, raw_msg)) {
                 cerr << "Erreur lors de la reception du message. " << endl;
