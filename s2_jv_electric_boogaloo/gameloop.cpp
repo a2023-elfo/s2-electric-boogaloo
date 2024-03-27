@@ -191,7 +191,6 @@ void Gameloop::mainLoop() {
                 }
             }
         }
-  
         if (checkPlayerInput(BTN_6, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
         if (checkPlayerInput(ACCELERO, inputs))
