@@ -18,7 +18,7 @@ public:
 	bool checkHitBox(Bullet& bang);
 	bool decreaseHealth(int damage);
 	char display();
-	void update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters, vector<Enemy>& enemies);
+	void update(std::vector<Bullet>& bullets, std::vector<Potato> potatoes, std::vector<PeaShooter> peaShooters, std::vector<Enemy>& enemies);
 	int getHealth();
 	void setDeplacement(int mouvement);
 private:

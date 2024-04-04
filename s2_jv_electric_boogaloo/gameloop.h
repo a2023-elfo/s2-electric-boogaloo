@@ -15,8 +15,8 @@ class Gameloop
 {
 public:
 	void mainLoop();
-	vector<GameControls> readUserInput(nlohmann::json json_msg);
-	bool checkPlayerInput(GameControls checkedInput, vector<GameControls>& inputVect);
+	 std::vector<GameControls> readUserInput(nlohmann::json json_msg);
+	bool checkPlayerInput(GameControls checkedInput, std::vector<GameControls>& inputVect);
 	void spawnEnemy(int enemyPos, bool theRock);
 	void spawnPeashooter(int health);
 	void spawnPotato(int health);
@@ -24,7 +24,7 @@ public:
 	void afficherTremblementDeTerre(int* charge);
 	void gameOver();
 	void setupDirector();
-	void inputUpdateDirector(vector<GameControls>& inputVect);
+	void inputUpdateDirector( std::vector<GameControls>& inputVect);
 	void muonUpdateDirector();
 	void generateEnemy();
 	void generatePosition();

@@ -23,19 +23,19 @@ void Player::move(int offset_x, int offset_y) {
     // TODO, move player towards offset, but prevent from going out of bounds
 }
 
-void Player::update(vector<Bullet>& bullets, vector<Enemy>& enemies)
+void Player::update( std::vector<Bullet>& bullets, std::vector<Enemy>& enemies)
 {
     //verirfie pour ne pas se tuer avec ses balles
     for (int i = 0; i < (int)bullets.size(); i++) {
         if (checkHitBullet(bullets.at(i)) && bullets.at(i).getBulletType() == friendlyFire) {
-            cout << "ouch les bullets font mal a elfo" << endl;
+            std::cout << "ouch les bullets font mal a elfo" << std::endl;
             health.decreaseHealth(1);
         }
     }
     //verirfie dommage enemy
     for (int i = 0; i < (int)enemies.size(); i++) {
         if (checkHitEnemy(enemies.at(i))) {
-            cout << "ouch les enemy font mal a elfo" << endl;
+            std::cout << "ouch les enemy font mal a elfo" << std::endl;
             health.decreaseHealth(1);
         }
     }

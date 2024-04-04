@@ -64,9 +64,9 @@ void HealthBar::increaseHealth(int amount)
 	}
 }
 
-string HealthBar::displayBar()
+std::string HealthBar::displayBar()
 {
-	string displayHealth = "HEALTH: ";
+	std::string displayHealth = "HEALTH: ";
 	for (int i = 0; i < health; i++)
 	{
 		displayHealth += "*";
