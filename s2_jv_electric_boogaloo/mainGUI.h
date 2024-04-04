@@ -5,6 +5,8 @@
 #include <qthread.h>
 #include <QTimer>
 #include <Qdebug>
+#include "gameloop.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

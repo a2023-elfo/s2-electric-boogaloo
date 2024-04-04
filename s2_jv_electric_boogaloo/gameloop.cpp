@@ -113,7 +113,7 @@ void Gameloop::mainLoop() {
     int bouton = 0;
 
     // Initialisation du port de communication
-    std::string com;
+    std::string com = "ELFO";
     std::cout << "Entrer le port de communication du Arduino: ";
     std::cin >> com;
     bool keyboardOnly = com == "ELFO";

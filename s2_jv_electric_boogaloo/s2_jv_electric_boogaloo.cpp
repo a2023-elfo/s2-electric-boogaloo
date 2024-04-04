@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <QTWidgets/QApplication>
-#include "gameloop.h"
 #include "include/serial/SerialPort.hpp"
 #include "include/json.hpp"
 #include "mainGUI.h"
