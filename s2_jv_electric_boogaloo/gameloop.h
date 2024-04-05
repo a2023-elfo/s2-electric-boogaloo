@@ -10,9 +10,19 @@
 #include "healthBar.h"
 #include "include/json.hpp"
 #include "enums.h"
+#include <qobject.h>
 
-class Gameloop
+QT_BEGIN_NAMESPACE
+namespace Ui {
+	class Gameloop;
+}
+QT_END_NAMESPACE
+
+class Gameloop : public QObject
 {
+	Q_OBJECT
+
+
 public:
 	void mainLoop();
 	 std::vector<GameControls> readUserInput(nlohmann::json json_msg);
@@ -37,6 +47,11 @@ private:
 	// Directpr values
 	long long directorRandom = 1;
 	int directorFunds = 0;
+
+public slots:
+
+signals:
+	void gridUpdate(char grid[5][10]);
 };
 
 #endif

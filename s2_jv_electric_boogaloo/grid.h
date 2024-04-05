@@ -12,6 +12,7 @@
 #include <random>
 #include <cstdlib>
 #include <ctime>
+#include <qobject.h>
 
 class Grid
 {

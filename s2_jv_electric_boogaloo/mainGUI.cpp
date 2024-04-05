@@ -6,11 +6,10 @@ MainGUI::MainGUI(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainGUI)
 {
-    connect(this, SIGNAL (testsignals()), this, SLOT (testslots()));
-
-
+    
     QThread* thread = QThread::create([this] {
         Gameloop gameloop;
+        connect(&gameloop, &Gameloop::gridUpdate, this, &MainGUI::gridUpdate);
         gameloop.mainLoop();
         });
     thread->start();
@@ -24,7 +23,7 @@ MainGUI::~MainGUI()
     delete ui;
 }
 
-void MainGUI::testslots()
+void MainGUI::gridUpdate(char grid[5][10])
 {
     qInfo()<< "thread parle au main";
 }

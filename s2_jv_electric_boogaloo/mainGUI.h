@@ -23,9 +23,7 @@ public:
     ~MainGUI();
 
 private slots:
-    void testslots();
-signals:
-    void testsignals();
+    void gridUpdate(char grid[5][10]);
 
 private:
     Ui::MainGUI*ui;
