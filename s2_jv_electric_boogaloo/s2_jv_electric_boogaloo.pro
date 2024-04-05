@@ -10,7 +10,7 @@ TEMPLATE = vcapp
 TARGET = s2_jv_electric_boogaloo
 INCLUDEPATH += .
 
-
+CONFIG  += console
 # You can make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # Please consult the documentation of the deprecated API in order to know
