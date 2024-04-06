@@ -12,31 +12,31 @@
 #include <random>
 #include <cstdlib>
 #include <ctime>
-using namespace std;
+#include <qobject.h>
 
 class Grid
 {
 private:
-	vector<Enemy> enemies;
-	vector<Plant> plants;
-	vector<PeaShooter> peaShooters;
-	vector<Potato> potatoes;
-	vector<Bullet> bullets;
+	 std::vector<Enemy> enemies;
+	 std::vector<Plant> plants;
+	 std::vector<PeaShooter> peaShooters;
+	 std::vector<Potato> potatoes;
+	 std::vector<Bullet> bullets;
 	
 public:
 	Player playerShooter;
 	void update();
 	void display();
 	Enemy* getEnemy(int index);
-	vector<Enemy>& getEnemies();
-	vector<PeaShooter>& getPeaShooters();
+	 std::vector<Enemy>& getEnemies();
+	 std::vector<PeaShooter>& getPeaShooters();
 	PeaShooter* getPeaShooter(int index);
-	vector<Potato>& getPotatoes();
+	 std::vector<Potato>& getPotatoes();
 	Potato* getPotato(int index);
 	Plant* getPlant(int index);
-	vector<Plant>& getPlants();
+	 std::vector<Plant>& getPlants();
 	Bullet* getBullet(int index);
-	vector<Bullet>& getBullets();
+	 std::vector<Bullet>& getBullets();
 	void deleteEnemy(int id);
 	void deletePotato(int id);
 	void deletePeaShooter(int id);

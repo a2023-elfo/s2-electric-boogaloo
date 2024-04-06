@@ -157,7 +157,7 @@ void Grid::display()
 }
 
 
-vector<Enemy>& Grid::getEnemies() {
+ std::vector<Enemy>& Grid::getEnemies() {
     return enemies;
 }
 
@@ -170,7 +170,7 @@ Enemy* Grid::getEnemy(int index) {
     }
 }
 
-vector<Plant>& Grid::getPlants() {
+ std::vector<Plant>& Grid::getPlants() {
     return plants;
 }
 
@@ -192,7 +192,7 @@ Bullet* Grid::getBullet(int index) {
     }
 }
 
-vector<Bullet>& Grid::getBullets() {
+ std::vector<Bullet>& Grid::getBullets() {
     return bullets;
 }
 
@@ -223,7 +223,7 @@ int Grid::getEnemyNumber()
     return enemies.size(); 
 }
 
-vector<PeaShooter>& Grid::getPeaShooters() {
+ std::vector<PeaShooter>& Grid::getPeaShooters() {
     return peaShooters;
 }
 PeaShooter* Grid::getPeaShooter(int index) {
@@ -236,7 +236,7 @@ PeaShooter* Grid::getPeaShooter(int index) {
 
 }
 
-vector<Potato>& Grid::getPotatoes() {
+ std::vector<Potato>& Grid::getPotatoes() {
     return potatoes;
 }
 

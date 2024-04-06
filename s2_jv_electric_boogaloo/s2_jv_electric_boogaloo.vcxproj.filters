@@ -1,102 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Fichiers sources">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête">
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Fichiers de ressources">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="s2_jv_electric_boogaloo.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="displayObject.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="include\serial\SerialPort.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="bullet.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="displayObject.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="enemy.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="plant.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="potato.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="peaShooter.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="grid.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gameloop.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="systemeArgent.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="include\serial\SerialPort.cpp">
-      <Filter>Fichiers de ressources</Filter>
+    <ClCompile Include="grid.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="healthBar.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="enums.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClCompile Include="mainGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="peaShooter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="potato.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="s2_jv_electric_boogaloo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="systemeArgent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="titleScreen.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="displayObject.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="include\serial\SerialPort.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bullet.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="displayObject.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="enemy.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="plant.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="enums.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="potato.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="peaShooter.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
+    <CustomBuild Include="gameloop.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="grid.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="gameloop.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="include\json.hpp">
-      <Filter>Fichiers de ressources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\serial\SerialPort.hpp">
-      <Filter>Fichiers de ressources</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="healthBar.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="mainGUI.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="peaShooter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="potato.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="systemeArgent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="titleScreen.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="debug\moc_gameloop.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_gameloop.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_mainGUI.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_mainGUI.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <ClCompile Include="debug\moc_titleScreen.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_titleScreen.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClInclude Include="ui_mainGUI.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_titleScreen.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="mainGUI.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="titleScreen.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

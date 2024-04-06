@@ -14,6 +14,6 @@ public:
 	void setMaxHealth(int amount);
 	int decreaseHealth(int amount);
 	void increaseHealth(int amount);
-	string displayBar();
+	std::string displayBar();
 };
 

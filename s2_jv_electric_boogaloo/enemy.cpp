@@ -18,7 +18,7 @@ char Enemy::display()
 }
 
 
-void Enemy::update(vector<Bullet>& bullets, vector<Potato> potatoes, vector<PeaShooter> peaShooters, vector<Enemy>& enemies)
+void Enemy::update(std::vector<Bullet>& bullets, std::vector<Potato> potatoes, std::vector<PeaShooter> peaShooters, std::vector<Enemy>& enemies)
 {
 	
 	for (int i = 0; i < (int)potatoes.size(); i++) {

@@ -10,13 +10,23 @@
 #include "healthBar.h"
 #include "include/json.hpp"
 #include "enums.h"
+#include <qobject.h>
 
-class Gameloop
+QT_BEGIN_NAMESPACE
+namespace Ui {
+	class Gameloop;
+}
+QT_END_NAMESPACE
+
+class Gameloop : public QObject
 {
+	Q_OBJECT
+
+
 public:
 	void mainLoop();
-	vector<GameControls> readUserInput(nlohmann::json json_msg);
-	bool checkPlayerInput(GameControls checkedInput, vector<GameControls>& inputVect);
+	 std::vector<GameControls> readUserInput(nlohmann::json json_msg);
+	bool checkPlayerInput(GameControls checkedInput, std::vector<GameControls>& inputVect);
 	void spawnEnemy(int enemyPos, bool theRock);
 	void spawnPeashooter(int health);
 	void spawnPotato(int health);
@@ -24,7 +34,7 @@ public:
 	void afficherTremblementDeTerre(int* charge);
 	void gameOver();
 	void setupDirector();
-	void inputUpdateDirector(vector<GameControls>& inputVect);
+	void inputUpdateDirector( std::vector<GameControls>& inputVect);
 	void muonUpdateDirector();
 	void generateEnemy();
 	void generatePosition();
@@ -33,10 +43,16 @@ public:
 private:
 	Grid arene;
 	int charge;
-
+	static const int GRID_X = 5;
+	static const int GRID_Y = 10;
 	// Directpr values
 	long long directorRandom = 1;
 	int directorFunds = 0;
+
+public slots:
+
+signals:
+	void gridUpdate(char grid[GRID_X][GRID_Y]);
 };
 
 #endif
