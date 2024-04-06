@@ -1,6 +1,5 @@
 #pragma once
 #include "displayObject.h"
-#include <string>
 
 class HealthBar : public DisplayObject
 {
