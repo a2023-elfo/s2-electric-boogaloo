@@ -20,14 +20,17 @@ class MainGUI : public QWidget
 public:
     MainGUI(QWidget *parent = nullptr);
     ~MainGUI();
-
-private slots:
-    void gridUpdate(char grid[5][10]);
-    void changePage(int);
-
 private:
-    Ui::MainGUI*ui;
+    Ui::MainGUI* ui;
+    static const int GRID_X = 5;
+    static const int GRID_Y = 10;
     TitleScreen* screen1;
     QThread* thread;
+
+private slots:
+    void gridUpdate(char grid[GRID_X][GRID_Y]);
+    void changePage(int);
+
+
 };
 #endif // TEST1_H

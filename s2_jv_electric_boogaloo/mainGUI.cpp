@@ -19,7 +19,7 @@ MainGUI::~MainGUI()
     delete ui;
 }
 
-void MainGUI::gridUpdate(char grid[5][10])
+void MainGUI::gridUpdate(char grid[GRID_X][GRID_Y])
 {
     qInfo()<< "thread parle au main";
 }

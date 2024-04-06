@@ -43,7 +43,8 @@ public:
 private:
 	Grid arene;
 	int charge;
-
+	static const int GRID_X = 5;
+	static const int GRID_Y = 10;
 	// Directpr values
 	long long directorRandom = 1;
 	int directorFunds = 0;
@@ -51,7 +52,7 @@ private:
 public slots:
 
 signals:
-	void gridUpdate(char grid[5][10]);
+	void gridUpdate(char grid[GRID_X][GRID_Y]);
 };
 
 #endif
