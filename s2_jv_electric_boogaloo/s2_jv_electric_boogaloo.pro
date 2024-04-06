@@ -19,7 +19,8 @@ CONFIG  += console
 #DEFINES += QT_DISABLE_DEPRECATED_UP_TO=0x060000 # disables all APIs deprecated in Qt 6.0.0 and earlier
 
 # Input
-FORMS +=   mainGUI.ui
+FORMS +=   mainGUI.ui \
+	titleScreen.ui
 HEADERS += bullet.h \
            displayObject.h \
            enemy.h \
@@ -34,6 +35,7 @@ HEADERS += bullet.h \
            systemeArgent.h \
            mainGUI.h \
            include/json.hpp \
+           titleScreen.h \
            include/serial/SerialPort.hpp
 SOURCES += bullet.cpp \
            displayObject.cpp \
@@ -47,6 +49,7 @@ SOURCES += bullet.cpp \
            potato.cpp \
            s2_jv_electric_boogaloo.cpp \
            systemeArgent.cpp \
+           titleScreen.cpp \
            include/serial/SerialPort.cpp \
            mainGUI.cpp
 

@@ -79,6 +79,9 @@
     <ClCompile Include="systemeArgent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="titleScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\serial\SerialPort.hpp">
@@ -126,6 +129,9 @@
     <ClInclude Include="systemeArgent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="titleScreen.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug\moc_gameloop.cpp">
@@ -146,12 +152,24 @@
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+    <ClCompile Include="debug\moc_titleScreen.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_titleScreen.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClInclude Include="ui_mainGUI.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_titleScreen.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainGUI.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="titleScreen.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>

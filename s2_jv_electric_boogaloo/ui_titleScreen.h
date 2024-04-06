@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainGUI.ui'
+** Form generated from reading UI file 'titleScreen.ui'
 **
 ** Created by: Qt User Interface Compiler version 6.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_MAINGUI_H
-#define UI_MAINGUI_H
+#ifndef UI_TITLESCREEN_H
+#define UI_TITLESCREEN_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -15,7 +15,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainGUI
+class Ui_TitleScreen
 {
 public:
 
@@ -32,15 +32,16 @@ public:
 
     void retranslateUi(QWidget *test1)
     {
-        test1->setWindowTitle(QCoreApplication::translate("MainGUI", "test1", nullptr));
+        test1->setWindowTitle(QCoreApplication::translate("TitleScreen", "test1", nullptr));
+        test1->setText(QCoreApplication::translate("TitleScreen", "PushButton", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainGUI: public Ui_MainGUI {};
+    class TitleScreen: public Ui_TitleScreen {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_MAINGUI_H
+#endif // UI_TITLESCREEN_H

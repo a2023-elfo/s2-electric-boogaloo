@@ -3,10 +3,9 @@
 
 #include <QWidget>
 #include <qthread.h>
-#include <QTimer>
 #include <Qdebug>
 #include "gameloop.h"
-
+#include "titleScreen.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,9 +23,11 @@ public:
 
 private slots:
     void gridUpdate(char grid[5][10]);
+    void changePage(int);
 
 private:
     Ui::MainGUI*ui;
-    QAction *testAction;
+    TitleScreen* screen1;
+    QThread* thread;
 };
 #endif // TEST1_H
