@@ -8,8 +8,7 @@
 #include "mainGUI.h"
 using json = nlohmann::json;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     MainGUI w;
     w.show();

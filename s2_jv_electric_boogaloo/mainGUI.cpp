@@ -6,12 +6,23 @@ MainGUI::MainGUI(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainGUI)
 {
-    ui->setupUi(this);
+
 
     screen1 = new TitleScreen(this);
-
     connect(screen1, &TitleScreen::changeScreen, this, &MainGUI::changePage);
     
+    gameloopMap = new GameloopUI(this);
+
+
+    health = new QProgressBar(this);
+
+    health->setOrientation(Qt::Horizontal);
+    health->setFormat(QString("%p health"));
+    health->setRange(0, 10);
+    health->setValue(10);
+    health->setGeometry(QRect(QPoint(10, 10), QSize(300, 25)));
+
+    ui->setupUi(this);
 }
 
 MainGUI::~MainGUI()

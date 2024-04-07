@@ -6,6 +6,8 @@
 #include <Qdebug>
 #include "gameloop.h"
 #include "titleScreen.h"
+#include "gameloopUI.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -26,6 +28,8 @@ private:
     static const int GRID_Y = 10;
     TitleScreen* screen1;
     QThread* thread;
+    GameloopUI* gameloopMap;
+    QProgressBar* health;
 
 private slots:
     void gridUpdate(char grid[GRID_X][GRID_Y]);

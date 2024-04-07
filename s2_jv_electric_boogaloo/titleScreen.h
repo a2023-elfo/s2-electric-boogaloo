@@ -4,7 +4,8 @@
 #include <QWidget>
 #include <Qdebug>
 #include <qpushbutton.h>
-
+#include <qlabel.h>
+#include <qprogressbar.h>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 	class TitleScreen;
@@ -27,7 +28,6 @@ signals:
 
 private:
     Ui::TitleScreen* ui;
-
 };
 
 #endif

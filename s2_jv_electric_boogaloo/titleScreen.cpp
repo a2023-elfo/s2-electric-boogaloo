@@ -9,6 +9,7 @@ TitleScreen::TitleScreen(QWidget* parent)
     
     connect(button, &QPushButton::released, this, &TitleScreen::buttonPressed);
 
+
 }
 
 

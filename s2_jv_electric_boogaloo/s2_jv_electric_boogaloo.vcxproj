@@ -58,7 +58,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;.;C:\Qt\6.6.3\msvc2019_64\include;C:\Qt\6.6.3\msvc2019_64\include\QtWidgets;C:\Qt\6.6.3\msvc2019_64\include\QtGui;C:\Qt\6.6.3\msvc2019_64\include\QtCore;release;.;/include;C:\Qt\6.6.3\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;.;C:\Qt\6.6.3\msvc2019_64\include;C:\Qt\6.6.3\msvc2019_64\include\QtWidgets;C:\Qt\6.6.3\msvc2019_64\include\QtGui;C:\Qt\6.6.3\msvc2019_64\include\QtCore;release;/include;C:\Qt\6.6.3\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -102,7 +102,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;.;C:\Qt\6.6.3\msvc2019_64\include;C:\Qt\6.6.3\msvc2019_64\include\QtWidgets;C:\Qt\6.6.3\msvc2019_64\include\QtGui;C:\Qt\6.6.3\msvc2019_64\include\QtCore;debug;.;/include;C:\Qt\6.6.3\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;.;C:\Qt\6.6.3\msvc2019_64\include;C:\Qt\6.6.3\msvc2019_64\include\QtWidgets;C:\Qt\6.6.3\msvc2019_64\include\QtGui;C:\Qt\6.6.3\msvc2019_64\include\QtCore;debug;/include;C:\Qt\6.6.3\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -146,6 +146,7 @@
     <ClCompile Include="displayObject.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="gameloop.cpp" />
+    <ClCompile Include="gameloopUI.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="healthBar.cpp" />
     <ClCompile Include="mainGUI.cpp" />
@@ -172,6 +173,16 @@
       <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.6.3\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include G:/_uni/S2/projet/codebase/Codebase/s2_jv_electric_boogaloo/debug/moc_predefs.h -IC:/Qt/6.6.3/msvc2019_64/mkspecs/win32-msvc -IG:/_uni/S2/projet/codebase/Codebase/s2_jv_electric_boogaloo -IG:/_uni/S2/projet/codebase/Codebase/s2_jv_electric_boogaloo -IC:/Qt/6.6.3/msvc2019_64/include -IC:/Qt/6.6.3/msvc2019_64/include/QtWidgets -IC:/Qt/6.6.3/msvc2019_64/include/QtGui -IC:/Qt/6.6.3/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\cppwinrt&quot; gameloop.h -o debug\moc_gameloop.cpp</Command>
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC gameloop.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_gameloop.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="gameloopUI.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">gameloopUI.h;release\moc_predefs.h;C:\Qt\6.6.3\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.6.3\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include G:/_uni/S2/projet/codebase/Codebase/s2_jv_electric_boogaloo/release/moc_predefs.h -IC:/Qt/6.6.3/msvc2019_64/mkspecs/win32-msvc -IG:/_uni/S2/projet/codebase/Codebase/s2_jv_electric_boogaloo -IG:/_uni/S2/projet/codebase/Codebase/s2_jv_electric_boogaloo -IC:/Qt/6.6.3/msvc2019_64/include -IC:/Qt/6.6.3/msvc2019_64/include/QtWidgets -IC:/Qt/6.6.3/msvc2019_64/include/QtGui -IC:/Qt/6.6.3/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\cppwinrt&quot; gameloopUI.h -o release\moc_gameloopUI.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC gameloopUI.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_gameloopUI.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">gameloopUI.h;debug\moc_predefs.h;C:\Qt\6.6.3\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.6.3\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include G:/_uni/S2/projet/codebase/Codebase/s2_jv_electric_boogaloo/debug/moc_predefs.h -IC:/Qt/6.6.3/msvc2019_64/mkspecs/win32-msvc -IG:/_uni/S2/projet/codebase/Codebase/s2_jv_electric_boogaloo -IG:/_uni/S2/projet/codebase/Codebase/s2_jv_electric_boogaloo -IC:/Qt/6.6.3/msvc2019_64/include -IC:/Qt/6.6.3/msvc2019_64/include/QtWidgets -IC:/Qt/6.6.3/msvc2019_64/include/QtGui -IC:/Qt/6.6.3/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\cppwinrt&quot; gameloopUI.h -o debug\moc_gameloopUI.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC gameloopUI.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_gameloopUI.cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="grid.h" />
     <ClInclude Include="healthBar.h" />
@@ -209,6 +220,12 @@
     <ClCompile Include="release\moc_gameloop.cpp">
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="debug\moc_gameloopUI.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_gameloopUI.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="debug\moc_mainGUI.cpp">
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
     </ClCompile>
@@ -237,32 +254,6 @@
     <ClCompile Include="release\moc_titleScreen.cpp">
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
     </ClCompile>
-    <ClInclude Include="ui_mainGUI.h" />
-    <ClInclude Include="ui_titleScreen.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="mainGUI.ui">
-      <FileType>Document</FileType>
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">mainGUI.ui;C:\Qt\6.6.3\msvc2019_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.6.3\msvc2019_64\bin\uic.exe mainGUI.ui -o ui_mainGUI.h</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">UIC mainGUI.ui</Message>
-      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">ui_mainGUI.h;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">mainGUI.ui;C:\Qt\6.6.3\msvc2019_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.6.3\msvc2019_64\bin\uic.exe mainGUI.ui -o ui_mainGUI.h</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">UIC mainGUI.ui</Message>
-      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">ui_mainGUI.h;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="titleScreen.ui">
-      <FileType>Document</FileType>
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">titleScreen.ui;C:\Qt\6.6.3\msvc2019_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.6.3\msvc2019_64\bin\uic.exe titleScreen.ui -o ui_titleScreen.h</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">UIC titleScreen.ui</Message>
-      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">ui_titleScreen.h;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">titleScreen.ui;C:\Qt\6.6.3\msvc2019_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.6.3\msvc2019_64\bin\uic.exe titleScreen.ui -o ui_titleScreen.h</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">UIC titleScreen.ui</Message>
-      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">ui_titleScreen.h;%(Outputs)</Outputs>
-    </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
