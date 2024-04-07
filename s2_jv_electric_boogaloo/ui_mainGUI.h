@@ -33,6 +33,7 @@ public:
     void retranslateUi(QWidget *test1)
     {
         test1->setWindowTitle(QCoreApplication::translate("MainGUI", "test1", nullptr));
+        //test1->setText(QCoreApplication::translate("MainGUI", "PushButton", nullptr));
     } // retranslateUi
 
 };

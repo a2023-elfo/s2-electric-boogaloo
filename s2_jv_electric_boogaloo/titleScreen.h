@@ -7,10 +7,14 @@
 #include <QFont>
 #include <QDebug>
 #include <QWidget>
+
+#include <Qdebug>
+#include "enums.h"
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,6 +32,9 @@ public:
     ~TitleScreen();
 
 public slots:
+    void gameplayButton();
+    void creditsButton();
+
     void jouerPressed();
     void confirmPressed();
 signals:

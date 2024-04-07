@@ -18,4 +18,10 @@ enum GameControls {
 enum EnemyTypes { // Text value and cost for director
     NORMAL = 150,
 };
+
+enum PageNb {
+    GAMEPLAY_SCREEN = 1,
+    CREDITS_SCREEN = 2,
+    TITLE_SCREEN = 3
+};
 #endif

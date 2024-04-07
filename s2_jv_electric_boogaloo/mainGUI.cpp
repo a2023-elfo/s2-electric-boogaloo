@@ -8,9 +8,13 @@ MainGUI::MainGUI(QWidget *parent)
 {
     ui->setupUi(this);
 
-    screen1 = new TitleScreen(this);
+    screen_title = new TitleScreen(this);
+    screen_credits = new Credits(this);
 
-    connect(screen1, &TitleScreen::changeScreen, this, &MainGUI::changePage);
+    connect(screen_title, &TitleScreen::changeScreen, this, &MainGUI::changePage);
+    connect(screen_credits, &Credits::changeScreen, this, &MainGUI::changePage);
+    screen_credits->hide();
+    screen_title->show();
     
 }
 
@@ -25,15 +29,26 @@ void MainGUI::gridUpdate(char grid[GRID_X][GRID_Y])
 }
 
 void MainGUI::changePage(int page) {
-    screen1->hide();
+    screen_title->hide();
+    screen_credits->hide();
     qWarning() << "page change";
 
-    if (page == 1) {
+    if (page == GAMEPLAY_SCREEN) {
+        screen_title->hide();
+        screen_credits->hide();
         thread = QThread::create([this] {
             Gameloop gameloop;
             connect(&gameloop, &Gameloop::gridUpdate, this, &MainGUI::gridUpdate);
             gameloop.mainLoop();
             });
         thread->start();
+    }
+    else if (page == CREDITS_SCREEN) {
+        screen_title->hide();
+        screen_credits->show();
+    }
+    else if (page == TITLE_SCREEN) {
+        screen_credits->hide();
+        screen_title->show();
     }
 }
