@@ -2,6 +2,11 @@
 
 
 TitleScreen::TitleScreen(QWidget* parent): QWidget(parent){
+    QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
+    int screenWidth = screenSize.width();
+    int screenHeight = screenSize.height();
+    resize(screenSize);
+
 
     //Fond d'accueil
     QPixmap background("image/backgroundcool.png");
@@ -41,7 +46,9 @@ TitleScreen::TitleScreen(QWidget* parent): QWidget(parent){
     layout->addWidget(jouerButton, 0, Qt::AlignCenter);
     layout->addWidget(textBox, 0, Qt::AlignHCenter | Qt::AlignBottom);
     layout->addWidget(confirmButton, 0, Qt::AlignHCenter | Qt::AlignBottom);
+    layout->addStretch(9999);
     this->setLayout(layout);
+    
 }
 
 

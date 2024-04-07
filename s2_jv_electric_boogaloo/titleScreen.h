@@ -11,6 +11,8 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QGuiApplication>
+#include <QScreen>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
