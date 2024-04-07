@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <Qdebug>
 #include <qpushbutton.h>
+#include "enums.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,7 +22,7 @@ public:
     ~TitleScreen();
 
 public slots:
-    void buttonPressed();
+    void gameplayButton();
     void creditsButton();
 signals:
     void changeScreen(int);

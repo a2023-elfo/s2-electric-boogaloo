@@ -9,6 +9,7 @@
 #include <QtWidgets>
 #include <QTextEdit>
 #include <QPixmap>
+#include "enums.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

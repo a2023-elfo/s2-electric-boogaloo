@@ -25,8 +25,8 @@ private:
     Ui::MainGUI* ui;
     static const int GRID_X = 5;
     static const int GRID_Y = 10;
-    TitleScreen* screen1;
-    Credits* screen2;
+    TitleScreen* screen_title;
+    Credits* screen_credits;
     QThread* thread;
 
 private slots:

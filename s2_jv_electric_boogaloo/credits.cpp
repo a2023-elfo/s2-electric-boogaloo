@@ -44,7 +44,7 @@ Credits::~Credits() {
 
 
 void Credits::buttonClicked() {
-    emit changeScreen(3);
+    emit changeScreen(TITLE_SCREEN);
 }
 
 

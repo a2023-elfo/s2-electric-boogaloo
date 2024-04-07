@@ -8,13 +8,13 @@ MainGUI::MainGUI(QWidget *parent)
 {
     ui->setupUi(this);
 
-    screen1 = new TitleScreen(this);
-    screen2 = new Credits(this);
+    screen_title = new TitleScreen(this);
+    screen_credits = new Credits(this);
 
-    connect(screen1, &TitleScreen::changeScreen, this, &MainGUI::changePage);
-    connect(screen2, &Credits::changeScreen, this, &MainGUI::changePage);
-    screen2->hide();
-    screen1->show();
+    connect(screen_title, &TitleScreen::changeScreen, this, &MainGUI::changePage);
+    connect(screen_credits, &Credits::changeScreen, this, &MainGUI::changePage);
+    screen_credits->hide();
+    screen_title->show();
     
 }
 
@@ -29,13 +29,13 @@ void MainGUI::gridUpdate(char grid[GRID_X][GRID_Y])
 }
 
 void MainGUI::changePage(int page) {
-    screen1->hide();
-    screen2->hide();
+    screen_title->hide();
+    screen_credits->hide();
     qWarning() << "page change";
 
-    if (page == 1) {
-        screen1->hide();
-        screen2->hide();
+    if (page == GAMEPLAY_SCREEN) {
+        screen_title->hide();
+        screen_credits->hide();
         thread = QThread::create([this] {
             Gameloop gameloop;
             connect(&gameloop, &Gameloop::gridUpdate, this, &MainGUI::gridUpdate);
@@ -43,12 +43,12 @@ void MainGUI::changePage(int page) {
             });
         thread->start();
     }
-    if (page == 2) {
-        screen1->hide();
-        screen2->show();
+    else if (page == CREDITS_SCREEN) {
+        screen_title->hide();
+        screen_credits->show();
     }
-    if (page == 3) {
-        screen2->hide();
-        screen1->show();
+    else if (page == TITLE_SCREEN) {
+        screen_credits->hide();
+        screen_title->show();
     }
 }
