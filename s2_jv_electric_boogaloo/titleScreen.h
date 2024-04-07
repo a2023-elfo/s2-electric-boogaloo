@@ -1,9 +1,16 @@
 #ifndef TITLESCREEN_H
 #define TITLESCREEN_H
 
+#include <QPixmap>
+#include <QPalette>
+#include <QBrush>
+#include <QFont>
+#include <QDebug>
 #include <QWidget>
-#include <Qdebug>
-#include <qpushbutton.h>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,17 +24,18 @@ class TitleScreen :public  QWidget
     Q_OBJECT
 
 public:
-    TitleScreen(QWidget* parent = nullptr);
+    TitleScreen(QWidget* parent);
     ~TitleScreen();
 
 public slots:
-    void buttonPressed();
+    void jouerPressed();
+    void confirmPressed();
 signals:
     void changeScreen(int);
 
 private:
     Ui::TitleScreen* ui;
-
+    QLineEdit* textBox;
 };
 
 #endif
