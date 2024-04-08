@@ -12,7 +12,7 @@ Credits::Credits(QWidget* parent) :QWidget(parent) {
     QVBoxLayout* layout = new QVBoxLayout(this);
     
     textCredits = new QTextEdit(this);
-    textCredits->setStyleSheet("background-color: black; color : #802180; border : none;");
+    textCredits->setStyleSheet("background-color: transparent; color : #8A1474; border : none;");
     textCredits->setAlignment(Qt::AlignCenter);
     QFont font = textCredits->font();
     font.setPointSize(30);
@@ -35,7 +35,13 @@ Credits::Credits(QWidget* parent) :QWidget(parent) {
 
     exitButton->setStyleSheet("background-color: green; color: black; border: 2px solid white; border-radius: 8px");
     connect(exitButton, &QPushButton::clicked, this, &Credits::buttonClicked);
-    this->setStyleSheet("QWidget { background-image: url(Images/backgroundCredits.jpg); }");
+    //this->setStyleSheet("QWidget { background-image: url(Images/backgroundCredits.jpg); }");
+    QPixmap background("Images/backgroundCredits.jpg");
+    QPixmap etirerBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, etirerBackground);
+    this->setPalette(palette);
+    this->setAutoFillBackground(true);
 
 }
 
@@ -46,11 +52,3 @@ Credits::~Credits() {
 void Credits::buttonClicked() {
     emit changeScreen(TITLE_SCREEN);
 }
-
-
-/*int main(int argc, char* argv[]) {
-    QApplication app(argc, argv);
-    Credits credits;
-    credits.show();
-    return app.exec();
-}*/
