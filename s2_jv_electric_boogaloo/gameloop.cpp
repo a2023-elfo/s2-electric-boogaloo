@@ -15,7 +15,7 @@ using json = nlohmann::json;
 
 /*------------------------- Prototypes de fonctions -------------------------*/
 bool SendToSerial(SerialPort* arduino, json j_msg);
-bool RcvFromSerial(SerialPort* arduino, string& msg);
+bool RcvFromSerial(SerialPort* arduino, std::string& msg);
 
 SerialPort* arduino; //doit etre un objet global!!!!
 
@@ -35,7 +35,7 @@ void Gameloop::setupDirector() {
     directorRandom = std::chrono::duration_cast<std::chrono::seconds>(currentTime).count();
 }
 
-void Gameloop::inputUpdateDirector(vector<GameControls>& inputVect) {
+void Gameloop::inputUpdateDirector(std::vector<GameControls>& inputVect) {
     directorRandom++;
     for (int i = 0; i < inputVect.size(); i++) {
         directorRandom += (long)inputVect.at(i);
@@ -94,7 +94,7 @@ void Gameloop::generateEnemy() {
     }
 }
 
-bool Gameloop::checkPlayerInput(GameControls checkedInput, vector<GameControls>& inputVect) {
+bool Gameloop::checkPlayerInput(GameControls checkedInput, std::vector<GameControls>& inputVect) {
     return std::find(inputVect.begin(), inputVect.end(), checkedInput) != inputVect.end();
 }
 
@@ -104,27 +104,28 @@ void Gameloop::mainLoop() {
     systemeArgent argent;
     charge = 1;
     arene.display();
+    bool usecharge = false;
 
-    string raw_msg;
+    std::string raw_msg;
 
     //Struct. Donn�es JSON 
     int bouge = 0;
     int bouton = 0;
 
     // Initialisation du port de communication
-    string com;
-    cout << "Entrer le port de communication du Arduino: ";
-    cin >> com;
+    std::string com = "ELFO";
+    std::cout << "Entrer le port de communication du Arduino: ";
+    std::cin >> com;
     bool keyboardOnly = com == "ELFO";
 
     arduino = new SerialPort(com.c_str(), BAUD);
 
     if (!arduino->isConnected() && !keyboardOnly) {
-        cerr << "Impossible de se connecter au port " << string(com) << ". Fermeture du programme!" << endl;
+        std::cerr << "Impossible de se connecter au port " << std::string(com) << ". Fermeture du programme!" << std::endl;
         exit(1);
     }
     else {
-        cout << "Connexion OK " << endl;
+        std::cout << "Connexion OK " << std::endl;
     }
     
     // Structure de donnees JSON pour envoie et reception
@@ -134,17 +135,17 @@ void Gameloop::mainLoop() {
     while (loop) {
 
         // Envoie message Arduino
-        j_msg_send["Affichage"] = "Mouvement=" + to_string(bouge) + " B=" + to_string(bouton);
+        j_msg_send["Affichage"] = "Mouvement=" + std::to_string(bouge) + " B=" + std::to_string(bouton);
         j_msg_send["vie"] = arene.playerShooter.health.getHealth();
         j_msg_send["charge"] = charge;
         if (!keyboardOnly) {
             if (!SendToSerial(arduino, j_msg_send)) {
-                cerr << "Erreur lors de l'envoie du message. " << endl;
+                std::cerr << "Erreur lors de l'envoie du message. " << std::endl;
             }
 
-            // Reception message Arduino
+          // Reception message Arduino
             if (!RcvFromSerial(arduino, raw_msg)) {
-                cerr << "Erreur lors de la reception du message. " << endl;
+                std::cerr << "Erreur lors de la reception du message. " << std::endl;
                 break;
             }
         }
@@ -194,7 +195,7 @@ void Gameloop::mainLoop() {
         if (checkPlayerInput(BTN_6, inputs))
             arene.getBullets().push_back(*arene.playerShooter.shoot());
         if (checkPlayerInput(ACCELERO, inputs))
-            activerTremblementDeTerre(&charge);
+            activerTremblementDeTerre(&charge, &usecharge);
 
         // Update du random, c'est au tour du directeur
         inputUpdateDirector(inputs);
@@ -205,9 +206,10 @@ void Gameloop::mainLoop() {
         
         std::system("cls");
         arene.display();
+        emit gridUpdate(arene.grille);
 
-        std::cout << arene.playerShooter.health.displayBar() << endl << endl;
-        cout << "Current money: " << argent.checkMoney() << endl;
+        std::cout << arene.playerShooter.health.displayBar() << std::endl << std::endl;
+        std::cout << "Current money: " << argent.checkMoney() << std::endl;
         afficherTremblementDeTerre(&charge);
 
         std::vector<Enemy> zombieMort;
@@ -245,17 +247,24 @@ void Gameloop::mainLoop() {
                 arene.deletePeaShooter(i);
             }
         }
-        
-        charge += (int)zombieMort.size();
+        if (!usecharge) {
+            charge += (int)zombieMort.size();
+            if (charge > 10) {
+                charge = 10;
+            }
+        }
+        else {
+            usecharge = false;
+        }
         zombieMort.clear();
-        std::this_thread::sleep_for(250ms);
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
         
     }
 }
 
 // Lecture du JSON et des entrées du clavier
 std::vector<GameControls> Gameloop :: readUserInput(json yeet) {
-    vector<GameControls> inputs = {};
+    std::vector<GameControls> inputs = {};
     char keyboardInput = NONE;
     int bouge = yeet.value("mouvement", 0);
     int bouton = yeet.value("Bouton", 0);
@@ -312,14 +321,14 @@ void Gameloop:: afficherTremblementDeTerre(int* charge) {
      // Afficher les barres de chargement en remplaçant les | par des X
     for (int i = 0; i < maxCharge; ++i) {
         if (i < *charge) {
-            std::cout << "■";
+            std::cout << "O";
         } else {
-            std::cout << "□";
+            std::cout << "-";
         }
     }
     std::cout << "]" << std::endl;
 }
-void Gameloop::activerTremblementDeTerre(int* charge) {
+void Gameloop::activerTremblementDeTerre(int* charge, bool* usecharge) {
 
     // Si la barre est pleine de X, la charge est suffisante pour utiliser le super
     if (*charge >= 10) {
@@ -329,6 +338,7 @@ void Gameloop::activerTremblementDeTerre(int* charge) {
         }
         std::cout << "Tous les ennemis ont ete elimines par le tremblement de terre!" << std::endl;
         *charge = 0;
+        *usecharge = true;
     }
     else {
         std::cout << "La charge du tremblement de terre est insuffisante." << std::endl;
@@ -338,15 +348,15 @@ void Gameloop::activerTremblementDeTerre(int* charge) {
 /*---------------------------Definition de fonctions JSON------------------------*/
 bool SendToSerial(SerialPort* arduino, json j_msg) {
     // Return 0 if error
-    string msg = j_msg.dump();
+    std::string msg = j_msg.dump();
     bool ret = arduino->writeSerialPort(msg.c_str(), msg.length());
     return ret;
 }
 
-bool RcvFromSerial(SerialPort* arduino, string& msg) {
+bool RcvFromSerial(SerialPort* arduino, std::string& msg) {
     // Return 0 if error
     // Message output in msg
-    string str_buffer;
+    std::string str_buffer;
     char char_buffer[MSG_MAX_SIZE];
     int buffer_size;
 

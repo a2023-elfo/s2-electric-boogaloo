@@ -2,18 +2,19 @@
 //
 
 #include <iostream>
-#include "gameloop.h"
+#include <QTWidgets/QApplication>
 #include "include/serial/SerialPort.hpp"
 #include "include/json.hpp"
+#include "mainGUI.h"
 using json = nlohmann::json;
 
-
-using namespace std;
-
-int main()
+int main(int argc, char *argv[])
 {
-    Gameloop electricBoogaloo;
-    electricBoogaloo.mainLoop();
+    QApplication a(argc, argv);
+    MainGUI w;
+    w.show();
+
+    return a.exec();
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage

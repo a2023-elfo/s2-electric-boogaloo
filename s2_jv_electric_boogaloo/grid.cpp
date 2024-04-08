@@ -1,14 +1,14 @@
 #include "grid.h"
 #include <iostream>
 
-int i = 0;
+int gametick = 0;
 
 void Grid::update()
 {
     
     bool enemyAvance;
 
-    if (i % 8 == 0 && i != 0) {
+    if (gametick % 8 == 0 && gametick != 0) {
         enemyAvance = true;
     }
     else {
@@ -32,7 +32,7 @@ void Grid::update()
 
     for (auto& peaShooter : peaShooters) {
         // Attack speed. Lower number is higher attack speed
-        if (i % 5 == 0) {
+        if (gametick % 5 == 0) {
             peaShooter.update(bullets, 1);
         }
         else {
@@ -65,7 +65,7 @@ void Grid::update()
     // Mettre � jour les balles
     for (auto& bullet : bullets) {
         bullet.update();
-        for (i = 0; i < (int)bullets.size(); i++) {
+        for (int i = 0; i < (int)bullets.size(); i++) {
             if (bullets.at(i).getY() < 0) {
                 bullets.erase(bullets.begin() + i);
             }
@@ -74,7 +74,7 @@ void Grid::update()
 
     // Mettre � jour le joueur
     playerShooter.update(bullets, enemies);
-    i++;
+    gametick++;
     
 }
 
@@ -90,6 +90,16 @@ void Grid::display()
             grille[i][j] = ' ';
         }
     }
+
+    // Afficher balles
+    for (auto& bullet : bullets) {
+        x = bullet.getX();
+        y = bullet.getY();
+        if (x >= 0 && x < GRID_X && y >= 0 && y < GRID_Y) {
+            grille[x][y] = bullet.display();
+        }
+    }
+
     /// Stockage des enemies dans la grid a afficher
     //Afficher ennemis
     for (auto& enemy : enemies) {
@@ -100,14 +110,6 @@ void Grid::display()
             grille[x][y] = enemy.display();
         }
     }
-    //Afficher plantes
-    /*for (auto& plant : plants) {
-        x = plant.getX();
-        y = plant.getY();
-        if (x >= 0 && x < GRID_X && y >= 0 && y < GRID_Y) {
-            grille[x][y] = plant.display();
-        }
-    }*/
 
     for (auto& peaShooter : peaShooters) {
         x = peaShooter.getX();
@@ -125,14 +127,6 @@ void Grid::display()
         }
     }
 
-    // Afficher balles
-    for (auto& bullet : bullets) {
-        x = bullet.getX();
-        y = bullet.getY();
-        if (x >= 0 && x < GRID_X && y >= 0 && y < GRID_Y) {
-            grille[x][y] = bullet.display();
-        }
-    }
     //Afficher joueur
     int playerX = playerShooter.getX();
     int playerY = playerShooter.getY();
@@ -163,7 +157,7 @@ void Grid::display()
 }
 
 
-vector<Enemy>& Grid::getEnemies() {
+ std::vector<Enemy>& Grid::getEnemies() {
     return enemies;
 }
 
@@ -176,7 +170,7 @@ Enemy* Grid::getEnemy(int index) {
     }
 }
 
-vector<Plant>& Grid::getPlants() {
+ std::vector<Plant>& Grid::getPlants() {
     return plants;
 }
 
@@ -198,7 +192,7 @@ Bullet* Grid::getBullet(int index) {
     }
 }
 
-vector<Bullet>& Grid::getBullets() {
+ std::vector<Bullet>& Grid::getBullets() {
     return bullets;
 }
 
@@ -229,7 +223,7 @@ int Grid::getEnemyNumber()
     return enemies.size(); 
 }
 
-vector<PeaShooter>& Grid::getPeaShooters() {
+ std::vector<PeaShooter>& Grid::getPeaShooters() {
     return peaShooters;
 }
 PeaShooter* Grid::getPeaShooter(int index) {
@@ -242,7 +236,7 @@ PeaShooter* Grid::getPeaShooter(int index) {
 
 }
 
-vector<Potato>& Grid::getPotatoes() {
+ std::vector<Potato>& Grid::getPotatoes() {
     return potatoes;
 }
 
