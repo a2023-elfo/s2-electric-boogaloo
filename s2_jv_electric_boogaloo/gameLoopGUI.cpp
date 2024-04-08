@@ -32,14 +32,14 @@ void GameLoopGUI::afficherGrid(){
             qDebug() << "Failed to load the image: images/Elfo_rest.png";
             continue; // Skip this iteration if the image failed to load
         }
-        pixmap = pixmap.scaled(16, 16, Qt::KeepAspectRatio, Qt::FastTransformation);
+        pixmap = pixmap.scaled(96, 96, Qt::KeepAspectRatio, Qt::FastTransformation);
         imageLabel->setPixmap(pixmap);
 
         gridLayout->addWidget(imageLabel, currentRow, currentColumn);
 
         // Update row and column for the next image
         currentColumn++;
-        if (currentColumn >= 10) {
+        if (currentColumn >= 5) {
             currentColumn = 0;
             currentRow++;
         }
