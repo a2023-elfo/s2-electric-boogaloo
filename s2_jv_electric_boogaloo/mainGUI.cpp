@@ -10,7 +10,8 @@ MainGUI::MainGUI(QWidget *parent)
 
     screen_title = new TitleScreen(this);
     screen_credits = new Credits(this);
-
+    connect(&gameloop, &Gameloop::gridUpdate, this, &MainGUI::gridUpdate);
+    connect(screen_title, &TitleScreen::PortDeComToGameLoop, &gameloop, &Gameloop::recupPortDeComTitleScreen);
     connect(screen_title, &TitleScreen::changeScreen, this, &MainGUI::changePage);
     connect(screen_credits, &Credits::changeScreen, this, &MainGUI::changePage);
     screen_credits->hide();
@@ -37,8 +38,6 @@ void MainGUI::changePage(int page) {
         screen_title->hide();
         screen_credits->hide();
         thread = QThread::create([this] {
-            Gameloop gameloop;
-            connect(&gameloop, &Gameloop::gridUpdate, this, &MainGUI::gridUpdate);
             gameloop.mainLoop();
             });
         thread->start();

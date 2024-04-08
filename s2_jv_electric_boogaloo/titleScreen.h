@@ -15,6 +15,9 @@
 #include <QVBoxLayout>
 #include <QtWidgets>
 #include "enums.h"
+#include <QString>
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -37,7 +40,7 @@ public slots:
     void confirmPressed();
 signals:
     void changeScreen(int);
-
+    void PortDeComToGameLoop(QString);
 private:
     Ui::TitleScreen* ui;
     QLineEdit* textBox;
