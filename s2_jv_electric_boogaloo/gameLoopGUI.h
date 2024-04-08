@@ -8,6 +8,15 @@
 #include <QLabel>
 #include <QPixmap>
 #include <qdebug.h>
+#include <QWidget>
+#include <QGridLayout>
+#include <QLabel>
+#include <QPixmap>
+#include <QSize>
+#include <QPalette>
+#include <QGuiApplication>
+#include <QScreen>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameLoopGUI; }
