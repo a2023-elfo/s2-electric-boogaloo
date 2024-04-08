@@ -5,6 +5,8 @@
 #include <conio.h>
 #include <cstdlib>
 #include <Windows.h>
+#include <QString>
+#include <qdebug.h>
 #include "grid.h"
 #include "systemeArgent.h"
 #include "healthBar.h"
@@ -48,9 +50,9 @@ private:
 	// Directpr values
 	long long directorRandom = 1;
 	int directorFunds = 0;
-
+	std::string com="";
 public slots:
-
+	void recupPortDeComTitleScreen(QString portDecom);
 signals:
 	void gridUpdate(char grid[GRID_X][GRID_Y]);
 };

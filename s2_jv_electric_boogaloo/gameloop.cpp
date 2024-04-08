@@ -113,15 +113,12 @@ void Gameloop::mainLoop() {
     int bouton = 0;
 
     // Initialisation du port de communication
-    std::string com = "ELFO";
-    std::cout << "Entrer le port de communication du Arduino: ";
-    std::cin >> com;
-    bool keyboardOnly = com == "ELFO";
+    bool keyboardOnly = this->com == "ELFO";
 
     arduino = new SerialPort(com.c_str(), BAUD);
 
     if (!arduino->isConnected() && !keyboardOnly) {
-        std::cerr << "Impossible de se connecter au port " << std::string(com) << ". Fermeture du programme!" << std::endl;
+        std::cerr << "Impossible de se connecter au port " << std::string(this->com) << ". Fermeture du programme!" << std::endl;
         exit(1);
     }
     else {
@@ -344,6 +341,11 @@ void Gameloop::activerTremblementDeTerre(int* charge, bool* usecharge) {
         std::cout << "La charge du tremblement de terre est insuffisante." << std::endl;
     }
 }
+void Gameloop::recupPortDeComTitleScreen(QString portDecom) {
+    this->com= portDecom.toStdString();
+    qInfo() <<"le port est" << portDecom;
+}
+
 
 /*---------------------------Definition de fonctions JSON------------------------*/
 bool SendToSerial(SerialPort* arduino, json j_msg) {
@@ -367,5 +369,3 @@ bool RcvFromSerial(SerialPort* arduino, std::string& msg) {
     msg.append(str_buffer);
     return true;
 }
-
-

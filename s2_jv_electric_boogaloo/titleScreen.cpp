@@ -72,6 +72,7 @@ void TitleScreen::gameplayButton() {
 void TitleScreen::creditsButton() {
     emit changeScreen(CREDITS_SCREEN);
 }
+
 void TitleScreen::jouerPressed() {
     qDebug() << "JOUER";
     emit changeScreen(1);
@@ -80,4 +81,6 @@ void TitleScreen::jouerPressed() {
 void TitleScreen::confirmPressed() {
     QString port = textBox->text();
     qDebug() << "Port de com: " << port;
+    emit PortDeComToGameLoop(port);
 }
+

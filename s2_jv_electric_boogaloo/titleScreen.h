@@ -14,6 +14,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QString>
 
 
 QT_BEGIN_NAMESPACE
@@ -39,7 +40,7 @@ public slots:
     void confirmPressed();
 signals:
     void changeScreen(int);
-
+    void PortDeComToGameLoop(QString);
 private:
     Ui::TitleScreen* ui;
     QLineEdit* textBox;
