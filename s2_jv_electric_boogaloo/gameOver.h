@@ -6,6 +6,8 @@
 #include <QPushButton>
 #include <QMainWindow>
 #include <QLabel>
+#include "enums.h"
+#include <QtWidgets>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -22,6 +24,8 @@ public:
 public slots:
 	void handlePlayAgainClicked();
 	void handleQuitClicked();
+signals:
+	void changepage(int);
 
 private:
 	Ui::gameOver* ui;

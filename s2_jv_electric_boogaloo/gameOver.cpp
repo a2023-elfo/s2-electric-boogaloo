@@ -2,6 +2,12 @@
 #include <QApplication>
 
 gameOver::gameOver(QWidget* parent) :QWidget(parent) {
+
+    QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
+    int screenWidth = screenSize.width();
+    int screenHeight = screenSize.height();
+    resize(screenSize);
+
     // Créer les QPushButton pour Play Again et Quit
     playAgainButton = new QPushButton("Play Again", this);
     quitButton = new QPushButton("Quit", this);
@@ -10,29 +16,20 @@ gameOver::gameOver(QWidget* parent) :QWidget(parent) {
     connect(playAgainButton, SIGNAL(clicked()), this, SLOT(handlePlayAgainClicked()));
     connect(quitButton, SIGNAL(clicked()), this, SLOT(handleQuitClicked()));
 
-    backgroundLabel = new QLabel(this);
-    QPixmap backgroundImage("gitgud.png"); // Utilisez le chemin relatif de votre image de fond
-    backgroundLabel->setPixmap(backgroundImage);
-    backgroundLabel->setScaledContents(true);
-    backgroundLabel->setGeometry(0, 0, this->width(), this->height());
+    QPixmap background("gitgud.png");
+    QPixmap etirerBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, etirerBackground);
+    this->setPalette(palette);
+    this->setAutoFillBackground(true);
 
 
-    // Placer les boutons au-dessus de l'image de fond
-    playAgainButton->raise();
-    quitButton->raise();
+    int buttonWidth = screenWidth / 15;
+    int buttonHeight = screenHeight / 30;
+    
+    quitButton -> setGeometry(((screenWidth - buttonWidth))*9/20, screenHeight / 2, buttonWidth, buttonHeight);
+    playAgainButton -> setGeometry(((screenWidth - buttonWidth))*11/20, screenHeight / 2, buttonWidth, buttonHeight);
 
-    // Ajuster la géométrie des boutons "Play Again" et "Quit"
-    QSize buttonSize(100, 50); // Taille des boutons
-    int spacing = 20; // Espacement entre les boutons et le bord de l'écran
-    playAgainButton->resize(buttonSize);
-    quitButton->resize(buttonSize);
-
-    // Placer les boutons au milieu en bas de l'écran
-    int totalWidth = buttonSize.width() * 2 + spacing; // Largeur totale occupée par les boutons et l'espacement
-    int startX = (this->width() - totalWidth) / 2; // Position horizontale de départ
-    int startY = this->height() - buttonSize.height() - spacing; // Position verticale
-    playAgainButton->move(startX, startY);
-    quitButton->move(startX + buttonSize.width() + spacing, startY);
 }
 
 gameOver::~gameOver() {
@@ -61,6 +58,7 @@ void gameOver::showGameOver() {
 
 void gameOver::handlePlayAgainClicked() {
     //reinitialiser le jeu
+    emit changepage(TITLE_SCREEN);
     qDebug() << "Play Again!";
 }
 

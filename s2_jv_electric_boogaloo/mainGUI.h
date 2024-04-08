@@ -7,6 +7,7 @@
 #include "gameloop.h"
 #include "titleScreen.h"
 #include "credits.h"
+#include "gameOver.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,8 +28,9 @@ private:
     static const int GRID_Y = 10;
     TitleScreen* screen_title;
     Credits* screen_credits;
+    gameOver* gameOver_screen;
     QThread* thread;
-    Gameloop gameloop;
+    Gameloop* gameloop;
 
 private slots:
     void gridUpdate(char grid[GRID_X][GRID_Y]);
