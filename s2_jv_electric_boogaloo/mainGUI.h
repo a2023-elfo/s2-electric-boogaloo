@@ -28,6 +28,7 @@ private:
     TitleScreen* screen_title;
     Credits* screen_credits;
     QThread* thread;
+    Gameloop gameloop;
 
 private slots:
     void gridUpdate(char grid[GRID_X][GRID_Y]);
