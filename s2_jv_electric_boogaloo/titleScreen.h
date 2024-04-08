@@ -9,12 +9,12 @@
 #include <QWidget>
 
 #include <Qdebug>
-#include "enums.h"
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
-
+#include <QtWidgets>
+#include "enums.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -32,9 +32,7 @@ public:
     ~TitleScreen();
 
 public slots:
-    void gameplayButton();
-    void creditsButton();
-
+    void creditsPressed();
     void jouerPressed();
     void confirmPressed();
 signals:

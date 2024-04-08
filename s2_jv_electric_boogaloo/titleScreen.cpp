@@ -1,26 +1,20 @@
 #include "titleScreen.h"
 
 
-
-// TitleScreen::TitleScreen(QWidget* parent)
-//     : QWidget(parent)
-// {
-//     QPushButton* button = new QPushButton("&Click here", this);
-//     button->setGeometry(QRect(QPoint(600, 525), QSize(200, 50)));
-    
-//     connect(button, &QPushButton::released, this, &TitleScreen::gameplayButton);
-
-//     QPushButton* button2 = new QPushButton("&Credits", this);
-//     button2->setGeometry(QRect(QPoint(300, 525), QSize(200, 50)));
-
-//     connect(button2, &QPushButton::released, this, &TitleScreen::creditsButton);
-
 TitleScreen::TitleScreen(QWidget* parent): QWidget(parent){
 
     //Fond d'accueil
+    QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
+    int screenWidth = screenSize.width();
+    int screenHeight = screenSize.height();
+    resize(screenSize);
+
+    
+
     QPixmap background("image/backgroundcool.png");
+    QPixmap etirerBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
     QPalette palette;
-    palette.setBrush(QPalette::Window, background);
+    palette.setBrush(QPalette::Window, etirerBackground);
     this->setPalette(palette);
     this->setAutoFillBackground(true);
 
@@ -28,12 +22,17 @@ TitleScreen::TitleScreen(QWidget* parent): QWidget(parent){
     QLabel* titleLabel = new QLabel("ELFO ELECTRIC BOOGALOO", this);
 
     QFont titleFont = titleLabel->font();
-    titleFont.setPointSize(72);
+    titleFont.setPointSize(60);
     titleFont.setFamily("Snap ITC");
     titleLabel->setFont(titleFont);
-
+    
     //jouer bouton
     QPushButton* jouerButton = new QPushButton("JOUER", this);
+
+    int buttonWidthJouer = screenWidth/10;
+    int buttonHeightJouer = screenHeight / 12;
+    jouerButton->setGeometry((screenSize.width() - buttonWidthJouer) / 2, 5 * screenSize.height() / 10, buttonWidthJouer, buttonHeightJouer);
+
     jouerButton->setStyleSheet("QPushButton {""background-color: rgba(255, 255, 255, 127);"
         "font-size: 20pt;"
         "border-radius: 10px;"
@@ -46,16 +45,29 @@ TitleScreen::TitleScreen(QWidget* parent): QWidget(parent){
     // port de com boite de texte
     textBox = new QLineEdit(this);
 
+    int widthText = screenWidth / 10;
+    int heightText = screenHeight / 20;
+    textBox->setGeometry((screenSize.width() - widthText) / 2, 6 * screenSize.height() / 10, widthText, heightText);
+
     //confirmation port de com button
+
+    int widthConfirm = screenWidth / 15;
+    int heightConfirm = screenHeight / 25;
+
     QPushButton* confirmButton = new QPushButton("Confirmation", this);
+    confirmButton->setGeometry((screenSize.width() - widthConfirm) / 2, 7 * screenSize.height() / 10, widthConfirm, heightConfirm);
     connect(confirmButton, &QPushButton::clicked, this, &TitleScreen::confirmPressed);
+
+    int widthCredits = screenWidth / 20;
+    int heightCredits = screenHeight / 30;
+
+    QPushButton* creditsButton = new QPushButton("Credits", this);
+    creditsButton->setGeometry((screenSize.width() - widthCredits) / 2, 8 * screenSize.height() / 10, widthCredits, heightCredits);
+    connect(creditsButton, &QPushButton::clicked, this, &TitleScreen::creditsPressed);
 
     // Layout
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(titleLabel, 0, Qt::AlignHCenter | Qt::AlignTop);
-    layout->addWidget(jouerButton, 0, Qt::AlignCenter);
-    layout->addWidget(textBox, 0, Qt::AlignHCenter | Qt::AlignBottom);
-    layout->addWidget(confirmButton, 0, Qt::AlignHCenter | Qt::AlignBottom);
     this->setLayout(layout);
 }
 
@@ -65,16 +77,13 @@ TitleScreen::~TitleScreen()
 }
 
 
-void TitleScreen::gameplayButton() {
-    emit changeScreen(GAMEPLAY_SCREEN);
-}
 
-void TitleScreen::creditsButton() {
+void TitleScreen::creditsPressed() {
     emit changeScreen(CREDITS_SCREEN);
 }
 void TitleScreen::jouerPressed() {
     qDebug() << "JOUER";
-    emit changeScreen(1);
+    emit changeScreen(GAMEPLAY_SCREEN);
 }
 
 void TitleScreen::confirmPressed() {
