@@ -2,6 +2,8 @@
 
 GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
     afficherGrid();
+    afficherSuper();
+    afficherHealt();
 }
 
 GameLoopGUI::~GameLoopGUI(){
@@ -11,6 +13,7 @@ void GameLoopGUI::afficherGrid(){
     // Set up background image
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
     QPixmap background("images/game.png");
+    // Assuming the background image should fill the entire screen
     QPixmap stretchedBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Window, stretchedBackground);
@@ -21,27 +24,60 @@ void GameLoopGUI::afficherGrid(){
     // Create a new grid layout and set it for this widget
     QGridLayout* gridLayout = new QGridLayout(this);
 
-    int currentRow = 0;
-    int currentColumn = 0;
+    // Determine the new height for the elf images to fit 10 vertically in the screen height
+    int newHeight = screenSize.height() / 10;
+    int newWidth; // Will be calculated to maintain aspect ratio
 
-    // Loop to populate the grid with images
-    for (int i = 1; i <= 50; ++i) {
-        QLabel* imageLabel = new QLabel;
-        QPixmap pixmap("images/Elfo_rest.png"); // Ensure this path is correct
-        if (pixmap.isNull()) {
-            qDebug() << "Failed to load the image: images/Elfo_rest.png";
-            continue; // Skip this iteration if the image failed to load
-        }
-        pixmap = pixmap.scaled(96, 96, Qt::KeepAspectRatio, Qt::FastTransformation);
-        imageLabel->setPixmap(pixmap);
-
-        gridLayout->addWidget(imageLabel, currentRow, currentColumn);
-
-        // Update row and column for the next image
-        currentColumn++;
-        if (currentColumn >= 5) {
-            currentColumn = 0;
-            currentRow++;
-        }
+    QPixmap elfPixmap("images/Elfo_rest.png");
+    if (elfPixmap.isNull()) {
+        qDebug() << "Failed to load the image: images/Elfo_rest.png";
     }
+    else {
+        // Calculate new width to maintain aspect ratio
+        double aspectRatio = static_cast<double>(elfPixmap.width()) / elfPixmap.height();
+        newWidth = static_cast<int>(newHeight * aspectRatio);
+    }
+
+    // Loop to populate the grid with images, 10 per column
+    for (int i = 0; i < 50; ++i) {
+        QLabel* imageLabel = new QLabel;
+        if (!elfPixmap.isNull()) {
+            QPixmap scaledPixmap = elfPixmap.scaled(newWidth, newHeight, Qt::KeepAspectRatio, Qt::FastTransformation);
+            imageLabel->setPixmap(scaledPixmap);
+        }
+
+        int currentRow = i % 10; // This will give you the row number 0-9
+        int currentColumn = i / 10; // This will give you the column number 0-4
+        gridLayout->addWidget(imageLabel, currentRow, currentColumn);
+    }
+
+    // Set the grid layout for the widget
+    this->setLayout(gridLayout);
 }
+
+void GameLoopGUI::afficherSuper(){
+    superBar = new QProgressBar(this);
+    superBar->setOrientation(Qt::Horizontal);
+    superBar->setRange(0, 10);
+    superBar->setValue(0);
+    superBar->setStyleSheet("QProgressBar::chunk { background-color: blue; }");
+    superBar->setFormat("Super: %v/%m");
+
+    // Set the geometry of the super progress bar or use layout
+    superBar->setGeometry(this->width() - 250, 60, 200, 40); // You will need to adjust these values
+}
+
+void GameLoopGUI::afficherHealt(){
+    healthBar = new QProgressBar(this);
+    healthBar->setOrientation(Qt::Horizontal);
+    healthBar->setRange(0, 10);
+    healthBar->setValue(0);
+    healthBar->setStyleSheet("QProgressBar::chunk { background-color: red; }");
+    healthBar->setFormat("Health: %v/%m");
+
+    // Set the geometry of the health progress bar or use layout
+    healthBar->setGeometry(this->width() - 250, 10, 200, 40); // You will need to adjust these values
+}
+
+
+

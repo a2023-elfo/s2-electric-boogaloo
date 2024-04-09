@@ -45,6 +45,7 @@ public:
 	static const int GRID_Y = 10;
 	char grille[GRID_X][GRID_Y];
 	int nbEnemyKilled = 0;
+	int getHealthPlayer();
 };
 
 #endif

@@ -205,6 +205,8 @@ void Gameloop::mainLoop() {
         std::system("cls");
         arene.display();
         emit gridUpdate(arene.grille);
+        emit healthUpdateGL(arene.getHealthPlayer());
+        emit superUpdateGL(charge);
 
         std::cout << arene.playerShooter.health.displayBar() << std::endl << std::endl;
         std::cout << "Current money: " << argent.checkMoney() << std::endl;
@@ -346,7 +348,6 @@ void Gameloop::recupPortDeComTitleScreen(QString portDecom) {
     this->com= portDecom.toStdString();
     qInfo() <<"le port est" << portDecom;
 }
-
 
 /*---------------------------Definition de fonctions JSON------------------------*/
 bool SendToSerial(SerialPort* arduino, json j_msg) {
