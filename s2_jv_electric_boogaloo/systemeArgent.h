@@ -12,9 +12,6 @@ class systemeArgent : public QObject
 private:
 		int money;
 		QLabel* curentMoneyLabel;
-public slots:
-signals:
-	void moneyUpdated(int money);
 public:
 	systemeArgent();
 	void killZombie();
@@ -23,5 +20,4 @@ public:
 	void buyPeaShooter();
 	void buyPotato();
 	int checkMoney();
-	int getMoney() const;
 };

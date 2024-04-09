@@ -1,5 +1,6 @@
 #include "ui_mainGUI.h"
 #include "mainGUI.h"
+#include "systemeArgent.h"
 
 
 MainGUI::MainGUI(QWidget *parent)
@@ -19,8 +20,7 @@ MainGUI::MainGUI(QWidget *parent)
     connect(screen_credits, &Credits::changeScreen, this, &MainGUI::changePage);
     connect(gameOver_screen, &gameOver::changepage, this, &MainGUI::changePage);
     connect(gameloop, &Gameloop::changepage, this, &MainGUI::changePage);
-    connect(gameloop->argent, &systemeArgent::moneyUpdated, screen_game, &GameLoopGUI::moneyUpdated);
-
+    connect(gameloop, &Gameloop::moneyUpdated, this, &MainGUI::updateMoneyGUI);
 
     screen_credits->hide();
     screen_game->hide();
@@ -76,4 +76,8 @@ void MainGUI::changePage(int page) {
         screen_title->hide();
         gameOver_screen->show();
     }
+}
+
+void MainGUI::updateMoneyGUI(int value) {
+    screen_game->moneyLabel->setText("<b>Money: </b>" + QString::number(value));
 }

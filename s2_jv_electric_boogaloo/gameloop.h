@@ -49,7 +49,7 @@ private:
 	int charge;
 	static const int GRID_X = 5;
 	static const int GRID_Y = 10;
-	// Directpr values
+	// Director values
 	long long directorRandom = 1;
 	int directorFunds = 0;
 	std::string com="";
@@ -58,6 +58,7 @@ public slots:
 signals:
 	void gridUpdate(char grid[GRID_X][GRID_Y]);
 	void changepage(int);
+	void moneyUpdated(int);
 };
 
 #endif

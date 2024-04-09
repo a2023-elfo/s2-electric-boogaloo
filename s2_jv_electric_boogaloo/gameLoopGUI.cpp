@@ -1,4 +1,5 @@
 #include "gameLoopGUI.h"
+#include <QString>
 #include "systemeArgent.h"
 
 GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
@@ -23,7 +24,8 @@ void GameLoopGUI::afficherGrid(){
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
     // Create a QLabel to display the current money
-    QLabel* moneyLabel = new QLabel("<b>Money:</b>", this);
+    systemeArgent systemeArgent;
+    moneyLabel = new QLabel("<b>Money: </b>" + QString::number(systemeArgent.checkMoney()), this);
     moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter); // Align the text to the center
     moneyLabel->setTextFormat(Qt::RichText);
     moneyLabel->setStyleSheet("font-size: 20px;");
@@ -58,8 +60,4 @@ void GameLoopGUI::afficherGrid(){
     }
 }
 
-
-void GameLoopGUI::moneyUpdated(int money) {
-
-}
 

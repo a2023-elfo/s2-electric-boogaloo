@@ -37,5 +37,6 @@ private:
 private slots:
     void gridUpdate(char grid[GRID_X][GRID_Y]);
     void changePage(int);
+    void updateMoneyGUI(int);
 };
 #endif // TEST1_H

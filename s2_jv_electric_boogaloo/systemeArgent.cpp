@@ -9,7 +9,6 @@ systemeArgent::systemeArgent(){
 //regarder si un zombie est mort et ajouter argent
 void systemeArgent::killZombie() {
 	money += 10;
-	emit moneyUpdated(money);
 }
 
 //regarder si on a l'argent pour acheter pea shooter
@@ -31,11 +30,10 @@ void systemeArgent::buyPeaShooter() {
 	else {
 		std::cout << "Smells like broke\n";
 	}
-	emit moneyUpdated(money);
 }
 
 //acheter patate et enlever argent
-void systemeArgent::buyPotato() {
+void systemeArgent::buyPotato(){
 	if (checkFundsPotato()) {
 		money -= 30;
 		std::cout << "Patate achete!!";
@@ -43,14 +41,9 @@ void systemeArgent::buyPotato() {
 	else {
 		std::cout << "Smells like broke\n";
 	}
-	emit moneyUpdated(money);
 }
 
 //regarder le montant d'argent qu'on a
 int systemeArgent::checkMoney() {
-	return money;
-}
-
-int systemeArgent::getMoney() const {
 	return money;
 }
