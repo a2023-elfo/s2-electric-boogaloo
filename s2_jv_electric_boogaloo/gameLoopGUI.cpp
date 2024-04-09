@@ -1,4 +1,5 @@
 #include "gameLoopGUI.h"
+#include "systemeArgent.h"
 
 GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
     afficherGrid();
@@ -17,6 +18,15 @@ void GameLoopGUI::afficherGrid(){
     this->setPalette(palette);
     this->setAutoFillBackground(true);
     this->resize(screenSize);
+
+    // Create a new vertical layout to contain the grid and the money label
+    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+
+    // Create a QLabel to display the current money
+    QLabel* moneyLabel = new QLabel("Money: ", this);
+    moneyLabel->setAlignment(Qt::AlignCenter); // Align the text to the center
+    mainLayout->addWidget(moneyLabel);
+
 
     // Create a new grid layout and set it for this widget
     QGridLayout* gridLayout = new QGridLayout(this);
@@ -45,3 +55,9 @@ void GameLoopGUI::afficherGrid(){
         }
     }
 }
+
+
+void GameLoopGUI::moneyUpdated(int money) {
+
+}
+

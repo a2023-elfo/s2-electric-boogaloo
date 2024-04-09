@@ -26,6 +26,8 @@ class Gameloop : public QObject
 
 
 public:
+	systemeArgent* argent;
+	Gameloop();
 	void mainLoop();
 	 std::vector<GameControls> readUserInput(nlohmann::json json_msg);
 	bool checkPlayerInput(GameControls checkedInput, std::vector<GameControls>& inputVect);

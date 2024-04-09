@@ -27,7 +27,8 @@ class GameLoopGUI:public QWidget{
 public:
 	GameLoopGUI(QWidget* parent = nullptr);
 	~GameLoopGUI();
-
+public slots:
+	void moneyUpdated(int money);
 	void afficherGrid();
 };
 

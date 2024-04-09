@@ -27,7 +27,9 @@ void Gameloop::gameOver(){
     emit changepage(GAMEOVER_SCREEN);
 }
 
-
+Gameloop::Gameloop() {
+    argent = new systemeArgent();
+}
 
 void Gameloop::setupDirector() {
     // Set base of random, current time
@@ -102,7 +104,7 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, std::vector<GameContr
 void Gameloop::mainLoop() {
     char userInput;
     bool loop = true;
-    systemeArgent argent;
+    argent =new systemeArgent();
     charge = 1;
     arene.display();
     bool usecharge = false;
@@ -176,15 +178,15 @@ void Gameloop::mainLoop() {
             arene.playerShooter.setX(arene.playerShooter.getX() + 1);
         if (checkPlayerInput(BTN_2, inputs))
             if (positionPlant != 'P' && positionPlant != 'O') {
-                if (argent.checkFundsPotato()) {
-                    argent.buyPotato();
+                if (argent->checkFundsPotato()) {
+                    argent->buyPotato();
                     spawnPotato(4);
                 }
             }
         if (checkPlayerInput(BTN_4, inputs)){
             if (positionPlant != 'P' && positionPlant != 'O') {
-                if (argent.checkFundsPeaShooter()) {
-                    argent.buyPeaShooter();
+                if (argent->checkFundsPeaShooter()) {
+                    argent->buyPeaShooter();
                     spawnPeashooter(2);
                 }
             }
@@ -207,7 +209,7 @@ void Gameloop::mainLoop() {
         emit gridUpdate(arene.grille);
 
         std::cout << arene.playerShooter.health.displayBar() << std::endl << std::endl;
-        std::cout << "Current money: " << argent.checkMoney() << std::endl;
+        std::cout << "Current money: " << argent->checkMoney() << std::endl;
         afficherTremblementDeTerre(&charge);
 
         std::vector<Enemy> zombieMort;
@@ -221,7 +223,7 @@ void Gameloop::mainLoop() {
                 zombieMort.push_back(arene.getEnemies()[i]);
                 arene.deleteEnemy(i);
                 arene.nbEnemyKilled++;
-                argent.killZombie(); //ajouter argent quand zombie est mort
+                argent->killZombie(); //ajouter argent quand zombie est mort
             }
             else {
                 i++;

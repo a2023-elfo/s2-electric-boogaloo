@@ -19,6 +19,7 @@ MainGUI::MainGUI(QWidget *parent)
     connect(screen_credits, &Credits::changeScreen, this, &MainGUI::changePage);
     connect(gameOver_screen, &gameOver::changepage, this, &MainGUI::changePage);
     connect(gameloop, &Gameloop::changepage, this, &MainGUI::changePage);
+    connect(gameloop->argent, &systemeArgent::moneyUpdated, screen_game, &GameLoopGUI::moneyUpdated);
 
 
     screen_credits->hide();
