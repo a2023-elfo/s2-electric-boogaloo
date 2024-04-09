@@ -10,8 +10,8 @@ MainGUI::MainGUI(QWidget *parent)
 
     screen_title = new TitleScreen(this);
     screen_credits = new Credits(this);
-
     gameOver_screen = new gameOver(this);
+    screen_game = new GameLoopGUI(this);
     gameloop = new Gameloop();
     connect(gameloop, &Gameloop::gridUpdate, this, &MainGUI::gridUpdate);
     connect(screen_title, &TitleScreen::PortDeComToGameLoop, gameloop, &Gameloop::recupPortDeComTitleScreen);
