@@ -54,6 +54,7 @@ void MainGUI::changePage(int page) {
         screen_game->show();
         screen_credits->hide();
         gameOver_screen->hide();
+        gameloop->reset();
         thread = QThread::create([this] {
             gameloop->mainLoop();
             });
