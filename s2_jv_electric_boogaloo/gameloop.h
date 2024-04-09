@@ -55,6 +55,7 @@ public slots:
 	void recupPortDeComTitleScreen(QString portDecom);
 signals:
 	void gridUpdate(char grid[GRID_X][GRID_Y]);
+	void changepage(int);
 };
 
 #endif

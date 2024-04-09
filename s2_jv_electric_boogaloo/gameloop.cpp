@@ -24,6 +24,7 @@ void Gameloop::gameOver(){
     std::system("cls");
     std::cout << "GAME OVER" << std::endl;
     std::cout << "Score : " << arene.nbEnemyKilled << std::endl;
+    emit changepage(GAMEOVER_SCREEN);
 }
 
 

@@ -27,6 +27,7 @@ HEADERS += gameLoopGUI.h \
            gameloop.h \
            grid.h \
            healthBar.h \
+	   gameOver.h\
            peaShooter.h \
            plant.h \
            player.h \
@@ -42,6 +43,7 @@ SOURCES += gameLoopGUI.cpp \
            displayObject.cpp \
            enemy.cpp \
            gameloop.cpp \
+	   gameOver.cpp\
            grid.cpp \
            healthBar.cpp \
            peaShooter.cpp \

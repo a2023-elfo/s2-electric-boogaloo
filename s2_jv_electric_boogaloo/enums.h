@@ -22,6 +22,7 @@ enum EnemyTypes { // Text value and cost for director
 enum PageNb {
     GAMEPLAY_SCREEN = 1,
     CREDITS_SCREEN = 2,
-    TITLE_SCREEN = 3
+    TITLE_SCREEN = 3,
+    GAMEOVER_SCREEN=4
 };
 #endif
