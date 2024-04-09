@@ -27,6 +27,7 @@ class Gameloop : public QObject
 
 
 public:
+	Gameloop();
 	void mainLoop();
 	 std::vector<GameControls> readUserInput(nlohmann::json json_msg);
 	bool checkPlayerInput(GameControls checkedInput, std::vector<GameControls>& inputVect);
@@ -42,9 +43,9 @@ public:
 	void generateEnemy();
 	void generatePosition();
 	int generateValue(int min, int max);
-
+	void reset();
 private:
-	Grid arene;
+	Grid* arene;
 	int charge;
 	static const int GRID_X = 5;
 	static const int GRID_Y = 10;
@@ -52,6 +53,7 @@ private:
 	long long directorRandom = 1;
 	int directorFunds = 0;
 	std::string com="";
+	bool loop = true;
 public slots:
 	void recupPortDeComTitleScreen(QString portDecom);
 signals:
