@@ -64,7 +64,7 @@ void Gameloop::reset()
 {
     delete(arene);
     arene = new Grid();
-    charge;
+    charge = 0;
     directorFunds = 0;
     loop = true;
 }
