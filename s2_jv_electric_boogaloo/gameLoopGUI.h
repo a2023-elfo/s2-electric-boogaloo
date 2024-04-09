@@ -17,6 +17,9 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDebug>
+#include <QVBoxLayout>
+
+#include "gameloop.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameLoopGUI; }
@@ -29,6 +32,19 @@ public:
 	~GameLoopGUI();
 
 	void afficherGrid();
+	void clearGrid();
+
+
+private:
+	static const int GRID_X = 5;
+	static const int GRID_Y = 10;
+	QGridLayout* gridLayout;
+	QVBoxLayout* layout;
+
+public slots:
+	void gridUpdate(char grid[GRID_X][GRID_Y]);
+	void sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets);
+
 };
 
 #endif // !GAMELOOPGUI_H

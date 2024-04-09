@@ -9,7 +9,7 @@ void DisplayObject::update() {
 	std::cout << "update non overwriter\n";
 }
 
-int DisplayObject::getX()
+int DisplayObject::getX() const
 {
 	return x;
 }
@@ -29,7 +29,7 @@ void DisplayObject::setX(int input)
 	}
 }
 
-int DisplayObject::getY()
+int DisplayObject::getY() const
 {
 	return y;
 }

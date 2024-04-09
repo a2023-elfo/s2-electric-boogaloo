@@ -15,9 +15,9 @@ protected:
 public:
 	virtual char display();
 	virtual void update();
-	int getX();
+	int getX() const;
 	void setX(int);
-	virtual int getY();
+	virtual int getY() const;
 	virtual void setY(int);
 	int getWidth();
 	void setWidth(int);

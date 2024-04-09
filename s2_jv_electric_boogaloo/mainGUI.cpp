@@ -13,7 +13,12 @@ MainGUI::MainGUI(QWidget *parent)
     gameOver_screen = new gameOver(this);
     screen_game = new GameLoopGUI(this);
     gameloop = new Gameloop();
-    connect(gameloop, &Gameloop::gridUpdate, this, &MainGUI::gridUpdate);
+
+
+
+    connect(gameloop, &Gameloop::sendVectors, screen_game, &GameLoopGUI::sendVectors);
+
+    connect(gameloop, &Gameloop::gridUpdate, screen_game, &GameLoopGUI::gridUpdate);
     connect(screen_title, &TitleScreen::PortDeComToGameLoop, gameloop, &Gameloop::recupPortDeComTitleScreen);
     connect(screen_title, &TitleScreen::changeScreen, this, &MainGUI::changePage);
     connect(screen_credits, &Credits::changeScreen, this, &MainGUI::changePage);
@@ -36,6 +41,9 @@ MainGUI::~MainGUI()
 void MainGUI::gridUpdate(char grid[GRID_X][GRID_Y])
 {
     //qInfo()<< "thread parle au main";
+}
+void MainGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets){
+    qInfo() << "thread vectors parle au main";
 }
 
 void MainGUI::changePage(int page) {

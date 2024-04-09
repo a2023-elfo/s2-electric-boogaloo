@@ -36,6 +36,7 @@ private:
 
 private slots:
     void gridUpdate(char grid[GRID_X][GRID_Y]);
+    void sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets);
     void changePage(int);
 };
 #endif // TEST1_H
