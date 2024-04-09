@@ -23,8 +23,10 @@ void GameLoopGUI::afficherGrid(){
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
     // Create a QLabel to display the current money
-    QLabel* moneyLabel = new QLabel("Money: ", this);
-    moneyLabel->setAlignment(Qt::AlignCenter); // Align the text to the center
+    QLabel* moneyLabel = new QLabel("<b>Money:</b>", this);
+    moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter); // Align the text to the center
+    moneyLabel->setTextFormat(Qt::RichText);
+    moneyLabel->setStyleSheet("font-size: 20px;");
     mainLayout->addWidget(moneyLabel);
 
 
