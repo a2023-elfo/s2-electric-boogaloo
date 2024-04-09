@@ -43,7 +43,7 @@ SOURCES += gameLoopGUI.cpp \
            displayObject.cpp \
            enemy.cpp \
            gameloop.cpp \
-	   gameOver.cpp\
+	   gameOver.cpp \
            grid.cpp \
            healthBar.cpp \
            peaShooter.cpp \
