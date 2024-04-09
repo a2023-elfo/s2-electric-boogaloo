@@ -215,7 +215,7 @@ void Gameloop::mainLoop() {
         
         std::system("cls");
         arene->display();
-        //emit gridUpdate(arene->grille);
+        emit gridUpdate(arene->grille);
 
         std::cout << arene->playerShooter.health.displayBar() << std::endl << std::endl;
         std::cout << "Current money: " << argent.checkMoney() << std::endl;
