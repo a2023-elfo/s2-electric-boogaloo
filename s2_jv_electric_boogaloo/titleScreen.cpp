@@ -11,7 +11,8 @@ TitleScreen::TitleScreen(QWidget* parent): QWidget(parent){
 
     
 
-    QPixmap background("Images/backgroundcool.png");
+    QPixmap background("images/backgroundcool.png");
+
     QPixmap etirerBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Window, etirerBackground);

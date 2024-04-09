@@ -19,7 +19,8 @@ CONFIG  += console
 #DEFINES += QT_DISABLE_DEPRECATED_UP_TO=0x060000 # disables all APIs deprecated in Qt 6.0.0 and earlier
 
 # Input
-HEADERS += bullet.h \
+HEADERS += gameLoopGUI.h \
+	   bullet.h \
            displayObject.h \
            enemy.h \
            enums.h \
@@ -37,7 +38,8 @@ HEADERS += bullet.h \
            titleScreen.h \
 	   credits.h\
            include/serial/SerialPort.hpp
-SOURCES += bullet.cpp \
+SOURCES += gameLoopGUI.cpp \
+	   bullet.cpp \
            displayObject.cpp \
            enemy.cpp \
            gameloop.cpp \
