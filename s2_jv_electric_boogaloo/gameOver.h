@@ -24,6 +24,7 @@ public:
 public slots:
 	void handlePlayAgainClicked();
 	void handleQuitClicked();
+	void displayScore(int); //afficher le score
 signals:
 	void changepage(int);
 
@@ -33,8 +34,7 @@ private:
 	QLabel* backgroundLabel;
 	QPushButton* playAgainButton;
 	QPushButton* quitButton;
-	int score;
-	void displayScore(int); //afficher le score
+	int score= 0;
 	void showGameOver(); //afficher l'ecran
 };
 

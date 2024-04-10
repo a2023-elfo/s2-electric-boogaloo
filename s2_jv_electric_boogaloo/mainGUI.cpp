@@ -28,6 +28,7 @@ MainGUI::MainGUI(QWidget *parent)
     connect(gameloop, &Gameloop::moneyUpdated, this, &MainGUI::updateMoneyGUI);
     connect(gameloop, &Gameloop::healthUpdateGL, this, &MainGUI::updateHealthGUI);
     connect(gameloop, &Gameloop::superUpdateGL, this, &MainGUI::updateSuperGUI);
+    connect(gameloop, &Gameloop::gameOverSignal, gameOver_screen, &gameOver::displayScore);
 
     screen_credits->hide();
     screen_game->hide();
