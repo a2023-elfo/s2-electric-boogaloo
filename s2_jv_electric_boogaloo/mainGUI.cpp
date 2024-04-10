@@ -1,5 +1,6 @@
 #include "ui_mainGUI.h"
 #include "mainGUI.h"
+#include "systemeArgent.h"
 
 
 MainGUI::MainGUI(QWidget *parent)
@@ -13,12 +14,20 @@ MainGUI::MainGUI(QWidget *parent)
     gameOver_screen = new gameOver(this);
     screen_game = new GameLoopGUI(this);
     gameloop = new Gameloop();
-    connect(gameloop, &Gameloop::gridUpdate, this, &MainGUI::gridUpdate);
+
+
+
+    connect(gameloop, &Gameloop::sendVectors, screen_game, &GameLoopGUI::sendVectors);
+
+    connect(gameloop, &Gameloop::gridUpdate, screen_game, &GameLoopGUI::gridUpdate);
     connect(screen_title, &TitleScreen::PortDeComToGameLoop, gameloop, &Gameloop::recupPortDeComTitleScreen);
     connect(screen_title, &TitleScreen::changeScreen, this, &MainGUI::changePage);
     connect(screen_credits, &Credits::changeScreen, this, &MainGUI::changePage);
     connect(gameOver_screen, &gameOver::changepage, this, &MainGUI::changePage);
     connect(gameloop, &Gameloop::changepage, this, &MainGUI::changePage);
+    connect(gameloop, &Gameloop::moneyUpdated, this, &MainGUI::updateMoneyGUI);
+    connect(gameloop, &Gameloop::healthUpdateGL, this, &MainGUI::updateHealthGUI);
+    connect(gameloop, &Gameloop::superUpdateGL, this, &MainGUI::updateSuperGUI);
 
     screen_credits->hide();
     screen_game->hide();
@@ -36,6 +45,9 @@ void MainGUI::gridUpdate(char grid[GRID_X][GRID_Y])
 {
     //qInfo()<< "thread parle au main";
 }
+void MainGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets){
+    qInfo() << "thread vectors parle au main";
+}
 
 void MainGUI::changePage(int page) {
     screen_title->hide();
@@ -52,6 +64,7 @@ void MainGUI::changePage(int page) {
         screen_game->show();
         screen_credits->hide();
         gameOver_screen->hide();
+        gameloop->reset();
         thread = QThread::create([this] {
             gameloop->mainLoop();
             });
@@ -74,4 +87,14 @@ void MainGUI::changePage(int page) {
         screen_title->hide();
         gameOver_screen->show();
     }
+}
+
+void MainGUI::updateMoneyGUI(int value) {
+    screen_game->moneyLabel->setText("<b>Money: </b>" + QString::number(value));
+}
+void MainGUI::updateSuperGUI(int value) {
+    screen_game->superBar->setValue(value);
+}
+void MainGUI::updateHealthGUI(int value) {
+    screen_game->healthBar->setValue(value);
 }

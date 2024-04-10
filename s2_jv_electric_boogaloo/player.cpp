@@ -66,3 +66,7 @@ bool Player::checkHitEnemy(Enemy& enemy)
     return enemy.getX() == getX() && enemy.getY() == getY();
 }
 
+int Player::getHealth() {
+    return health.getHealth();
+}
+

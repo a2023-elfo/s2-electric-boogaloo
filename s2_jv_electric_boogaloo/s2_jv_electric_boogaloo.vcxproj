@@ -58,6 +58,23 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">
     <ClCompile>
+      <AdditionalIncludeDirectories>.;.;C:\Qt\6.6.3\msvc2019_64\include;C:\Qt\6.6.3\msvc2019_64\include\QtWidgets;C:\Qt\6.6.3\msvc2019_64\include\QtGui;C:\Qt\6.6.3\msvc2019_64\include\QtCore;release;/include;C:\Qt\6.6.3\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>release\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName></ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
@@ -85,6 +102,22 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
     <ClCompile>
+      <AdditionalIncludeDirectories>.;.;C:\Qt\6.6.3\msvc2019_64\include;C:\Qt\6.6.3\msvc2019_64\include\QtWidgets;C:\Qt\6.6.3\msvc2019_64\include\QtGui;C:\Qt\6.6.3\msvc2019_64\include\QtCore;debug;/include;C:\Qt\6.6.3\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>debug\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
@@ -113,6 +146,8 @@
     <ClCompile Include="credits.cpp" />
     <ClCompile Include="displayObject.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="gameLoopGUI.cpp" />
+    <ClCompile Include="gameOver.cpp" />
     <ClCompile Include="gameloop.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="healthBar.cpp" />
@@ -130,11 +165,7 @@
     <ClInclude Include="bullet.h" />
     <CustomBuild Include="credits.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">credits.h;release\moc_predefs.h;C:\Qt\6.6.3\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.6.3\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/davec/source/repos/s2-electric-boogaloo/s2_jv_electric_boogaloo/release/moc_predefs.h -IC:/Qt/6.6.3/msvc2019_64/mkspecs/win32-msvc -IC:/Users/davec/source/repos/s2-electric-boogaloo/s2_jv_electric_boogaloo -IC:/Users/davec/source/repos/s2-electric-boogaloo/s2_jv_electric_boogaloo -IC:/Qt/6.6.3/msvc2019_64/include -IC:/Qt/6.6.3/msvc2019_64/include/QtWidgets -IC:/Qt/6.6.3/msvc2019_64/include/QtGui -IC:/Qt/6.6.3/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\cppwinrt&quot; credits.h -o release\moc_credits.cpp</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC credits.h</Message>
-      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_credits.cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">credits.h;debug\moc_predefs.h;C:\Qt\6.6.3\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.6.3\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/davec/source/repos/s2-electric-boogaloo/s2_jv_electric_boogaloo/debug/moc_predefs.h -IC:/Qt/6.6.3/msvc2019_64/mkspecs/win32-msvc -IC:/Users/davec/source/repos/s2-electric-boogaloo/s2_jv_electric_boogaloo -IC:/Users/davec/source/repos/s2-electric-boogaloo/s2_jv_electric_boogaloo -IC:/Qt/6.6.3/msvc2019_64/include -IC:/Qt/6.6.3/msvc2019_64/include/QtWidgets -IC:/Qt/6.6.3/msvc2019_64/include/QtGui -IC:/Qt/6.6.3/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\cppwinrt&quot; credits.h -o debug\moc_credits.cpp</Command>
+
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC credits.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_credits.cpp;%(Outputs)</Outputs>
     </CustomBuild>
