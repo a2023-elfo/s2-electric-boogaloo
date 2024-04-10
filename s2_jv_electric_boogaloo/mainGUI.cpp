@@ -21,6 +21,8 @@ MainGUI::MainGUI(QWidget *parent)
     connect(gameOver_screen, &gameOver::changepage, this, &MainGUI::changePage);
     connect(gameloop, &Gameloop::changepage, this, &MainGUI::changePage);
     connect(gameloop, &Gameloop::moneyUpdated, this, &MainGUI::updateMoneyGUI);
+    connect(gameloop, &Gameloop::healthUpdateGL, this, &MainGUI::updateHealthGUI);
+    connect(gameloop, &Gameloop::superUpdateGL, this, &MainGUI::updateSuperGUI);
 
     screen_credits->hide();
     screen_game->hide();
@@ -54,6 +56,7 @@ void MainGUI::changePage(int page) {
         screen_game->show();
         screen_credits->hide();
         gameOver_screen->hide();
+        gameloop->reset();
         thread = QThread::create([this] {
             gameloop->mainLoop();
             });
@@ -80,4 +83,10 @@ void MainGUI::changePage(int page) {
 
 void MainGUI::updateMoneyGUI(int value) {
     screen_game->moneyLabel->setText("<b>Money: </b>" + QString::number(value));
+}
+void MainGUI::updateSuperGUI(int value) {
+    screen_game->superBar->setValue(value);
+}
+void MainGUI::updateHealthGUI(int value) {
+    screen_game->healthBar->setValue(value);
 }

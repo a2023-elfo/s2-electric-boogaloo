@@ -19,6 +19,7 @@ public:
 	void update(std::vector<Bullet>& bullets, std::vector<Enemy>& enemies);
 	void setY(int input);
 	int getY();
+	int getHealth();
 
 	Bullet* shoot();
 	bool checkHitBullet(Bullet& bang);

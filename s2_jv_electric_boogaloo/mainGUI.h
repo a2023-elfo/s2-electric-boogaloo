@@ -38,5 +38,7 @@ private slots:
     void gridUpdate(char grid[GRID_X][GRID_Y]);
     void changePage(int);
     void updateMoneyGUI(int);
+    void updateSuperGUI(int);
+    void updateHealthGUI(int);
 };
 #endif // TEST1_H
