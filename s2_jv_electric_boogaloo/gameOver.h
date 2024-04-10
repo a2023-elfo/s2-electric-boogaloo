@@ -33,7 +33,8 @@ private:
 	QLabel* backgroundLabel;
 	QPushButton* playAgainButton;
 	QPushButton* quitButton;
-	void displayScore(); //afficher le score
+	int score;
+	void displayScore(int); //afficher le score
 	void showGameOver(); //afficher l'ecran
 };
 
