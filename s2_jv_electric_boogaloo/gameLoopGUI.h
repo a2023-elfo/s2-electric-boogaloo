@@ -36,6 +36,11 @@ public:
 	QLabel* moneyLabel;
 	QProgressBar* healthBar;
 	QProgressBar* superBar;
+private:
+	static const int GRID_X = 5;
+	static const int GRID_Y = 10;
+	QGridLayout* gridLayout;
+	QVBoxLayout* layout;
 public slots:
 	void afficherGrid();
 	void clearGrid();
@@ -44,11 +49,7 @@ public slots:
 	void afficherSuper();
 	void afficherHealt();
 
-private:
-	static const int GRID_X = 5;
-	static const int GRID_Y = 10;
-	QGridLayout* gridLayout;
-	QVBoxLayout* layout;
+
 
 
 
