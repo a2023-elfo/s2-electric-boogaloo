@@ -31,13 +31,13 @@ public:
 	GameLoopGUI(QWidget* parent = nullptr);
 	~GameLoopGUI();
 	QLabel* moneyLabel;
+	QProgressBar* healthBar;
+	QProgressBar* superBar;
 public slots:
 	void afficherGrid();
 	void afficherSuper();
 	void afficherHealt();
 
-	QProgressBar* healthBar;
-	QProgressBar* superBar;
 };
 
 #endif // !GAMELOOPGUI_H

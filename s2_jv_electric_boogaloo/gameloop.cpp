@@ -19,9 +19,7 @@ bool RcvFromSerial(SerialPort* arduino, std::string& msg);
 
 SerialPort* arduino; //doit etre un objet global!!!!
 
-Gameloop::Gameloop() {
-    arene = new Grid();
-}
+
 void Gameloop::gameOver(){
     std::system("cls");
     std::cout << "GAME OVER" << std::endl;
@@ -31,6 +29,7 @@ void Gameloop::gameOver(){
 
 Gameloop::Gameloop() {
     argent = new systemeArgent();
+    arene = new Grid();
 }
 
 void Gameloop::setupDirector() {
@@ -225,7 +224,7 @@ void Gameloop::mainLoop() {
         emit moneyUpdated(argent->checkMoney());
       
         std::cout << arene->playerShooter.health.displayBar() << std::endl << std::endl;
-        std::cout << "Current money: " << argent.checkMoney() << std::endl;
+        std::cout << "Current money: " << argent->checkMoney() << std::endl;
 
         afficherTremblementDeTerre(&charge);
 
