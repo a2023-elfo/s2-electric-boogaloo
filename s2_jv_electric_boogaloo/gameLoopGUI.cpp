@@ -32,7 +32,7 @@ void GameLoopGUI::gridUpdate(char grid[GRID_X][GRID_Y])
 }
 
 
-void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets) {
+void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1) {
    // qInfo() << "thread vectors parle au gameGUI";
     clearGrid();
 
@@ -109,15 +109,27 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                 const Potato& potato = potatoes[size_po];
                 if (currentRow == potato.getY() && currentColumn == potato.getX()) {
                     QLabel* tankLabel = new QLabel;
-                    QPixmap tankPixmap("images/bullets.png");
+                    QPixmap tankPixmap("images/noix.png");
                     if (tankPixmap.isNull()) {
-                        qDebug() << "Failed to load the image: images/bullets.png";
+                        qDebug() << "Failed to load the image: images/noix.png";
                         continue; // Skip this iteration if the image failed to load
                     }
                     tankPixmap = tankPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
                     tankLabel->setPixmap(tankPixmap);
                     gridLayout->addWidget(tankLabel, currentRow, currentColumn);
                 }
+            }
+            const Player& player = player1;
+            if (currentRow == player.getY() && currentColumn == player.getX()) {
+                QLabel* playerLabel = new QLabel;
+                QPixmap playerPixmap("images/Elfo_shoot.png");
+                if (playerPixmap.isNull()) {
+                    qDebug() << "Failed to load the image: images/Elfo_shoot.png";
+                    continue; // Skip this iteration if the image failed to load
+                }
+                playerPixmap = playerPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                playerLabel->setPixmap(playerPixmap);
+                gridLayout->addWidget(playerLabel, currentRow, currentColumn);
             }
         }
     }

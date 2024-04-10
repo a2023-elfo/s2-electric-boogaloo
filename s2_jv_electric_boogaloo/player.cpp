@@ -52,7 +52,7 @@ void Player::setY(int input)
         y = input;
     }
 }
-int Player::getY()
+int Player::getY() const
 {
     return y;
 }

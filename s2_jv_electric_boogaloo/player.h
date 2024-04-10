@@ -18,7 +18,7 @@ public:
 	char display();
 	void update(std::vector<Bullet>& bullets, std::vector<Enemy>& enemies);
 	void setY(int input);
-	int getY();
+	int getY() const;
 	int getHealth();
 
 	Bullet* shoot();
