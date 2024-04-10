@@ -145,6 +145,7 @@ void Gameloop::mainLoop() {
 
     while (loop) {
 
+       
         // Envoie message Arduino
         j_msg_send["Affichage"] = "Mouvement=" + std::to_string(bouge) + " B=" + std::to_string(bouton);
         j_msg_send["vie"] = arene->playerShooter.health.getHealth();
@@ -191,14 +192,14 @@ void Gameloop::mainLoop() {
             if (positionPlant != 'P' && positionPlant != 'O') {
                 if (argent->checkFundsPotato()) {
                     argent->buyPotato();
-                    spawnPotato(4);
+                    spawnPotato(5);
                 }
             }
         if (checkPlayerInput(BTN_4, inputs)){
             if (positionPlant != 'P' && positionPlant != 'O') {
                 if (argent->checkFundsPeaShooter()) {
                     argent->buyPeaShooter();
-                    spawnPeashooter(2);
+                    spawnPeashooter(1);
                 }
             }
         }
