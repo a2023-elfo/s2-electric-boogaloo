@@ -15,7 +15,7 @@ gameOver::gameOver(QWidget* parent) :QWidget(parent) {
 
     // Connecter les clics des boutons aux slots correspondants
     connect(playAgainButton, SIGNAL(clicked()), this, SLOT(handlePlayAgainClicked()));
-    connect(quitButton, SIGNAL(clicked()), this, SLOT(handleQuitClicked()));
+    connect(quitButton, &QPushButton::clicked, this, &gameOver::handleQuitClicked);
 
     QPixmap background("gitgud.png");
     QPixmap etirerBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
@@ -40,7 +40,6 @@ gameOver::gameOver(QWidget* parent) :QWidget(parent) {
 }
 
 gameOver::~gameOver() {
-    delete ui; // Libérer la mémoire allouée pour ui
 }
 
 void gameOver::displayScore(int score) {

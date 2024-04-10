@@ -15,11 +15,6 @@
 #include <qobject.h>
 
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-	class Gameloop;
-}
-QT_END_NAMESPACE
 
 class Gameloop : public QObject
 {
@@ -58,7 +53,7 @@ private:
 public slots:
 	void recupPortDeComTitleScreen(QString portDecom);
 signals:
-	void gridUpdate(char grid[GRID_X][GRID_Y]);
+	
 	void healthUpdateGL(int);
 	void superUpdateGL(int);
 	void changepage(int);

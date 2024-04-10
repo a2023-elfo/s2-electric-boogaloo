@@ -3,23 +3,20 @@
 #include "systemeArgent.h"
 
 
-MainGUI::MainGUI(QWidget *parent)
+MainGUI::MainGUI(QWidget* parent)
     : QWidget(parent)
-    , ui(new Ui::MainGUI)
+    , screen_title(new TitleScreen(this))
+    , screen_credits(new Credits(this))
+    , gameOver_screen(new gameOver(this))
+    , screen_game(new GameLoopGUI(this))
+    , gameloop(new Gameloop())
 {
-    ui->setupUi(this);
-
-    screen_title = new TitleScreen(this);
-    screen_credits = new Credits(this);
-    gameOver_screen = new gameOver(this);
-    screen_game = new GameLoopGUI(this);
-    gameloop = new Gameloop();
-
-
+    screen_title->show();
+    screen_credits->hide();
+    screen_game->hide();
+    gameOver_screen->hide();
 
     connect(gameloop, &Gameloop::sendVectors, screen_game, &GameLoopGUI::sendVectors);
-
-    connect(gameloop, &Gameloop::gridUpdate, screen_game, &GameLoopGUI::gridUpdate);
     connect(screen_title, &TitleScreen::PortDeComToGameLoop, gameloop, &Gameloop::recupPortDeComTitleScreen);
     connect(screen_title, &TitleScreen::changeScreen, this, &MainGUI::changePage);
     connect(screen_credits, &Credits::changeScreen, this, &MainGUI::changePage);
@@ -29,23 +26,12 @@ MainGUI::MainGUI(QWidget *parent)
     connect(gameloop, &Gameloop::healthUpdateGL, this, &MainGUI::updateHealthGUI);
     connect(gameloop, &Gameloop::superUpdateGL, this, &MainGUI::updateSuperGUI);
     connect(gameloop, &Gameloop::gameOverSignal, gameOver_screen, &gameOver::displayScore);
-
-    screen_credits->hide();
-    screen_game->hide();
-    gameOver_screen->hide();
-    screen_title->show();
-    
 }
 
 MainGUI::~MainGUI()
 {
-    delete ui;
 }
 
-void MainGUI::gridUpdate(char grid[GRID_X][GRID_Y])
-{
-    //qInfo()<< "thread parle au main";
-}
 void MainGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1){
     qInfo() << "thread vectors parle au main";
 }
@@ -53,10 +39,10 @@ void MainGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<P
 void MainGUI::changePage(int page) {
     screen_title->hide();
     screen_credits->hide();
-
     screen_game->hide();
-
     gameOver_screen->hide();
+
+
 
     qWarning() << "page change";
 

@@ -9,11 +9,6 @@
 #include "enums.h"
 #include <QtWidgets>
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-	class gameOver;
-}
-QT_END_NAMESPACE
 
 class gameOver : public QWidget {
 	Q_OBJECT
@@ -29,7 +24,6 @@ signals:
 	void changepage(int);
 
 private:
-	Ui::gameOver* ui;
 	QLabel* scoreLabel;
 	QLabel* backgroundLabel;
 	QPushButton* playAgainButton;

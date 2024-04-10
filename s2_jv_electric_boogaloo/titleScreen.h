@@ -19,11 +19,6 @@
 
 
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-	class TitleScreen;
-}
-QT_END_NAMESPACE
 
 class TitleScreen :public  QWidget
 {
@@ -42,7 +37,6 @@ signals:
     void changeScreen(int);
     void PortDeComToGameLoop(QString);
 private:
-    Ui::TitleScreen* ui;
     QLineEdit* textBox;
 };
 

@@ -219,7 +219,7 @@ void Gameloop::mainLoop() {
         std::system("cls"); 
       
         arene->display();
-        emit gridUpdate(arene->grille);
+        
         emit healthUpdateGL(arene->getHealthPlayer());
         emit superUpdateGL(charge);
         emit moneyUpdated(argent->checkMoney());

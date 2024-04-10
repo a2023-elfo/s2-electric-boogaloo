@@ -10,11 +10,6 @@
 #include "gameLoopGUI.h"
 #include "gameOver.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainGUI;
-}
-QT_END_NAMESPACE
 
 class MainGUI : public QWidget
 {
@@ -24,7 +19,6 @@ public:
     MainGUI(QWidget* parent = nullptr);
     ~MainGUI();
 private:
-    Ui::MainGUI* ui;
     static const int GRID_X = 5;
     static const int GRID_Y = 10;
     TitleScreen* screen_title;
@@ -35,7 +29,7 @@ private:
     Gameloop* gameloop;
 
 private slots:
-    void gridUpdate(char grid[GRID_X][GRID_Y]);
+    
     void sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1);
     void changePage(int);
     void updateMoneyGUI(int);
