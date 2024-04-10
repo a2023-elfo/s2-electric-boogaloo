@@ -3,10 +3,14 @@
 #include "systemeArgent.h"
 
 GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
-    gridLayout = new QGridLayout(this);
+
+    QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
+
+    gridLayout = new QGridLayout(this);  // Grid layout for the game grid
+    int marginSizeHeight = 400;
+    int marginSizeWeidth = 60;
+    gridLayout->setContentsMargins(marginSizeHeight, marginSizeWeidth, marginSizeHeight, marginSizeWeidth);
     
-    /*layout = new QVBoxLayout(this);
-    setLayout(layout);*/
     afficherGrid();
     afficherSuper();
     afficherHealt();
@@ -32,8 +36,7 @@ void GameLoopGUI::gridUpdate(char grid[GRID_X][GRID_Y])
 }
 
 
-void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1) {
-   // qInfo() << "thread vectors parle au gameGUI";
+void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1) {   
     clearGrid();
 
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
@@ -45,38 +48,40 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
     this->setAutoFillBackground(true);
     this->resize(screenSize);
 
+    static int animationFrame = 0;
     for (int currentRow = 0; currentRow < 10; ++currentRow) {
         for (int currentColumn = 0; currentColumn < 5; ++currentColumn) {
-            // Create a QLabel for the empty cell
+            
             QLabel* imageLabel = new QLabel;
             QPixmap pixmap("images/vide.png");
             if (pixmap.isNull()) {
                 qDebug() << "Failed to load the image: images/vide.png";
                 continue; // Skip this iteration if the image failed to load
             }
-            pixmap = pixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+            pixmap = pixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
             imageLabel->setPixmap(pixmap);
 
-            // Add the empty cell to the grid layout
+           
             gridLayout->addWidget(imageLabel, currentRow, currentColumn);
 
-            // Check if this cell corresponds to an enemy
+            
             for (int size_z = 0; size_z < enemies.size(); ++size_z) {
                 const Enemy& enemy = enemies[size_z];
                 if (currentRow == enemy.getY() && currentColumn == enemy.getX()) {
                     QLabel* enemyLabel = new QLabel;
-                    QPixmap enemyPixmap("images/zombie1.png");
+                    
+                    QPixmap enemyPixmap(QString("images/zombie%1.png").arg((animationFrame % 3) + 1));
                     if (enemyPixmap.isNull()) {
-                        qDebug() << "Failed to load the image: images/zombie1.png";
+                        qDebug() << "Failed to load the image: images/zombie" << (animationFrame % 3) + 1 << ".png";
                         continue; // Skip this iteration if the image failed to load
                     }
-                    enemyPixmap = enemyPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                    enemyPixmap = enemyPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                     enemyLabel->setPixmap(enemyPixmap);
                     gridLayout->addWidget(enemyLabel, currentRow, currentColumn);
                 }
             }
 
-            // Check if this cell corresponds to a bullet
+            
             for (int size_b = 0; size_b < bullets.size(); ++size_b) {
                 const Bullet& bullet = bullets[size_b];
                 if (currentRow == bullet.getY() && currentColumn == bullet.getX()) {
@@ -84,9 +89,9 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                     QPixmap bulletPixmap("images/bullets.png");
                     if (bulletPixmap.isNull()) {
                         qDebug() << "Failed to load the image: images/bullets.png";
-                        continue; // Skip this iteration if the image failed to load
+                        continue; 
                     }
-                    bulletPixmap = bulletPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                    bulletPixmap = bulletPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                     bulletLabel->setPixmap(bulletPixmap);
                     gridLayout->addWidget(bulletLabel, currentRow, currentColumn);
                 }
@@ -98,43 +103,59 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                     QPixmap shooterPixmap("images/peaShooter.png");
                     if (shooterPixmap.isNull()) {
                         qDebug() << "Failed to load the image: images/peaShooter.png";
-                        continue; // Skip this iteration if the image failed to load
+                        continue; 
                     }
-                    shooterPixmap = shooterPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                    shooterPixmap = shooterPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                     shooterLabel->setPixmap(shooterPixmap);
                     gridLayout->addWidget(shooterLabel, currentRow, currentColumn);
                 }
             }
             for (int size_po = 0; size_po < potatoes.size(); ++size_po) {
                 const Potato& potato = potatoes[size_po];
+                int health = potato.getHealth();
+                
                 if (currentRow == potato.getY() && currentColumn == potato.getX()) {
-                    QLabel* tankLabel = new QLabel;
-                    QPixmap tankPixmap("images/noix.png");
-                    if (tankPixmap.isNull()) {
-                        qDebug() << "Failed to load the image: images/noix.png";
-                        continue; // Skip this iteration if the image failed to load
+                    if (health > 2) {
+                        QLabel* tankLabel = new QLabel;
+                        QPixmap tankPixmap("images/noix.png");
+                        if (tankPixmap.isNull()) {
+                            qDebug() << "Failed to load the image: images/noix.png";
+                            continue;
+                        }
+                        tankPixmap = tankPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
+                        tankLabel->setPixmap(tankPixmap);
+                        gridLayout->addWidget(tankLabel, currentRow, currentColumn);
                     }
-                    tankPixmap = tankPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
-                    tankLabel->setPixmap(tankPixmap);
-                    gridLayout->addWidget(tankLabel, currentRow, currentColumn);
+                    else {
+                        QLabel* tankLabel = new QLabel;
+                        QPixmap tankPixmap("images/noixBobo.png");
+                        if (tankPixmap.isNull()) {
+                            qDebug() << "Failed to load the image: images/noixBobo.png";
+                            continue;
+                        }
+                        tankPixmap = tankPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
+                        tankLabel->setPixmap(tankPixmap);
+                        gridLayout->addWidget(tankLabel, currentRow, currentColumn);
+                    }
                 }
             }
             const Player& player = player1;
             if (currentRow == player.getY() && currentColumn == player.getX()) {
                 QLabel* playerLabel = new QLabel;
                 QPixmap playerPixmap("images/Elfo_shoot.png");
+                
                 if (playerPixmap.isNull()) {
                     qDebug() << "Failed to load the image: images/Elfo_shoot.png";
-                    continue; // Skip this iteration if the image failed to load
+                    continue; 
                 }
-                playerPixmap = playerPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                playerPixmap = playerPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                 playerLabel->setPixmap(playerPixmap);
                 gridLayout->addWidget(playerLabel, currentRow, currentColumn);
             }
         }
     }
 
-    // Set the grid layout for the widget
+    animationFrame = (animationFrame + 1) % 4;
     setLayout(gridLayout);
     
 
@@ -146,10 +167,10 @@ void GameLoopGUI::afficherGrid() {
     this->resize(screenSize);
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
-    // Create a QLabel to display the current money
+    
     systemeArgent systemeArgent;
     moneyLabel = new QLabel("<b>Money: </b>" + QString::number(systemeArgent.checkMoney()), this);
-    moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter); // Align the text to the center
+    moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter); 
     moneyLabel->setTextFormat(Qt::RichText);
     moneyLabel->setStyleSheet("font-size: 20px;");
     mainLayout->addWidget(moneyLabel);
@@ -163,8 +184,8 @@ void GameLoopGUI::afficherSuper(){
     superBar->setStyleSheet("QProgressBar::chunk { background-color: blue; }");
     superBar->setFormat("Super: %v/%m");
 
-    // Set the geometry of the super progress bar or use layout
-    superBar->setGeometry(this->width() - 250, 60, 200, 40); // You will need to adjust these values
+    
+    superBar->setGeometry(this->width() - 250, 60, 200, 40); 
 }
 
 void GameLoopGUI::afficherHealt(){
