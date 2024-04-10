@@ -249,4 +249,8 @@ Potato* Grid::getPotato(int index) {
     }
 
 }
+
+int Grid::getHealthPlayer() {
+    return playerShooter.getHealth();
+}
   

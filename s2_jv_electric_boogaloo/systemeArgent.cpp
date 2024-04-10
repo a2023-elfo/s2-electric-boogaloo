@@ -33,7 +33,7 @@ void systemeArgent::buyPeaShooter() {
 }
 
 //acheter patate et enlever argent
-void systemeArgent::buyPotato() {
+void systemeArgent::buyPotato(){
 	if (checkFundsPotato()) {
 		money -= 30;
 		std::cout << "Patate achete!!";
