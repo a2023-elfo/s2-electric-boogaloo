@@ -8,7 +8,7 @@ void Grid::update()
     
     bool enemyAvance;
 
-    if (gametick % 8 == 0 && gametick != 0) {
+    if (gametick % 9 == 0 && gametick != 0) {
         enemyAvance = true;
     }
     else {
@@ -32,7 +32,7 @@ void Grid::update()
 
     for (auto& peaShooter : peaShooters) {
         // Attack speed. Lower number is higher attack speed
-        if (gametick % 5 == 0) {
+        if (gametick % 6 == 0) {
             peaShooter.update(bullets, 1);
         }
         else {

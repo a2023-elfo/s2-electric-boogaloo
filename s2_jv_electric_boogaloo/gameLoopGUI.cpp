@@ -3,10 +3,11 @@
 #include "systemeArgent.h"
 
 GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
+    setUpdatesEnabled(false);
 
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
 
-    gridLayout = new QGridLayout(this);  // Grid layout for the game grid
+    gridLayout = new QGridLayout(this);
     int marginSizeHeight = 400;
     int marginSizeWeidth = 60;
     gridLayout->setContentsMargins(marginSizeHeight, marginSizeWeidth, marginSizeHeight, marginSizeWeidth);
@@ -14,6 +15,7 @@ GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
     afficherGrid();
     afficherSuper();
     afficherHealt();
+    setUpdatesEnabled(true);
 }
 
 GameLoopGUI::~GameLoopGUI(){
@@ -27,7 +29,7 @@ void GameLoopGUI::clearGrid() {
         }
         delete item;
     }
-
+    
 }
 
 void GameLoopGUI::gridUpdate(char grid[GRID_X][GRID_Y])
@@ -37,6 +39,7 @@ void GameLoopGUI::gridUpdate(char grid[GRID_X][GRID_Y])
 
 
 void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1) {   
+    setUpdatesEnabled(false);
     clearGrid();
 
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
@@ -157,7 +160,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
 
     animationFrame = (animationFrame + 1) % 4;
     setLayout(gridLayout);
-    
+    setUpdatesEnabled(true);
 
 }
 
@@ -167,7 +170,6 @@ void GameLoopGUI::afficherGrid() {
     this->resize(screenSize);
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
-    
     systemeArgent systemeArgent;
     moneyLabel = new QLabel("<b>Money: </b>" + QString::number(systemeArgent.checkMoney()), this);
     moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter); 
