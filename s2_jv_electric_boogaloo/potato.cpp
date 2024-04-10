@@ -34,7 +34,7 @@ bool Potato::decreaseHealth(int damage)
     return (health -= damage) > 0;
 }
 
-int Potato::getHealth()
+int Potato::getHealth() const
 {
     return health;
 }
