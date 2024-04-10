@@ -17,6 +17,9 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDebug>
+#include <QProgressBar>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameLoopGUI; }
@@ -29,6 +32,11 @@ public:
 	~GameLoopGUI();
 
 	void afficherGrid();
+	void afficherSuper();
+	void afficherHealt();
+
+	QProgressBar* healthBar;
+	QProgressBar* superBar;
 };
 
 #endif // !GAMELOOPGUI_H

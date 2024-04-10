@@ -19,7 +19,8 @@ MainGUI::MainGUI(QWidget *parent)
     connect(screen_credits, &Credits::changeScreen, this, &MainGUI::changePage);
     connect(gameOver_screen, &gameOver::changepage, this, &MainGUI::changePage);
     connect(gameloop, &Gameloop::changepage, this, &MainGUI::changePage);
-
+    connect(gameloop, &Gameloop::healthUpdateGL, this, &MainGUI::updateHealthGUI);
+    connect(gameloop, &Gameloop::superUpdateGL, this, &MainGUI::updateSuperGUI);
 
     screen_credits->hide();
     screen_game->hide();
@@ -76,4 +77,12 @@ void MainGUI::changePage(int page) {
         screen_title->hide();
         gameOver_screen->show();
     }
+}
+
+void MainGUI::updateSuperGUI(int value) {
+    screen_game->superBar->setValue(value);
+}
+
+void MainGUI::updateHealthGUI(int value) {
+    screen_game->healthBar->setValue(value);
 }
