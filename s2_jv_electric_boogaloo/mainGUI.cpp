@@ -20,7 +20,6 @@ MainGUI::MainGUI(QWidget *parent)
     connect(gameOver_screen, &gameOver::changepage, this, &MainGUI::changePage);
     connect(gameloop, &Gameloop::changepage, this, &MainGUI::changePage);
 
-
     screen_credits->hide();
     screen_game->hide();
     gameOver_screen->hide();

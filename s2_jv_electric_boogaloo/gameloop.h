@@ -56,6 +56,7 @@ public slots:
 signals:
 	void gridUpdate(char grid[GRID_X][GRID_Y]);
 	void changepage(int);
+	void gameOverSignal(int);
 };
 
 #endif
