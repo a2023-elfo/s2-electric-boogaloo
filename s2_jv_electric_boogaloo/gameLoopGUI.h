@@ -18,8 +18,11 @@
 #include <QScreen>
 #include <QDebug>
 #include <QVBoxLayout>
-
 #include "gameloop.h"
+#include <QProgressBar>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameLoopGUI; }
@@ -30,10 +33,16 @@ class GameLoopGUI:public QWidget{
 public:
 	GameLoopGUI(QWidget* parent = nullptr);
 	~GameLoopGUI();
-
+	QLabel* moneyLabel;
+	QProgressBar* healthBar;
+	QProgressBar* superBar;
+public slots:
 	void afficherGrid();
 	void clearGrid();
-
+	void gridUpdate(char grid[GRID_X][GRID_Y]);
+	void sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets);
+	void afficherSuper();
+	void afficherHealt();
 
 private:
 	static const int GRID_X = 5;
@@ -41,9 +50,7 @@ private:
 	QGridLayout* gridLayout;
 	QVBoxLayout* layout;
 
-public slots:
-	void gridUpdate(char grid[GRID_X][GRID_Y]);
-	void sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets);
+
 
 };
 

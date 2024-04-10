@@ -19,9 +19,7 @@ bool RcvFromSerial(SerialPort* arduino, std::string& msg);
 
 SerialPort* arduino; //doit etre un objet global!!!!
 
-Gameloop::Gameloop() {
-    arene = new Grid();
-}
+
 void Gameloop::gameOver(){
     std::system("cls");
     std::cout << "GAME OVER" << std::endl;
@@ -29,7 +27,10 @@ void Gameloop::gameOver(){
     emit changepage(GAMEOVER_SCREEN);
 }
 
-
+Gameloop::Gameloop() {
+    argent = new systemeArgent();
+    arene = new Grid();
+}
 
 void Gameloop::setupDirector() {
     // Set base of random, current time
@@ -112,8 +113,8 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, std::vector<GameContr
 
 void Gameloop::mainLoop() {
     char userInput;
+    argent =new systemeArgent();
     loop = true;
-    systemeArgent argent;
     charge = 1;
     arene->display();
     bool usecharge = false;
@@ -187,15 +188,15 @@ void Gameloop::mainLoop() {
             arene->playerShooter.setX(arene->playerShooter.getX() + 1);
         if (checkPlayerInput(BTN_2, inputs))
             if (positionPlant != 'P' && positionPlant != 'O') {
-                if (argent.checkFundsPotato()) {
-                    argent.buyPotato();
+                if (argent->checkFundsPotato()) {
+                    argent->buyPotato();
                     spawnPotato(4);
                 }
             }
         if (checkPlayerInput(BTN_4, inputs)){
             if (positionPlant != 'P' && positionPlant != 'O') {
-                if (argent.checkFundsPeaShooter()) {
-                    argent.buyPeaShooter();
+                if (argent->checkFundsPeaShooter()) {
+                    argent->buyPeaShooter();
                     spawnPeashooter(2);
                 }
             }
@@ -213,14 +214,19 @@ void Gameloop::mainLoop() {
 
         arene->update();
         
-        std::system("cls");
-
-        arene.display();
-        emit gridUpdate(arene.grille);
+        std::system("cls"); 
+      
+        arene->display();
+        emit gridUpdate(arene->grille);
+        emit healthUpdateGL(arene->getHealthPlayer());
+        emit superUpdateGL(charge);
+        emit moneyUpdated(argent->checkMoney());
         emit sendVectors(arene.getEnemies(), arene.getPeaShooters(), arene.getPotatoes(), arene.getBullets());
 
+
         std::cout << arene->playerShooter.health.displayBar() << std::endl << std::endl;
-        std::cout << "Current money: " << argent.checkMoney() << std::endl;
+        std::cout << "Current money: " << argent->checkMoney() << std::endl;
+
         afficherTremblementDeTerre(&charge);
 
         std::vector<Enemy> zombieMort;
@@ -230,11 +236,12 @@ void Gameloop::mainLoop() {
                 zombieMort.push_back(arene->getEnemies()[i]);
                 arene->deleteEnemy(i);
             }
+
             else if (arene->getEnemies()[i].getHealth() <= 0) {
                 zombieMort.push_back(arene->getEnemies()[i]);
                 arene->deleteEnemy(i);
                 arene->nbEnemyKilled++;
-                argent.killZombie(); //ajouter argent quand zombie est mort
+                argent->killZombie(); //ajouter argent quand zombie est mort
             }
             else {
                 i++;
@@ -359,7 +366,6 @@ void Gameloop::recupPortDeComTitleScreen(QString portDecom) {
     this->com= portDecom.toStdString();
     qInfo() <<"le port est" << portDecom;
 }
-
 
 /*---------------------------Definition de fonctions JSON------------------------*/
 bool SendToSerial(SerialPort* arduino, json j_msg) {
