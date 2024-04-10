@@ -5,8 +5,6 @@
 GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
     gridLayout = new QGridLayout(this);
     
-    /*layout = new QVBoxLayout(this);
-    setLayout(layout);*/
     afficherGrid();
     afficherSuper();
     afficherHealt();
@@ -47,7 +45,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
 
     for (int currentRow = 0; currentRow < 10; ++currentRow) {
         for (int currentColumn = 0; currentColumn < 5; ++currentColumn) {
-            // Create a QLabel for the empty cell
+            
             QLabel* imageLabel = new QLabel;
             QPixmap pixmap("images/vide.png");
             if (pixmap.isNull()) {
@@ -57,10 +55,10 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
             pixmap = pixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
             imageLabel->setPixmap(pixmap);
 
-            // Add the empty cell to the grid layout
+           
             gridLayout->addWidget(imageLabel, currentRow, currentColumn);
 
-            // Check if this cell corresponds to an enemy
+            
             for (int size_z = 0; size_z < enemies.size(); ++size_z) {
                 const Enemy& enemy = enemies[size_z];
                 if (currentRow == enemy.getY() && currentColumn == enemy.getX()) {
@@ -76,7 +74,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                 }
             }
 
-            // Check if this cell corresponds to a bullet
+            
             for (int size_b = 0; size_b < bullets.size(); ++size_b) {
                 const Bullet& bullet = bullets[size_b];
                 if (currentRow == bullet.getY() && currentColumn == bullet.getX()) {
@@ -84,7 +82,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                     QPixmap bulletPixmap("images/bullets.png");
                     if (bulletPixmap.isNull()) {
                         qDebug() << "Failed to load the image: images/bullets.png";
-                        continue; // Skip this iteration if the image failed to load
+                        continue; 
                     }
                     bulletPixmap = bulletPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
                     bulletLabel->setPixmap(bulletPixmap);
@@ -98,7 +96,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                     QPixmap shooterPixmap("images/peaShooter.png");
                     if (shooterPixmap.isNull()) {
                         qDebug() << "Failed to load the image: images/peaShooter.png";
-                        continue; // Skip this iteration if the image failed to load
+                        continue; 
                     }
                     shooterPixmap = shooterPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
                     shooterLabel->setPixmap(shooterPixmap);
@@ -112,7 +110,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                     QPixmap tankPixmap("images/noix.png");
                     if (tankPixmap.isNull()) {
                         qDebug() << "Failed to load the image: images/noix.png";
-                        continue; // Skip this iteration if the image failed to load
+                        continue; 
                     }
                     tankPixmap = tankPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
                     tankLabel->setPixmap(tankPixmap);
@@ -125,7 +123,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                 QPixmap playerPixmap("images/Elfo_shoot.png");
                 if (playerPixmap.isNull()) {
                     qDebug() << "Failed to load the image: images/Elfo_shoot.png";
-                    continue; // Skip this iteration if the image failed to load
+                    continue; 
                 }
                 playerPixmap = playerPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
                 playerLabel->setPixmap(playerPixmap);
@@ -134,7 +132,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
         }
     }
 
-    // Set the grid layout for the widget
+    
     setLayout(gridLayout);
     
 
@@ -146,10 +144,10 @@ void GameLoopGUI::afficherGrid() {
     this->resize(screenSize);
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
-    // Create a QLabel to display the current money
+    
     systemeArgent systemeArgent;
     moneyLabel = new QLabel("<b>Money: </b>" + QString::number(systemeArgent.checkMoney()), this);
-    moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter); // Align the text to the center
+    moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter); 
     moneyLabel->setTextFormat(Qt::RichText);
     moneyLabel->setStyleSheet("font-size: 20px;");
     mainLayout->addWidget(moneyLabel);
@@ -163,8 +161,8 @@ void GameLoopGUI::afficherSuper(){
     superBar->setStyleSheet("QProgressBar::chunk { background-color: blue; }");
     superBar->setFormat("Super: %v/%m");
 
-    // Set the geometry of the super progress bar or use layout
-    superBar->setGeometry(this->width() - 250, 60, 200, 40); // You will need to adjust these values
+    
+    superBar->setGeometry(this->width() - 250, 60, 200, 40); 
 }
 
 void GameLoopGUI::afficherHealt(){
