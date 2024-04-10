@@ -126,9 +126,9 @@
     <ClInclude Include="potato.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="systemeArgent.h">
+    <CustomBuild Include="systemeArgent.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </CustomBuild>
     <CustomBuild Include="titleScreen.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -152,6 +152,12 @@
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+    <ClCompile Include="debug\moc_systemeArgent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_systemeArgent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="debug\moc_titleScreen.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
