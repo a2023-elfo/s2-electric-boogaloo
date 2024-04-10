@@ -3,7 +3,13 @@
 #include "systemeArgent.h"
 
 GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
-    gridLayout = new QGridLayout(this);
+
+    QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
+
+    gridLayout = new QGridLayout(this);  // Grid layout for the game grid
+    int marginSizeHeight = 400;
+    int marginSizeWeidth = 60;
+    gridLayout->setContentsMargins(marginSizeHeight, marginSizeWeidth, marginSizeHeight, marginSizeWeidth);
     
     afficherGrid();
     afficherSuper();
@@ -52,7 +58,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                 qDebug() << "Failed to load the image: images/vide.png";
                 continue; // Skip this iteration if the image failed to load
             }
-            pixmap = pixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+            pixmap = pixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
             imageLabel->setPixmap(pixmap);
 
            
@@ -68,7 +74,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                         qDebug() << "Failed to load the image: images/zombie1.png";
                         continue; // Skip this iteration if the image failed to load
                     }
-                    enemyPixmap = enemyPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                    enemyPixmap = enemyPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                     enemyLabel->setPixmap(enemyPixmap);
                     gridLayout->addWidget(enemyLabel, currentRow, currentColumn);
                 }
@@ -84,7 +90,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                         qDebug() << "Failed to load the image: images/bullets.png";
                         continue; 
                     }
-                    bulletPixmap = bulletPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                    bulletPixmap = bulletPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                     bulletLabel->setPixmap(bulletPixmap);
                     gridLayout->addWidget(bulletLabel, currentRow, currentColumn);
                 }
@@ -98,7 +104,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                         qDebug() << "Failed to load the image: images/peaShooter.png";
                         continue; 
                     }
-                    shooterPixmap = shooterPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                    shooterPixmap = shooterPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                     shooterLabel->setPixmap(shooterPixmap);
                     gridLayout->addWidget(shooterLabel, currentRow, currentColumn);
                 }
@@ -112,7 +118,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                         qDebug() << "Failed to load the image: images/noix.png";
                         continue; 
                     }
-                    tankPixmap = tankPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                    tankPixmap = tankPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                     tankLabel->setPixmap(tankPixmap);
                     gridLayout->addWidget(tankLabel, currentRow, currentColumn);
                 }
@@ -125,7 +131,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                     qDebug() << "Failed to load the image: images/Elfo_shoot.png";
                     continue; 
                 }
-                playerPixmap = playerPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::FastTransformation);
+                playerPixmap = playerPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                 playerLabel->setPixmap(playerPixmap);
                 gridLayout->addWidget(playerLabel, currentRow, currentColumn);
             }
