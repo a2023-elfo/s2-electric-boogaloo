@@ -45,7 +45,8 @@ gameOver::~gameOver() {
 
 void gameOver::displayScore(int score) {
     // Afficher le score sur l'écran Game Over
-    scoreLabel->setText("<font color=\"white\">Score: " + QString::number(score));
+    scoreLabel->setAlignment(Qt::AlignCenter);
+    scoreLabel->setText("<font color=\"white\" size=6 >Score: " + QString::number(score));
 }
 
 void gameOver::showGameOver() {
