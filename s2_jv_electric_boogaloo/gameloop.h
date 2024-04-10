@@ -13,6 +13,7 @@
 #include "include/json.hpp"
 #include "enums.h"
 #include <qobject.h>
+#include "gameloop.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -61,7 +62,9 @@ signals:
 	void healthUpdateGL(int);
 	void superUpdateGL(int);
 	void changepage(int);
+	void sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets);
 	void moneyUpdated(int);
+
 };
 
 #endif

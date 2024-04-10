@@ -214,7 +214,6 @@ void Gameloop::mainLoop() {
 
         arene->update();
         
-
         std::system("cls"); 
       
         arene->display();
@@ -222,7 +221,9 @@ void Gameloop::mainLoop() {
         emit healthUpdateGL(arene->getHealthPlayer());
         emit superUpdateGL(charge);
         emit moneyUpdated(argent->checkMoney());
-      
+        emit sendVectors(arene.getEnemies(), arene.getPeaShooters(), arene.getPotatoes(), arene.getBullets());
+
+
         std::cout << arene->playerShooter.health.displayBar() << std::endl << std::endl;
         std::cout << "Current money: " << argent->checkMoney() << std::endl;
 
