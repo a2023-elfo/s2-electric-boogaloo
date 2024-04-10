@@ -3,10 +3,15 @@
 #include "plant.h"
 #include "peaShooter.h"
 #include "potato.h"
-class systemeArgent
+#include <QObject>
+#include <QLabel>
+
+class systemeArgent : public QObject
 {
+	Q_OBJECT
 private:
 		int money;
+		QLabel* curentMoneyLabel;
 public:
 	systemeArgent();
 	void killZombie();

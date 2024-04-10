@@ -1,4 +1,6 @@
 #include "gameLoopGUI.h"
+#include <QString>
+#include "systemeArgent.h"
 
 GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
     afficherGrid();
@@ -20,6 +22,18 @@ void GameLoopGUI::afficherGrid(){
     this->setPalette(palette);
     this->setAutoFillBackground(true);
     this->resize(screenSize);
+
+    // Create a new vertical layout to contain the grid and the money label
+    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+
+    // Create a QLabel to display the current money
+    systemeArgent systemeArgent;
+    moneyLabel = new QLabel("<b>Money: </b>" + QString::number(systemeArgent.checkMoney()), this);
+    moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter); // Align the text to the center
+    moneyLabel->setTextFormat(Qt::RichText);
+    moneyLabel->setStyleSheet("font-size: 20px;");
+    mainLayout->addWidget(moneyLabel);
+
 
     // Create a new grid layout and set it for this widget
     QGridLayout* gridLayout = new QGridLayout(this);
@@ -78,6 +92,7 @@ void GameLoopGUI::afficherHealt(){
     // Set the geometry of the health progress bar or use layout
     healthBar->setGeometry(this->width() - 250, 10, 200, 40); // You will need to adjust these values
 }
+
 
 
 
