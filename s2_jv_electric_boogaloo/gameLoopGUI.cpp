@@ -39,8 +39,10 @@ void GameLoopGUI::gridUpdate(char grid[GRID_X][GRID_Y])
 
 
 void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1) {   
+    
+    setUpdatesEnabled(false);
     clearGrid();
-
+  
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
     QPixmap background("images/game.png");
     QPixmap stretchedBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
