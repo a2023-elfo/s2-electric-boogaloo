@@ -11,6 +11,7 @@ gameOver::gameOver(QWidget* parent) :QWidget(parent) {
     // Créer les QPushButton pour Play Again et Quit
     playAgainButton = new QPushButton("Play Again", this);
     quitButton = new QPushButton("Quit", this);
+    scoreLabel = new QLabel(this);
 
     // Connecter les clics des boutons aux slots correspondants
     connect(playAgainButton, SIGNAL(clicked()), this, SLOT(handlePlayAgainClicked()));
@@ -30,18 +31,22 @@ gameOver::gameOver(QWidget* parent) :QWidget(parent) {
     quitButton -> setGeometry(((screenWidth - buttonWidth))*9/20, screenHeight / 2, buttonWidth, buttonHeight);
     playAgainButton -> setGeometry(((screenWidth - buttonWidth))*11/20, screenHeight / 2, buttonWidth, buttonHeight);
 
+
+    scoreLabel->setText("<font color=\"white\">Score: " + QString::number(score));
+    // Positionner et dimensionner le QLabel
+    int labelWidth = screenWidth / 5;
+    int labelHeight = screenHeight / 10;
+    scoreLabel->setGeometry((screenWidth - labelWidth) / 2, screenHeight / 4, labelWidth, labelHeight);
 }
 
 gameOver::~gameOver() {
     delete ui; // Libérer la mémoire allouée pour ui
 }
 
-void gameOver::displayScore() {
-    // Récupérer le score depuis une source quelconque (par exemple, une variable membre de la classe)
-    int score = 8; //pour essayer lol
-
-    // Afficher le score sur l'écran Game Over (par exemple, en utilisant une étiquette)
-    scoreLabel->setText("Score: " + QString::number(score));
+void gameOver::displayScore(int score) {
+    // Afficher le score sur l'écran Game Over
+    scoreLabel->setAlignment(Qt::AlignCenter);
+    scoreLabel->setText("<font color=\"white\" size=6 >Score: " + QString::number(score));
 }
 
 void gameOver::showGameOver() {
@@ -49,7 +54,7 @@ void gameOver::showGameOver() {
     this->show();
 
     // Afficher le score (s'il est disponible)
-    displayScore();
+    displayScore(score);
 
     // Afficher des éléments supplémentaires, tels que des boutons pour rejouer ou quitter le jeu
     playAgainButton->show();

@@ -63,6 +63,7 @@ signals:
 	void superUpdateGL(int);
 	void changepage(int);
 	void sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1);
+	void gameOverSignal(int);
 	void moneyUpdated(int);
 
 };
