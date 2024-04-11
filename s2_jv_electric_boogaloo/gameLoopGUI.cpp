@@ -65,8 +65,8 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
             QLabel* imageLabel = new QLabel;
             QPixmap pixmap("images/vide.png");
             if (pixmap.isNull()) {
-                qDebug() << "Failed to load the image: images/vide.png";
-                continue; // Skip this iteration if the image failed to load
+                qDebug() << "Probleme chargement image: images/vide.png";
+                continue; 
             }
             pixmap = pixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
             imageLabel->setPixmap(pixmap);
@@ -79,26 +79,33 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                 const Enemy& enemy = enemies[size_z];
                 if (currentRow == enemy.getY() && currentColumn == enemy.getX()) {
                     QLabel* enemyLabel = new QLabel;
-                    
-                    QPixmap enemyPixmap(QString("images/zombie%1.png").arg((animationFrame % 3) + 1));
-                    if (enemyPixmap.isNull()) {
-                        qDebug() << "Failed to load the image: images/zombie" << (animationFrame % 3) + 1 << ".png";
-                        continue; // Skip this iteration if the image failed to load
+
+                    QPixmap enemyPixmap;
+                    if (enemy.getHealth() > 8) {
+                        enemyPixmap = QPixmap(QString("images/TheRock%1.png").arg((animationFrame % 3) + 1));
                     }
+                    else {
+                        enemyPixmap = QPixmap(QString("images/zombie%1.png").arg((animationFrame % 3) + 1));
+                    }
+
+                    if (enemyPixmap.isNull()) {
+                        qDebug() << "Probleme chargement image: images/zombie" << (animationFrame % 3) + 1 << ".png";
+                        continue;
+                    }
+
                     enemyPixmap = enemyPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                     enemyLabel->setPixmap(enemyPixmap);
                     gridLayout->addWidget(enemyLabel, currentRow, currentColumn);
                 }
             }
 
-            
             for (int size_b = 0; size_b < bullets.size(); ++size_b) {
                 const Bullet& bullet = bullets[size_b];
                 if (currentRow == bullet.getY() && currentColumn == bullet.getX()) {
                     QLabel* bulletLabel = new QLabel;
                     QPixmap bulletPixmap("images/bullets.png");
                     if (bulletPixmap.isNull()) {
-                        qDebug() << "Failed to load the image: images/bullets.png";
+                        qDebug() << "Probleme chargement image: images/bullets.png";
                         continue; 
                     }
                     bulletPixmap = bulletPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
@@ -147,6 +154,20 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                         tankLabel->setPixmap(tankPixmap);
                         gridLayout->addWidget(tankLabel, currentRow, currentColumn);
                     }
+                }
+            }
+            for (int size_b = 0; size_b < bullets.size(); ++size_b) {
+                const Bullet& bullet = bullets[size_b];
+                if (currentRow == bullet.getY() && currentColumn == bullet.getX()) {
+                    QLabel* bulletLabel = new QLabel;
+                    QPixmap bulletPixmap("images/bullets.png");
+                    if (bulletPixmap.isNull()) {
+                        qDebug() << "Probleme chargement image: images/bullets.png";
+                        continue;
+                    }
+                    bulletPixmap = bulletPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
+                    bulletLabel->setPixmap(bulletPixmap);
+                    gridLayout->addWidget(bulletLabel, currentRow, currentColumn);
                 }
             }
             const Player& player = player1;

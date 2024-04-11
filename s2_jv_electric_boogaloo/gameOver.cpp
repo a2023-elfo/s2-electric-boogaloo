@@ -9,8 +9,8 @@ gameOver::gameOver(QWidget* parent) :QWidget(parent) {
     resize(screenSize);
 
     // Créer les QPushButton pour Play Again et Quit
-    playAgainButton = new QPushButton("Play Again", this);
-    quitButton = new QPushButton("Quit", this);
+    playAgainButton = new QPushButton("Rejouer", this);
+    quitButton = new QPushButton("Quitter", this);
     scoreLabel = new QLabel(this);
 
     // Connecter les clics des boutons aux slots correspondants
@@ -63,7 +63,7 @@ void gameOver::showGameOver() {
 void gameOver::handlePlayAgainClicked() {
     //reinitialiser le jeu
     emit changepage(TITLE_SCREEN);
-    qDebug() << "Play Again!";
+    qDebug() << "Rejouer!";
 }
 
 void gameOver::handleQuitClicked() {
