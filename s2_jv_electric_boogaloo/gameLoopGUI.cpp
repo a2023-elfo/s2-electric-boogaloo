@@ -193,7 +193,7 @@ void GameLoopGUI::afficherSuper(){
     superBar->setRange(0, 10);
     superBar->setValue(0);
     
-    superBar->setStyleSheet("QProgressBar::chunk { background-color: #0371FF; font-weight: bold; } QProgressBar { font-weight: bold; }");
+    superBar->setStyleSheet("QProgressBar::chunk { background-color: #0371FF; } QProgressBar { font-weight: bold; }");
 
     superBar->setFormat("Super: %v/%m");
     superBar->setFormat("Super: %v/%m");
@@ -207,7 +207,7 @@ void GameLoopGUI::afficherHealt(){
     healthBar->setOrientation(Qt::Horizontal);
     healthBar->setRange(0, 10);
     healthBar->setValue(0);
-    healthBar->setStyleSheet("QProgressBar::chunk { background-color: #BE1414; font-weight: bold; } QProgressBar { font-weight: bold; }");
+    healthBar->setStyleSheet("QProgressBar::chunk { background-color: #BE1414; } QProgressBar { font-weight: bold; }");
     healthBar->setFormat("Health: %v/%m");
 
     // Set the geometry of the health progress bar or use layout
