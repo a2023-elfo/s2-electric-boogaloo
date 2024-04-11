@@ -9,8 +9,6 @@ TitleScreen::TitleScreen(QWidget* parent): QWidget(parent){
     int screenHeight = screenSize.height();
     resize(screenSize);
 
-    
-
     QPixmap background("images/backgroundcool.png");
 
     QPixmap etirerBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
@@ -59,8 +57,15 @@ TitleScreen::TitleScreen(QWidget* parent): QWidget(parent){
     confirmButton->setGeometry((screenSize.width() - widthConfirm) / 2, 7 * screenSize.height() / 10, widthConfirm, heightConfirm);
     connect(confirmButton, &QPushButton::clicked, this, &TitleScreen::confirmPressed);
 
-    int widthCredits = screenWidth / 20;
-    int heightCredits = screenHeight / 30;
+    int widthQuit = screenWidth / 20;
+    int heightQuit = screenHeight / 30;
+
+    QPushButton* quitButton = new QPushButton("Quitter", this);
+    quitButton->setGeometry((screenSize.width() - widthQuit) / 2, 9 * (screenSize.height() - heightQuit) / 10, widthQuit, heightQuit);
+    connect(quitButton, &QPushButton::clicked, this, &TitleScreen::quitPressed);
+
+    int widthCredits = screenWidth / 15;
+    int heightCredits = screenHeight / 25;
 
     QPushButton* creditsButton = new QPushButton("Credits", this);
     creditsButton->setGeometry((screenSize.width() - widthCredits) / 2, 8 * screenSize.height() / 10, widthCredits, heightCredits);
@@ -94,3 +99,8 @@ void TitleScreen::confirmPressed() {
     emit PortDeComToGameLoop(port);
 }
 
+void TitleScreen::quitPressed()
+{
+    QApplication::quit();
+    qDebug() << "Quit :(";
+}

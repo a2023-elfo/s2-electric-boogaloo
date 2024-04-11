@@ -19,10 +19,10 @@
 #include <QProgressBar>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-
 #include <QString>
 #include "systemeArgent.h"
-
+#include <qmediaplayer.h>
+#include <QAudioOutput>
 
 
 class GameLoopGUI:public QWidget{
@@ -33,11 +33,15 @@ public:
 	QLabel* moneyLabel;
 	QProgressBar* healthBar;
 	QProgressBar* superBar;
+	void stopAudio();
+
 private:
 	static const int GRID_X = 5;
 	static const int GRID_Y = 10;
 	QGridLayout* gridLayout;
-	
+	QMediaPlayer* player;
+	QAudioOutput* audioOutput;
+
 	//QVBoxLayout* layout;
 public slots:
 	void afficherGrid();
@@ -46,10 +50,6 @@ public slots:
 	void afficherSuper();
 	void afficherHealt();
 	
-
-
-
-
 
 };
 

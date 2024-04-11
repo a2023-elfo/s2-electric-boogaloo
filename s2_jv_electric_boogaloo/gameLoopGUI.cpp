@@ -7,17 +7,28 @@ GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
 
     gridLayout = new QGridLayout(this);  // Grid layout for the game grid
-    int marginSizeHeight = 400;
-    int marginSizeWeidth = 60;
-    gridLayout->setContentsMargins(marginSizeHeight, marginSizeWeidth, marginSizeHeight, marginSizeWeidth);
+    int marginSizeWidth = screenSize.width()/4;
+    int marginSizeHeight = screenSize.height()/20;
+    gridLayout->setContentsMargins(marginSizeWidth, marginSizeHeight, marginSizeWidth, marginSizeHeight);
     
     afficherGrid();
     afficherSuper();
     afficherHealt();
     setUpdatesEnabled(true);
+
+    player = new QMediaPlayer;
+    audioOutput = new QAudioOutput;
+    player->setAudioOutput(audioOutput);
+    player->setSource(QUrl::fromLocalFile("Sons/mainMusic.mp3"));
+    audioOutput->setVolume(50);
 }
 
 GameLoopGUI::~GameLoopGUI(){
+}
+
+void GameLoopGUI::stopAudio()
+{
+    player->stop();
 }
 
 void GameLoopGUI::clearGrid() {
@@ -36,6 +47,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
     
     setUpdatesEnabled(false);
     clearGrid();
+    player->play();
   
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
     QPixmap background("images/game.png");
@@ -163,15 +175,16 @@ void GameLoopGUI::afficherGrid() {
 
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
     this->resize(screenSize);
-    QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
-    
+    QVBoxLayout* mainLayout = new QVBoxLayout(this);
     systemeArgent systemeArgent;
     moneyLabel = new QLabel("<b>Money: </b>" + QString::number(systemeArgent.checkMoney()), this);
-    moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter); 
+    moneyLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     moneyLabel->setTextFormat(Qt::RichText);
-    moneyLabel->setStyleSheet("font-size: 20px;");
+    moneyLabel->setStyleSheet("font-size: 18px;");
+
     mainLayout->addWidget(moneyLabel);
+    mainLayout->setAlignment(moneyLabel, Qt::AlignTop | Qt::AlignLeft);
 }
 
 void GameLoopGUI::afficherSuper(){
