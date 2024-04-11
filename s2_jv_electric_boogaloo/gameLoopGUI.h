@@ -9,9 +9,6 @@
 #include <QPixmap>
 #include <qdebug.h>
 #include <QWidget>
-#include <QGridLayout>
-#include <QLabel>
-#include <QPixmap>
 #include <QSize>
 #include <QPalette>
 #include <QGuiApplication>
@@ -22,6 +19,9 @@
 #include <QProgressBar>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+
+#include <QString>
+#include "systemeArgent.h"
 
 
 
