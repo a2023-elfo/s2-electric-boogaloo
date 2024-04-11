@@ -29,6 +29,12 @@ int del[4] = {pinLED1, pinLED2, pinLED3, pinLED4};
 int pinjoy_X= A15;
 int pinjoy_Y= A14;
 
+// MUONS my beloved
+int pinMuons = A0;
+
+// ACCELEROMETRE
+int pinAccel = A3;
+
 //BOUTONS
 int SW1 = 29;
 int SW2 = 23;
@@ -54,8 +60,10 @@ int bouton = 0 ;
 int mouvement = 0;
 int joy_X_Value = 0;
 int joy_Y_Value = 0;
+int potMuonsValue = 0;
 int vie = 10;
 int nb_power = 0;
+int nb_muons = 0;
 bool pouvoir = false;
 float charge = 0;
 float total_charge = 10.0;
@@ -95,9 +103,14 @@ void setup() {
 void loop() {
   joy_X_Value = analogRead(pinjoy_X);
   joy_Y_Value = analogRead(pinjoy_Y);
+  potMuonsValue = analogRead(pinMuons);
   mouvement = 0;
   bouton = 0;
   pouvoir = false;
+
+  // On veut seulement utiliser la présence pour offset notre random
+  if (potMuonsValue > 524) // 2.5610948192 V
+    nb_muons += 1;
 
   if (joy_Y_Value < 100)
     mouvement = 1;
@@ -121,7 +134,7 @@ void loop() {
   if (digitalRead(SW6) == LOW)
     bouton = 6;
 
-  if (analogRead(A3) > 350)
+  if (analogRead(pinAccel) > 350)
     pouvoir = true;
 
   if (shouldRead_) 
@@ -152,11 +165,14 @@ void sendMsg() {
   doc["mouvement"] = mouvement;
   doc["Bouton"] = bouton;
   doc["pouvoir"] = pouvoir;
+  doc["muons"] = nb_muons;
+
   // Serialisation
   serializeJson(doc, Serial);
 
   // Envoie
   Serial.println();
+  nb_muons = 0;
   shouldSend_ = false;
 }
 
