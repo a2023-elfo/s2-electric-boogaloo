@@ -24,9 +24,6 @@
 #include <QHBoxLayout>
 
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class GameLoopGUI; }
-QT_END_NAMESPACE
 
 class GameLoopGUI:public QWidget{
 	Q_OBJECT
@@ -45,7 +42,6 @@ private:
 public slots:
 	void afficherGrid();
 	void clearGrid();
-	void gridUpdate(char grid[GRID_X][GRID_Y]);
 	void sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1);
 	void afficherSuper();
 	void afficherHealt();

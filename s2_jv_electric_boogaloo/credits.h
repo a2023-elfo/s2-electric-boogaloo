@@ -11,11 +11,7 @@
 #include <QPixmap>
 #include "enums.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-	class Credits;
-}
-QT_END_NAMESPACE
+
 
 class Credits : public QWidget {
 
@@ -27,7 +23,7 @@ public:
 private :
 	QTextEdit* textCredits;
 	QPushButton* exitButton;
-	//Ui::Credits* ui;
+	
 public slots:
 	void buttonClicked();
 signals :
