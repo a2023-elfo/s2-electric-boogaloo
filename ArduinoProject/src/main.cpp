@@ -134,7 +134,7 @@ void loop() {
   if (digitalRead(SW6) == LOW)
     bouton = 6;
 
-  if (analogRead(pinAccel) > 350)
+  if (analogRead(pinAccel) > 550)
     pouvoir = true;
 
   if (shouldRead_) 
