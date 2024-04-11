@@ -40,6 +40,7 @@ public:
 	void generatePosition();
 	int generateValue(int min, int max);
 	void reset();
+	void offsetDirector(int);
 private:
 	Grid* arene;
 	int charge;
