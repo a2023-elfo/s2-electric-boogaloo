@@ -41,7 +41,7 @@ void MainGUI::changePage(int page) {
     screen_credits->hide();
     screen_game->hide();
     gameOver_screen->hide();
-
+    screen_game->stopAudio();
 
 
     qWarning() << "page change";

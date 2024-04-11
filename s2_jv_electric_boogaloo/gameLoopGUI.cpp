@@ -1,6 +1,4 @@
 #include "gameLoopGUI.h"
-#include <QString>
-#include "systemeArgent.h"
 
 GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
     setUpdatesEnabled(false);
@@ -16,9 +14,20 @@ GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
     afficherSuper();
     afficherHealt();
     setUpdatesEnabled(true);
+
+    player = new QMediaPlayer;
+    audioOutput = new QAudioOutput;
+    player->setAudioOutput(audioOutput);
+    player->setSource(QUrl::fromLocalFile("Sons/mainMusic.mp3"));
+    audioOutput->setVolume(50);
 }
 
 GameLoopGUI::~GameLoopGUI(){
+}
+
+void GameLoopGUI::stopAudio()
+{
+    player->stop();
 }
 
 void GameLoopGUI::clearGrid() {
@@ -37,6 +46,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
     
     setUpdatesEnabled(false);
     clearGrid();
+    player->play();
   
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
     QPixmap background("images/game.png");
