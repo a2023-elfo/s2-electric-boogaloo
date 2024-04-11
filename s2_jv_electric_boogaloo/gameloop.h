@@ -39,6 +39,7 @@ public:
 	void generateEnemy();
 	void generatePosition();
 	int generateValue(int min, int max);
+	void offsetDirector(int);
 	void reset();
 private:
 	Grid* arene;
