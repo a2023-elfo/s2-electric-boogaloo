@@ -47,6 +47,10 @@ void Gameloop::inputUpdateDirector(std::vector<GameControls>& inputVect) {
     }
 }
 
+void Gameloop::offsetDirector(int value) {
+    directorRandom += value;
+}
+
 // Generate a value between min (included) and max (excluded)
 int Gameloop::generateValue(int min, int max) {
     int range = std::abs(max - min);
@@ -125,6 +129,7 @@ void Gameloop::mainLoop() {
     //Struct. Donn�es JSON 
     int bouge = 0;
     int bouton = 0;
+    int muon = 0;
 
     // Initialisation du port de communication
     bool keyboardOnly = this->com == "ELFO";
@@ -167,7 +172,8 @@ void Gameloop::mainLoop() {
             // cout << "raw_msg: " << raw_msg << endl;  // debug
             // Transfert du message en json
             j_msg_rcv = json::parse(raw_msg);
-
+            muon = j_msg_rcv.value("muons", 0);
+            offsetDirector(muon);
             bouge = j_msg_rcv.value("mouvement", 0);
             bouton = j_msg_rcv.value("Bouton", 0);
         }
