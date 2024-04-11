@@ -19,10 +19,6 @@ public:
 	void setX(int);
 	virtual int getY() const;
 	virtual void setY(int);
-	int getWidth();
-	void setWidth(int);
-	int getHeight();
-	void setHeight(int);
 };
 
 #endif;

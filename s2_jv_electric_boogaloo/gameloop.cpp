@@ -1,12 +1,5 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <chrono>
 #include "gameloop.h"
-#include "thread"
-#include "include/serial/SerialPort.hpp"
-#include "include/json.hpp"
-#include "enums.h"
+
 using json = nlohmann::json;
 
 /*------------------------------ Constantes ---------------------------------*/

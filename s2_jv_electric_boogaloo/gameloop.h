@@ -14,6 +14,15 @@
 #include "enums.h"
 #include <qobject.h>
 
+#include <iostream>
+#include <string>
+#include <vector>
+#include <chrono>
+#include "thread"
+#include "include/serial/SerialPort.hpp"
+
+
+
 
 
 class Gameloop : public QObject
@@ -27,7 +36,6 @@ public:
 	void mainLoop();
 	 std::vector<GameControls> readUserInput(nlohmann::json json_msg);
 	bool checkPlayerInput(GameControls checkedInput, std::vector<GameControls>& inputVect);
-	void spawnEnemy(int enemyPos, bool theRock);
 	void spawnPeashooter(int health);
 	void spawnPotato(int health);
 	void activerTremblementDeTerre(int* charge, bool* usecharge);
@@ -37,7 +45,6 @@ public:
 	void inputUpdateDirector( std::vector<GameControls>& inputVect);
 	void muonUpdateDirector();
 	void generateEnemy();
-	void generatePosition();
 	int generateValue(int min, int max);
 	void reset();
 private:

@@ -6,7 +6,7 @@ GameLoopGUI::GameLoopGUI(QWidget* parent) : QWidget(parent){
 
     QSize screenSize = QGuiApplication::primaryScreen()->geometry().size();
 
-    gridLayout = new QGridLayout(this);  // Grid layout for the game grid
+    gridLayout = new QGridLayout(this);
     int marginSizeWidth = screenSize.width()/4;
     int marginSizeHeight = screenSize.height()/20;
     gridLayout->setContentsMargins(marginSizeWidth, marginSizeHeight, marginSizeWidth, marginSizeHeight);
@@ -65,8 +65,8 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
             QLabel* imageLabel = new QLabel;
             QPixmap pixmap("images/vide.png");
             if (pixmap.isNull()) {
-                qDebug() << "Failed to load the image: images/vide.png";
-                continue; // Skip this iteration if the image failed to load
+                qDebug() << "Probleme chargement image: images/vide.png";
+                continue;
             }
             pixmap = pixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
             imageLabel->setPixmap(pixmap);
@@ -82,8 +82,8 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                     
                     QPixmap enemyPixmap(QString("images/zombie%1.png").arg((animationFrame % 3) + 1));
                     if (enemyPixmap.isNull()) {
-                        qDebug() << "Failed to load the image: images/zombie" << (animationFrame % 3) + 1 << ".png";
-                        continue; // Skip this iteration if the image failed to load
+                        qDebug() << "Probleme chargement image: images/zombie" << (animationFrame % 3) + 1 << ".png";
+                        continue;
                     }
                     enemyPixmap = enemyPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
                     enemyLabel->setPixmap(enemyPixmap);
@@ -98,7 +98,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                     QLabel* bulletLabel = new QLabel;
                     QPixmap bulletPixmap("images/bullets.png");
                     if (bulletPixmap.isNull()) {
-                        qDebug() << "Failed to load the image: images/bullets.png";
+                        qDebug() << "Probleme chargement image: images/bullets.png";
                         continue; 
                     }
                     bulletPixmap = bulletPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
@@ -112,7 +112,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                     QLabel* shooterLabel = new QLabel;
                     QPixmap shooterPixmap("images/peaShooter.png");
                     if (shooterPixmap.isNull()) {
-                        qDebug() << "Failed to load the image: images/peaShooter.png";
+                        qDebug() << "Probleme chargement image: images/peaShooter.png";
                         continue; 
                     }
                     shooterPixmap = shooterPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
@@ -129,7 +129,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                         QLabel* tankLabel = new QLabel;
                         QPixmap tankPixmap("images/noix.png");
                         if (tankPixmap.isNull()) {
-                            qDebug() << "Failed to load the image: images/noix.png";
+                            qDebug() << "Probleme chargement image: images/noix.png";
                             continue;
                         }
                         tankPixmap = tankPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
@@ -140,7 +140,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                         QLabel* tankLabel = new QLabel;
                         QPixmap tankPixmap("images/noixBobo.png");
                         if (tankPixmap.isNull()) {
-                            qDebug() << "Failed to load the image: images/noixBobo.png";
+                            qDebug() << "Probleme chargement image: images/noixBobo.png";
                             continue;
                         }
                         tankPixmap = tankPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
@@ -155,7 +155,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                 QPixmap playerPixmap("images/Elfo_shoot.png");
                 
                 if (playerPixmap.isNull()) {
-                    qDebug() << "Failed to load the image: images/Elfo_shoot.png";
+                    qDebug() << "Probleme chargement image: images/Elfo_shoot.png";
                     continue; 
                 }
                 playerPixmap = playerPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
@@ -210,8 +210,7 @@ void GameLoopGUI::afficherHealt(){
     healthBar->setStyleSheet("QProgressBar::chunk { background-color: #BE1414; } QProgressBar { font-weight: bold; }");
     healthBar->setFormat("Health: %v/%m");
 
-    // Set the geometry of the health progress bar or use layout
-    healthBar->setGeometry(this->width() - 250, 10, 200, 40); // You will need to adjust these values
+    healthBar->setGeometry(this->width() - 250, 10, 200, 40);
 }
 
 
