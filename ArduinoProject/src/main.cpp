@@ -56,6 +56,9 @@ int bar9 = 37;
 int bar10 = 39;
 int bargraph[10] = {bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10};
 
+
+int accelValues[10] = {0};
+int accelIndex = 0;
 int bouton = 0 ;
 int mouvement = 0;
 int joy_X_Value = 0;
@@ -134,8 +137,19 @@ void loop() {
   if (digitalRead(SW6) == LOW)
     bouton = 6;
 
-  if (analogRead(pinAccel) > 550)
+  accelValues[accelIndex] = analogRead(pinAccel);
+  accelIndex = (accelIndex + 1) % 10;
+
+  int sum = 0;
+  for (int i = 0; i < 10; i++)
+  {
+    sum += accelValues[i];
+  }
+  float moyenne = sum / 10;
+
+  if (moyenne > 500) {
     pouvoir = true;
+  }
 
   if (shouldRead_) 
   {
