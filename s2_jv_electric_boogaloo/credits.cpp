@@ -43,6 +43,11 @@ Credits::Credits(QWidget* parent) :QWidget(parent) {
     this->setPalette(palette);
     this->setAutoFillBackground(true);
 
+    int labelWidth = 2* screenWidth / 6;
+    int labelHeight = screenHeight / 2;
+    QLabel* label = new QLabel(this);
+    label->setPixmap(QPixmap("Images/manette.png"));
+    label->setGeometry((screenSize.width() - labelWidth) / 10, 6 * screenSize.height() / 10, labelWidth, labelHeight);
 }
 
 Credits::~Credits() {
