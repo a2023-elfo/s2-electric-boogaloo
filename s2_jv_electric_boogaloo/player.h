@@ -14,7 +14,6 @@ protected :
 	int y = 0;
 public:
 	Player();
-	void move(int offset_x, int offset_y);
 	char display();
 	void update(std::vector<Bullet>& bullets, std::vector<Enemy>& enemies);
 	void setY(int input);

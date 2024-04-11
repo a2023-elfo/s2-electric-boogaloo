@@ -1,12 +1,5 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <chrono>
 #include "gameloop.h"
-#include "thread"
-#include "include/serial/SerialPort.hpp"
-#include "include/json.hpp"
-#include "enums.h"
+
 using json = nlohmann::json;
 
 /*------------------------------ Constantes ---------------------------------*/
@@ -45,6 +38,10 @@ void Gameloop::inputUpdateDirector(std::vector<GameControls>& inputVect) {
     for (int i = 0; i < inputVect.size(); i++) {
         directorRandom += (long)inputVect.at(i);
     }
+}
+
+void Gameloop::offsetDirector(int value) {
+    directorRandom += value;
 }
 
 // Generate a value between min (included) and max (excluded)
@@ -125,6 +122,7 @@ void Gameloop::mainLoop() {
     //Struct. Donn�es JSON 
     int bouge = 0;
     int bouton = 0;
+    int muon = 0;
 
     // Initialisation du port de communication
     bool keyboardOnly = this->com == "ELFO";
@@ -167,7 +165,8 @@ void Gameloop::mainLoop() {
             // cout << "raw_msg: " << raw_msg << endl;  // debug
             // Transfert du message en json
             j_msg_rcv = json::parse(raw_msg);
-
+            muon = j_msg_rcv.value("muons", 0);
+            offsetDirector(muon);
             bouge = j_msg_rcv.value("mouvement", 0);
             bouton = j_msg_rcv.value("Bouton", 0);
         }

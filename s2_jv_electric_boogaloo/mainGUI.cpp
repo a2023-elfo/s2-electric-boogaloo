@@ -1,6 +1,4 @@
-#include "ui_mainGUI.h"
 #include "mainGUI.h"
-#include "systemeArgent.h"
 
 
 MainGUI::MainGUI(QWidget* parent)
@@ -32,9 +30,6 @@ MainGUI::~MainGUI()
 {
 }
 
-void MainGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1){
-    qInfo() << "thread vectors parle au main";
-}
 
 void MainGUI::changePage(int page) {
     screen_title->hide();

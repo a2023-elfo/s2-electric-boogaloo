@@ -6,19 +6,18 @@
 #include "enemy.h"
 #include "potato.h"
 #include "peaShooter.h"
-#include "plant.h"
 #include "bullet.h"
 #include "player.h"
 #include <random>
 #include <cstdlib>
 #include <ctime>
 #include <qobject.h>
+#include <iostream>
 
 class Grid
 {
 private:
 	 std::vector<Enemy> enemies;
-	 std::vector<Plant> plants;
 	 std::vector<PeaShooter> peaShooters;
 	 std::vector<Potato> potatoes;
 	 std::vector<Bullet> bullets;
@@ -33,8 +32,6 @@ public:
 	PeaShooter* getPeaShooter(int index);
 	 std::vector<Potato>& getPotatoes();
 	Potato* getPotato(int index);
-	Plant* getPlant(int index);
-	 std::vector<Plant>& getPlants();
 	Bullet* getBullet(int index);
 	 std::vector<Bullet>& getBullets();
 	void deleteEnemy(int id);

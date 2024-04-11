@@ -1,5 +1,4 @@
 #include "gameOver.h"
-#include <QApplication>
 
 gameOver::gameOver(QWidget* parent) :QWidget(parent) {
 
