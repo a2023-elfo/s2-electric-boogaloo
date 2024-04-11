@@ -34,8 +34,7 @@ Credits::Credits(QWidget* parent) :QWidget(parent) {
     exitButton->setFont(buttonFont);
 
     exitButton->setStyleSheet("background-color: green; color: black; border: 2px solid white; border-radius: 8px");
-    connect(exitButton, &QPushButton::clicked, this, &Credits::buttonClicked);
-    //this->setStyleSheet("QWidget { background-image: url(Images/backgroundCredits.jpg); }");
+    connect(exitButton, &QPushButton::clicked, this, &Credits::buttonClicked);    
     QPixmap background("Images/backgroundCredits.jpg");
     QPixmap etirerBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
     QPalette palette;

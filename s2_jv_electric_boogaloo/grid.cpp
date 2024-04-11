@@ -1,5 +1,4 @@
 #include "grid.h"
-#include <iostream>
 
 int gametick = 0;
 
@@ -15,7 +14,7 @@ void Grid::update()
         enemyAvance = false;
     }
     //lol
-    // Mettre � jour les ennemis
+    // Mettre a jour les ennemis
     for (auto& enemy : enemies) { 
         if (enemyAvance) {
             enemy.setDeplacement(1);
@@ -48,10 +47,6 @@ void Grid::update()
     }
 
      
-    // Mettre � jour les plantes
-    for (auto& plant : plants) {
-        plant.update();
-    }
 
     for (auto& potato : potatoes) {
         potato.update();
@@ -62,7 +57,7 @@ void Grid::update()
         }
     }
 
-    // Mettre � jour les balles
+    // Mettre a jour les balles
     for (auto& bullet : bullets) {
         bullet.update();
         for (int i = 0; i < (int)bullets.size(); i++) {
@@ -72,7 +67,7 @@ void Grid::update()
         }
     }
 
-    // Mettre � jour le joueur
+    // Mettre a jour le joueur
     playerShooter.update(bullets, enemies);
     gametick++;
     
@@ -170,18 +165,6 @@ Enemy* Grid::getEnemy(int index) {
     }
 }
 
- std::vector<Plant>& Grid::getPlants() {
-    return plants;
-}
-
-Plant* Grid::getPlant(int index) {
-    if (index >= 0 && index < plants.size()) {
-        return &plants[index];
-    }
-    else {
-        return nullptr;
-    }
-}
 
 Bullet* Grid::getBullet(int index) {
     if (index >= 0 && index < (int)this->bullets.size()) {

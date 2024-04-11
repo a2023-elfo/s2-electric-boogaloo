@@ -50,8 +50,6 @@ Enemy::Enemy(int _health, int x, char appearance)
 {
 	setDeplacement(1);
 	health = _health;
-	setHeight(5);
-	setWidth(3);
 	setX(x);
 	setY(0);
 	apparence = appearance;

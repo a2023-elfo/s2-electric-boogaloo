@@ -9,6 +9,7 @@
 #include "credits.h"
 #include "gameLoopGUI.h"
 #include "gameOver.h"
+#include "systemeArgent.h"
 
 
 class MainGUI : public QWidget
@@ -30,7 +31,6 @@ private:
 
 private slots:
     
-    void sendVectors(const std::vector<Enemy>& enemies, const std::vector<PeaShooter>& peaShooters, const std::vector<Potato>& potatoes, const std::vector<Bullet>& bullets, const Player& player1);
     void changePage(int);
     void updateMoneyGUI(int);
     void updateSuperGUI(int);

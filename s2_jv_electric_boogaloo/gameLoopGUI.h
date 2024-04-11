@@ -1,31 +1,27 @@
 #ifndef GAMELOOPGUI_H
 #define GAMELOOPGUI_H
 
-#include <qwidget.h>
-#include <QtWidgets>
+#include "gameloop.h"
+
 #include <qpushbutton.h>
 #include <QGridLayout>
 #include <QLabel>
 #include <QPixmap>
 #include <qdebug.h>
 #include <QWidget>
-#include <QGridLayout>
-#include <QLabel>
-#include <QPixmap>
 #include <QSize>
 #include <QPalette>
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDebug>
 #include <QVBoxLayout>
-#include "gameloop.h"
 #include <QProgressBar>
-#include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QString>
 #include "systemeArgent.h"
 #include <qmediaplayer.h>
 #include <QAudioOutput>
+
 
 class GameLoopGUI:public QWidget{
 	Q_OBJECT

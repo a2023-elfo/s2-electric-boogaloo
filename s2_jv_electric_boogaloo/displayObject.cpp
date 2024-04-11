@@ -22,8 +22,6 @@ void DisplayObject::setX(int input)
 	else if (input > 4) {
 		x = 4;
 	}
-	// On va devoir mettre les bornes du grid ici, question d'empêcher
-	// les objets d'aller out of bounds
 	else {
 		x = input;
 	}
@@ -45,24 +43,4 @@ void DisplayObject::setY(int input)
 	else {
 		y = input;
 	}
-}
-
-int DisplayObject::getWidth()
-{
-	return width;
-}
-
-void DisplayObject::setWidth(int input)
-{
-	width = input;
-}
-
-int DisplayObject::getHeight()
-{
-	return height;
-}
-
-void DisplayObject::setHeight(int input)
-{
-	height = input;
 }

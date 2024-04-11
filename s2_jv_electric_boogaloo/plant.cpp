@@ -1,5 +1,4 @@
 #include "plant.h"
-#include <iostream>
 
 bool Plant::checkHitBox(int, int)
 {

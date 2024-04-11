@@ -8,6 +8,7 @@
 #include <QLabel>
 #include "enums.h"
 #include <QtWidgets>
+#include <QApplication>
 
 
 class gameOver : public QWidget {
