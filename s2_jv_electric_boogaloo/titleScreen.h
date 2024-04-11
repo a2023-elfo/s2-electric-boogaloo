@@ -33,6 +33,7 @@ public slots:
     void creditsPressed();
     void jouerPressed();
     void confirmPressed();
+    void quitPressed();
 signals:
     void changeScreen(int);
     void PortDeComToGameLoop(QString);
