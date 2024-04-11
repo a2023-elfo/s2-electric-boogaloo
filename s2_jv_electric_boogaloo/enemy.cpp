@@ -55,7 +55,7 @@ Enemy::Enemy(int _health, int x, char appearance)
 	apparence = appearance;
 }
 
-int Enemy::getHealth() {
+int Enemy::getHealth() const{
 	return health;
 }
 

@@ -19,7 +19,7 @@ public:
 	bool decreaseHealth(int damage);
 	char display();
 	void update(std::vector<Bullet>& bullets, std::vector<Potato> potatoes, std::vector<PeaShooter> peaShooters, std::vector<Enemy>& enemies);
-	int getHealth();
+	int getHealth() const;
 	void setDeplacement(int mouvement);
 private:
 	int deplacement;
