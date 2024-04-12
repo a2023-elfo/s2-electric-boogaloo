@@ -20,4 +20,5 @@ public:
 	void buyPeaShooter();
 	void buyPotato();
 	int checkMoney();
+	void moreMoney(int moneyIn);
 };

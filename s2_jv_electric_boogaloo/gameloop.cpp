@@ -40,6 +40,8 @@ void Gameloop::inputUpdateDirector(std::vector<GameControls>& inputVect) {
     }
 }
 
+
+
 void Gameloop::offsetDirector(int value) {
     directorRandom += value;
 }
@@ -81,14 +83,9 @@ void Gameloop::generateEnemy() {
 
         // We are spawning an enemy, choose position
         int desiredPosition = generateValue(0, arene->GRID_X);
-        int bossHealth = 10 + arene->nbEnemyKilled / 7;
-        int enemyHealth = 5 + arene->nbEnemyKilled / 10;
-        if (bossHealth > 20) {
-            bossHealth = 20;
-        }
-        if (enemyHealth > 12) {
-            enemyHealth = 12;
-        }
+        int bossHealth = 12 + arene->nbEnemyKilled / 7;
+        int enemyHealth = 6 + arene->nbEnemyKilled / 10;
+        
 
         if (arene->grille[desiredPosition][0] == ' ' || arene->grille[desiredPosition][0] == 'B') {  // Empty, we can spawn
             
@@ -202,6 +199,14 @@ void Gameloop::mainLoop() {
                 }
             }
         }
+
+        if (checkPlayerInput(BTN_3, inputs))
+            freeMoney(&charge);
+        if (checkPlayerInput(BTN_5, inputs))
+            activerTremblementDeTerre(&charge, &usecharge);
+
+        if (checkPlayerInput(BTN_1, inputs))
+            arene->getBullets().push_back(*arene->playerShooter.shoot());
         
         if (checkPlayerInput(BTN_6, inputs))
             arene->getBullets().push_back(*arene->playerShooter.shoot());
@@ -242,7 +247,11 @@ void Gameloop::mainLoop() {
                 zombieMort.push_back(arene->getEnemies()[i]);
                 arene->deleteEnemy(i);
                 arene->nbEnemyKilled++;
-                argent->killZombie(); //ajouter argent quand zombie est mort
+                
+                if (!usecharge) {
+                    argent->killZombie(); //ajouter argent quand zombie est mort
+                }
+                
             }
             else {
                 i++;
@@ -363,6 +372,19 @@ void Gameloop::activerTremblementDeTerre(int* charge, bool* usecharge) {
         std::cout << "La charge du tremblement de terre est insuffisante." << std::endl;
     }
 }
+
+void Gameloop::freeMoney(int* charge) {
+    if (*charge >= 10) {
+        argent->moreMoney(30);
+        std::cout << "Tous les ennemis ont ete elimines par le tremblement de terre!" << std::endl;
+        *charge = 0;
+    }
+    else {
+        std::cout << "La charge du tremblement de terre est insuffisante." << std::endl;
+    }
+    
+}
+
 void Gameloop::recupPortDeComTitleScreen(QString portDecom) {
     this->com= portDecom.toStdString();
     qInfo() <<"le port est" << portDecom;

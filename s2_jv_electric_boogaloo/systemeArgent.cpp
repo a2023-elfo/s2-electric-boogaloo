@@ -47,3 +47,7 @@ void systemeArgent::buyPotato(){
 int systemeArgent::checkMoney() {
 	return money;
 }
+
+void systemeArgent::moreMoney(int moneyIn) {
+	money = checkMoney() + moneyIn;
+}

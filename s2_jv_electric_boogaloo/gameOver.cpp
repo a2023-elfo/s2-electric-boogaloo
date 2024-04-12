@@ -16,7 +16,7 @@ gameOver::gameOver(QWidget* parent) :QWidget(parent) {
     connect(playAgainButton, SIGNAL(clicked()), this, SLOT(handlePlayAgainClicked()));
     connect(quitButton, &QPushButton::clicked, this, &gameOver::handleQuitClicked);
 
-    QPixmap background("gitgud.png");
+    QPixmap background("Images/gitgud.png");
     QPixmap etirerBackground = background.scaled(screenSize, Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Window, etirerBackground);
