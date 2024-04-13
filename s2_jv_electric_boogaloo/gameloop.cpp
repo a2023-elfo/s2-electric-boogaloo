@@ -83,8 +83,8 @@ void Gameloop::generateEnemy() {
 
         // We are spawning an enemy, choose position
         int desiredPosition = generateValue(0, arene->GRID_X);
-        int bossHealth = 12 + arene->nbEnemyKilled / 7;
-        int enemyHealth = 6 + arene->nbEnemyKilled / 10;
+        int bossHealth = 12 + arene->nbEnemyKilled / 4;
+        int enemyHealth = 6 + arene->nbEnemyKilled / 7;
         
 
         if (arene->grille[desiredPosition][0] == ' ' || arene->grille[desiredPosition][0] == 'B') {  // Empty, we can spawn
