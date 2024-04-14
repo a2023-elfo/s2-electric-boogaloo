@@ -5,7 +5,7 @@ enum GameControls {
     UP = 'w',
     DOWN = 's',
     LEFT = 'a',
-    BTN_1 = ' ',
+    BTN_1 = 'm',
     BTN_2 = 't',
     BTN_3 = 'e',
     BTN_4 = 'r',

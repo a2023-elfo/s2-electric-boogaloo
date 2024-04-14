@@ -99,20 +99,7 @@ void GameLoopGUI::sendVectors(const std::vector<Enemy>& enemies, const std::vect
                 }
             }
 
-            for (int size_b = 0; size_b < bullets.size(); ++size_b) {
-                const Bullet& bullet = bullets[size_b];
-                if (currentRow == bullet.getY() && currentColumn == bullet.getX()) {
-                    QLabel* bulletLabel = new QLabel;
-                    QPixmap bulletPixmap("images/bullets.png");
-                    if (bulletPixmap.isNull()) {
-                        qDebug() << "Probleme chargement image: images/bullets.png";
-                        continue; 
-                    }
-                    bulletPixmap = bulletPixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::FastTransformation);
-                    bulletLabel->setPixmap(bulletPixmap);
-                    gridLayout->addWidget(bulletLabel, currentRow, currentColumn);
-                }
-            }
+            
             for (int size_p = 0; size_p < peaShooters.size(); ++size_p) {
                 const PeaShooter& peaShooter = peaShooters[size_p];
                 if (currentRow == peaShooter.getY() && currentColumn == peaShooter.getX()) {
@@ -233,8 +220,3 @@ void GameLoopGUI::afficherHealt(){
 
     healthBar->setGeometry(this->width() - 250, 10, 200, 40);
 }
-
-
-
-
-

@@ -2,7 +2,7 @@
 #define MAINGUI_H
 
 #include <QWidget>
-#include <qthread.h>
+#include <QThread>
 #include <Qdebug>
 #include "gameloop.h"
 #include "titleScreen.h"

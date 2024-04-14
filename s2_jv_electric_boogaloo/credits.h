@@ -5,7 +5,9 @@
 #include <QMainWindow>
 #include <Qlabel>
 #include <QPushButton>
-#include <QtWidgets>
+#include <QVBoxLayout>
+#include <QGUIApplication>
+#include <QScreen>
 #include <QTextEdit>
 #include <QPixmap>
 #include "enums.h"

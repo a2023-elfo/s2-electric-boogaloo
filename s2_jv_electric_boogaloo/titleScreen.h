@@ -7,15 +7,17 @@
 #include <QFont>
 #include <QDebug>
 #include <QWidget>
-
 #include <Qdebug>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <QtWidgets>
-#include "enums.h"
+#include <QScreen>
 #include <QString>
+#include <QApplication>
+#include <QGUIApplication>
+
+#include "enums.h"
 
 
 

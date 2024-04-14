@@ -1,13 +1,14 @@
 #include "grid.h"
 
 int gametick = 0;
+int difficulte = 15; //enfant : 30, facile : 20, moyen : 15, difficile : 10, extreme : 6
 
 void Grid::update()
 {
     
     bool enemyAvance;
 
-    if (gametick % 9 == 0 && gametick != 0) {
+    if (gametick % difficulte == 0 && gametick != 0) {
         enemyAvance = true;
     }
     else {

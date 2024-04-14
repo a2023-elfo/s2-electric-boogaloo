@@ -48,6 +48,7 @@ public:
 	int generateValue(int min, int max);
 	void offsetDirector(int);
 	void reset();
+	void freeMoney(int *charge);
 private:
 	Grid* arene;
 	int charge;
