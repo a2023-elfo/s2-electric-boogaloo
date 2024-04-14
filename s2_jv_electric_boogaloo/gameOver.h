@@ -4,11 +4,12 @@
 #include <QWidget>
 #include <QDebug>
 #include <QPushButton>
-#include <QMainWindow>
 #include <QLabel>
-#include "enums.h"
-#include <QtWidgets>
+#include <QScreen>
 #include <QApplication>
+#include <QGUIApplication>
+
+#include "enums.h"
 
 
 class gameOver : public QWidget {

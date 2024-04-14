@@ -107,7 +107,6 @@ bool Gameloop::checkPlayerInput(GameControls checkedInput, std::vector<GameContr
 }
 
 void Gameloop::mainLoop() {
-    char userInput;
     argent =new systemeArgent();
     loop = true;
     charge = 1;
